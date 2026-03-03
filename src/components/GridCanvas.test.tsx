@@ -21,9 +21,9 @@ describe('GridCanvas', () => {
         gridLetters={letters}
         activeSelection={[]}
         foundPaths={[]}
-        onPointerStart={() => undefined}
-        onPointerMove={() => undefined}
-        onPointerEnd={() => undefined}
+        onMouseStart={() => undefined}
+        onMouseMove={() => undefined}
+        onMouseEnd={() => undefined}
       />
     );
 
@@ -36,9 +36,9 @@ describe('GridCanvas', () => {
         gridLetters={letters}
         activeSelection={[]}
         foundPaths={[]}
-        onPointerStart={() => undefined}
-        onPointerMove={() => undefined}
-        onPointerEnd={() => undefined}
+        onMouseStart={() => undefined}
+        onMouseMove={() => undefined}
+        onMouseEnd={() => undefined}
       />
     );
 
@@ -47,9 +47,9 @@ describe('GridCanvas', () => {
         gridLetters={letters}
         activeSelection={selection}
         foundPaths={[]}
-        onPointerStart={() => undefined}
-        onPointerMove={() => undefined}
-        onPointerEnd={() => undefined}
+        onMouseStart={() => undefined}
+        onMouseMove={() => undefined}
+        onMouseEnd={() => undefined}
       />
     );
 

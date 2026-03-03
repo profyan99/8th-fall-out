@@ -1,28 +1,26 @@
-import { useMemo } from 'react';
 import type { GridCell } from '../domain/types';
 
 type GridCanvasProps = {
   gridLetters: string[][];
   activeSelection: GridCell[];
   foundPaths: GridCell[][];
-  onPointerStart: (event: React.PointerEvent<HTMLCanvasElement>) => void;
-  onPointerMove: (event: React.PointerEvent<HTMLCanvasElement>) => void;
-  onPointerEnd: () => void;
+  onMouseStart: (event: React.MouseEvent<HTMLCanvasElement>) => void;
+  onMouseMove: (event: React.MouseEvent<HTMLCanvasElement>) => void;
+  onMouseEnd: () => void;
 };
 
 export function GridCanvas({
   gridLetters,
   activeSelection,
   foundPaths,
-  onPointerStart,
-  onPointerMove,
-  onPointerEnd
+  onMouseStart,
+  onMouseMove,
+  onMouseEnd
 }: GridCanvasProps) {
   const rows = gridLetters.length;
   const cols = gridLetters[0]?.length ?? 0;
   const cells = rows * cols;
-
-  const foundCellCount = useMemo(() => foundPaths.reduce((sum, path) => sum + path.length, 0), [foundPaths]);
+  const foundCellCount = foundPaths.reduce((sum, path) => sum + path.length, 0);
 
   return (
     <section className="grid-canvas-wrap">
@@ -31,9 +29,9 @@ export function GridCanvas({
         width={640}
         height={640}
         data-testid="grid-canvas"
-        onPointerDown={onPointerStart}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerEnd}
+        onMouseDown={onMouseStart}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseEnd}
       />
       <div data-testid="grid-canvas-meta">rows:{rows} cols:{cols} cells:{cells}</div>
       <div data-testid="grid-canvas-selection">selection:{activeSelection.length}</div>
