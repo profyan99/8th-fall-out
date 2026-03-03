@@ -3,6 +3,13 @@
   --panel: #f7f4ea;
   --ink: #212121;
   --accent: #6f8b7d;
+  --crt-screen-bg: #061106;
+  --crt-phosphor: #8cff8c;
+  --crt-phosphor-dim: #4f8f4f;
+  --crt-bezel: #1a1f1a;
+  --crt-bezel-edge: #2b332b;
+  --crt-frame-radius: 16px;
+  --crt-viewport-padding: 1rem;
   color: var(--ink);
   background: radial-gradient(circle at top left, #f9f7f1, var(--bg));
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
