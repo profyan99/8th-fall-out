@@ -1,6 +1,10 @@
 :root {
-  color: #111;
-  background: #f4f4ef;
+  --bg: #ece9de;
+  --panel: #f7f4ea;
+  --ink: #212121;
+  --accent: #6f8b7d;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #f9f7f1, var(--bg));
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
 }
 
@@ -13,10 +17,55 @@ body {
   min-height: 100vh;
 }
 
-.app-shell {
+#root {
   min-height: 100vh;
+}
+
+.game-shell {
+  min-height: 100vh;
+  padding: 2rem;
   display: grid;
-  place-items: center;
-  text-align: center;
-  gap: 0.5rem;
+  gap: 1.25rem;
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.game-main {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(640px, 2fr) minmax(260px, 1fr);
+  align-items: start;
+}
+
+.grid-canvas-wrap,
+.progress-panel {
+  background: var(--panel);
+  border: 1px solid #d2cdc0;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.grid-canvas-wrap canvas {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1;
+  display: block;
+  border: 1px solid #c9c1af;
+  border-radius: 10px;
+}
+
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(20, 20, 20, 0.02) 0,
+    rgba(20, 20, 20, 0.02) 2px,
+    transparent 2px,
+    transparent 4px
+  );
 }

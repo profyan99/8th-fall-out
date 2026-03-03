@@ -1,10 +1,11 @@
+import level01 from '../content/levels/level-01.json';
+import { loadLevel } from './domain/loadLevel';
+import { GameShell } from './components/GameShell';
+
 function App() {
-  return (
-    <main className="app-shell">
-      <h1>Severance Word Game</h1>
-      <p>Initializing game...</p>
-    </main>
-  );
+  const level = loadLevel(level01);
+
+  return <GameShell level={level} />;
 }
 
 export default App;
