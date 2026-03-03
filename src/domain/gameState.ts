@@ -34,6 +34,16 @@ export const reduceGameState = (state: GameState, action: GameAction): GameState
     return state;
   }
 
+  if (
+    state.phase === 'video_open' &&
+    (action.type === 'selection_started' ||
+      action.type === 'selection_updated' ||
+      action.type === 'selection_committed' ||
+      action.type === 'selection_cleared')
+  ) {
+    return state;
+  }
+
   switch (action.type) {
     case 'selection_started':
     case 'selection_updated':

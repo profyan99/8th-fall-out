@@ -68,6 +68,23 @@ describe('reduceGameState', () => {
     expect(next.activeVideoWordId).toBeNull();
   });
 
+  test('keeps video_open state when selection input arrives', () => {
+    const withVideo = {
+      ...createInitialGameState(level),
+      phase: 'video_open' as const,
+      activeVideoWordId: 'word-alpha',
+      foundWordIds: new Set(['word-alpha'])
+    };
+
+    const next = reduceGameState(withVideo, {
+      type: 'selection_started',
+      path: [{ row: 1, col: 1 }]
+    });
+
+    expect(next.phase).toBe('video_open');
+    expect(next.activeSelection).toEqual([]);
+  });
+
   test('transitions to completed when all words found', () => {
     const selecting = {
       ...createInitialGameState(level),

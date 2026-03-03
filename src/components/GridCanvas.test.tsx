@@ -50,9 +50,11 @@ describe('GridCanvas', () => {
         onMouseStart={() => undefined}
         onMouseMove={() => undefined}
         onMouseEnd={() => undefined}
+        isInputBlocked
       />
     );
 
     expect(screen.getByTestId('grid-canvas-selection')).toHaveTextContent('selection:2');
+    expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
   });
 });

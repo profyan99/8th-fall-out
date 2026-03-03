@@ -7,6 +7,7 @@ type GridCanvasProps = {
   onMouseStart: (event: React.MouseEvent<HTMLCanvasElement>) => void;
   onMouseMove: (event: React.MouseEvent<HTMLCanvasElement>) => void;
   onMouseEnd: () => void;
+  isInputBlocked?: boolean;
 };
 
 export function GridCanvas({
@@ -15,7 +16,8 @@ export function GridCanvas({
   foundPaths,
   onMouseStart,
   onMouseMove,
-  onMouseEnd
+  onMouseEnd,
+  isInputBlocked = false
 }: GridCanvasProps) {
   const rows = gridLetters.length;
   const cols = gridLetters[0]?.length ?? 0;
@@ -29,9 +31,10 @@ export function GridCanvas({
         width={640}
         height={640}
         data-testid="grid-canvas"
-        onMouseDown={onMouseStart}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseEnd}
+        data-input-blocked={String(isInputBlocked)}
+        onMouseDown={isInputBlocked ? undefined : onMouseStart}
+        onMouseMove={isInputBlocked ? undefined : onMouseMove}
+        onMouseUp={isInputBlocked ? undefined : onMouseEnd}
       />
       <div data-testid="grid-canvas-meta">rows:{rows} cols:{cols} cells:{cells}</div>
       <div data-testid="grid-canvas-selection">selection:{activeSelection.length}</div>
