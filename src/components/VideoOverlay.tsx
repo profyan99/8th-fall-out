@@ -10,9 +10,13 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="video-overlay-backdrop" role="presentation" data-testid="video-overlay-backdrop">
-      <section className="video-overlay" role="dialog" aria-modal="true" aria-label="Word video">
-        <h2>{word.value}</h2>
+    <div
+      className="video-overlay-backdrop signal-capture-active"
+      role="presentation"
+      data-testid="video-overlay-backdrop"
+    >
+      <section className="video-overlay signal-capture-dialog" role="dialog" aria-modal="true" aria-label="Word video">
+        <h2>SIGNAL LOCK: {word.value}</h2>
 
         {!hasError ? (
           <video

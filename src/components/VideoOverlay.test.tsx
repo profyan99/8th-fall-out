@@ -20,6 +20,7 @@ describe('VideoOverlay', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByText(/ALPHA/i)).toBeInTheDocument();
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
+    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
   });
 
   test('shows fallback UI on video error and allows continue', () => {

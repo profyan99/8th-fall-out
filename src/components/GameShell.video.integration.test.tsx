@@ -54,6 +54,7 @@ describe('GameShell video flow', () => {
     fireEvent.mouseUp(canvas);
 
     expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
     fireEvent.mouseDown(canvas, { offsetX: 410, offsetY: 10, clientX: 410, clientY: 10 });
