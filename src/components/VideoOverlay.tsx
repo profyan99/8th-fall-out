@@ -10,7 +10,7 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="video-overlay-backdrop" role="presentation">
+    <div className="video-overlay-backdrop" role="presentation" data-testid="video-overlay-backdrop">
       <section className="video-overlay" role="dialog" aria-modal="true" aria-label="Word video">
         <h2>{word.value}</h2>
 
@@ -32,7 +32,7 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
           </div>
         )}
 
-        <button type="button" onClick={onClose}>
+        <button type="button" onClick={onClose} data-testid="video-close-button">
           Close
         </button>
       </section>

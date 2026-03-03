@@ -35,12 +35,20 @@ export function GameShell({ level }: GameShellProps) {
   });
 
   const isVideoOpen = state.phase === 'video_open' && activeVideoWord !== null;
+  const isCompleted = state.phase === 'completed';
 
   return (
     <main className="game-shell">
       <header className="game-header">
         <h1>{level.title}</h1>
       </header>
+
+      {isCompleted && (
+        <section className="completion-banner" data-testid="completion-banner">
+          <h2>All words found</h2>
+          <p>Session complete.</p>
+        </section>
+      )}
 
       <div className="game-main">
         <GridCanvas
