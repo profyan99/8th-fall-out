@@ -22,6 +22,7 @@ type GameShellProps = {
 
 const toLetterGrid = (rows: string[]): string[][] => rows.map((row) => row.split(''));
 const bootLines = ['BOOTING CRT SHELL...', 'CALIBRATING PHOSPHOR GRID...', 'READY.'];
+const GRID_CANVAS_SIZE = 700;
 
 export function GameShell({
   level,
@@ -49,7 +50,7 @@ export function GameShell({
 
   const { activeSelection, onMouseStart, onMouseMove, onMouseEnd } = useGridSelection({
     gridSize: level.gridSize,
-    canvasSize: 640,
+    canvasSize: GRID_CANVAS_SIZE,
     onSelectionCommitted: (path: GridCell[]) => {
       dispatch({ type: 'selection_committed', path });
     }

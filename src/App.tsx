@@ -1,9 +1,9 @@
-import level01 from '../content/levels/level-01.json';
-import { loadLevel } from './domain/loadLevel';
 import { GameShell } from './components/GameShell';
+import { loadLevel } from './domain/loadLevel';
+import { resolveLevelPayload } from './domain/levelCatalog';
 
 function App() {
-  const level = loadLevel(level01);
+  const level = loadLevel(resolveLevelPayload(window.location.search));
   const search = new URLSearchParams(window.location.search);
   const isVisualMode = search.get('visual') === '1';
 

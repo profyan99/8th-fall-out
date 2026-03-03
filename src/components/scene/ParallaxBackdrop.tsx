@@ -1,21 +1,10 @@
-import { useParallax } from "../../hooks/useParallax";
-import type { QualityMode } from "../../theme/qualityMode";
-
 type ParallaxBackdropProps = {
-  qualityMode?: QualityMode;
+  layerTransforms: string[];
 };
 
-export function ParallaxBackdrop({ qualityMode = "high" }: ParallaxBackdropProps) {
-  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax(qualityMode);
-
+export function ParallaxBackdrop({ layerTransforms }: ParallaxBackdropProps) {
   return (
-    <div
-      className="parallax-backdrop"
-      data-testid="parallax-backdrop"
-      aria-hidden="true"
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
-    >
+    <div className="parallax-backdrop" data-testid="parallax-backdrop" aria-hidden="true">
       {layerTransforms.map((transform, index) => (
         <div
           key={index}

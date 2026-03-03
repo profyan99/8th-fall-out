@@ -1,27 +1,30 @@
 {
   "id": "level-01",
-  "title": "Macrodata Refinement",
+  "title": "ROBCO TERMINAL // 8 MARCH PROTOCOL",
   "grid": [
-    "HELIOTIC",
-    "QWERASDF",
-    "MNOPLKJH",
-    "ZXCVBNMQ",
-    "TRACEMAP",
-    "YUIOHGFD",
-    "PLANSNOW",
-    "SEVEREDX"
+    "MARCHGREEN",
+    "QWERTYUIOP",
+    "ASDFGHJKLZ",
+    "XCVBNMQWER",
+    "PLASMATERM",
+    "RETROPIXEL",
+    "VAULTDOORS",
+    "CIRCUITRYX",
+    "NEONGLOWER",
+    "TERMINALZX"
   ],
   "words": [
     {
-      "id": "word-helio",
-      "value": "HELIO",
-      "videoSrc": "/videos/helio.mp4",
+      "id": "word-march",
+      "value": "MARCHG",
+      "videoSrc": "/videos/march.mp4",
       "path": [
         { "row": 0, "col": 0 },
         { "row": 0, "col": 1 },
         { "row": 0, "col": 2 },
         { "row": 0, "col": 3 },
-        { "row": 0, "col": 4 }
+        { "row": 0, "col": 4 },
+        { "row": 0, "col": 5 }
       ]
     }
   ]

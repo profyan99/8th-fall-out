@@ -57,16 +57,16 @@ describe('GameShell video flow', () => {
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
-    fireEvent.mouseDown(canvas, { offsetX: 410, offsetY: 10, clientX: 410, clientY: 10 });
-    fireEvent.mouseMove(canvas, { offsetX: 620, offsetY: 10, clientX: 620, clientY: 10 });
+    fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });
+    fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
     expect(screen.getByTestId('progress-text')).toHaveTextContent('1/2 words found');
 
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
 
-    fireEvent.mouseDown(canvas, { offsetX: 410, offsetY: 10, clientX: 410, clientY: 10 });
-    fireEvent.mouseMove(canvas, { offsetX: 620, offsetY: 10, clientX: 620, clientY: 10 });
+    fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });
+    fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
     expect(screen.getByTestId('progress-text')).toHaveTextContent('2/2 words found');

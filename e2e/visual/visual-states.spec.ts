@@ -14,7 +14,7 @@ test("captures crt visual states", async ({ page }) => {
   const canvas = page.getByTestId("grid-canvas");
   await canvas.hover({ position: { x: 10, y: 10 } });
   await page.mouse.down();
-  await canvas.hover({ position: { x: 390, y: 10 } });
+  await canvas.hover({ position: { x: 350, y: 10 } });
   await page.mouse.up();
 
   await expect(page.getByRole("dialog")).toBeVisible();

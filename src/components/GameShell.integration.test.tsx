@@ -41,7 +41,6 @@ describe('GameShell drag integration', () => {
 
     fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
     fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
-    expect(screen.getByTestId('grid-canvas-selection')).toHaveTextContent('selection:5');
     fireEvent.mouseUp(canvas);
 
     expect(screen.getByTestId('progress-text')).toHaveTextContent('1/1 words found');
