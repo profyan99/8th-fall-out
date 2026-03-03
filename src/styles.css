@@ -44,12 +44,27 @@ body {
 .parallax-backdrop {
   position: absolute;
   inset: -1rem;
+  overflow: hidden;
   border-radius: 22px;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(120, 98, 62, 0.25), transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(94, 79, 54, 0.22), transparent 40%),
-    linear-gradient(135deg, #261f16, #1d1812);
   z-index: 0;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  transition: transform 120ms linear;
+}
+
+.parallax-layer-0 {
+  background: linear-gradient(135deg, #261f16, #1d1812);
+}
+
+.parallax-layer-1 {
+  background: radial-gradient(circle at 20% 20%, rgba(120, 98, 62, 0.25), transparent 45%);
+}
+
+.parallax-layer-2 {
+  background: radial-gradient(circle at 80% 70%, rgba(94, 79, 54, 0.22), transparent 40%);
 }
 
 .monitor-frame {
@@ -67,6 +82,8 @@ body {
   padding: var(--crt-viewport-padding);
   display: grid;
   gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .game-header h1 {
@@ -149,11 +166,80 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  z-index: 5;
+}
+
+.crt-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.crt-scanline-layer {
+  opacity: 0.18;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(20, 20, 20, 0.02) 0,
-    rgba(20, 20, 20, 0.02) 2px,
+    rgba(16, 38, 16, 0.12) 0,
+    rgba(16, 38, 16, 0.12) 2px,
     transparent 2px,
     transparent 4px
   );
+}
+
+.crt-noise-layer {
+  opacity: 0.12;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0.6px, transparent 0.7px);
+  background-size: 3px 3px;
+  animation: crt-noise-shift 180ms steps(2, end) infinite;
+}
+
+.crt-vignette-layer {
+  background: radial-gradient(circle at center, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.phosphor-glow-layer {
+  background: radial-gradient(circle at 50% 50%, rgba(124, 255, 124, 0.08), transparent 65%);
+}
+
+.boot-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 17, 6, 0.94);
+  color: var(--crt-phosphor);
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: 1rem;
+  font-family: "IBM Plex Mono", monospace;
+  text-shadow: 0 0 8px rgba(140, 255, 140, 0.35);
+}
+
+.boot-overlay p {
+  margin: 0;
+}
+
+.boot-cursor {
+  animation: boot-caret 0.8s steps(1, end) infinite;
+}
+
+@keyframes boot-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes crt-noise-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(1px, -1px, 0);
+  }
+  100% {
+    transform: translate3d(-1px, 1px, 0);
+  }
 }
