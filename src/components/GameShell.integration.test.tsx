@@ -45,5 +45,7 @@ describe('GameShell drag integration', () => {
     fireEvent.mouseUp(canvas);
 
     expect(screen.getByTestId('progress-text')).toHaveTextContent('1/1 words found');
+    fireEvent.click(screen.getByRole('button', { name: /close/i }));
+    expect(screen.getByTestId('completion-banner')).toHaveTextContent('8 March transmission complete');
   });
 });

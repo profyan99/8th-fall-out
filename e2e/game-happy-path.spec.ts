@@ -13,5 +13,6 @@ test('completes level on happy path', async ({ page }) => {
   await page.getByRole('button', { name: /close/i }).click();
 
   await expect(page.getByTestId('completion-banner')).toBeVisible();
+  await expect(page.getByTestId('completion-banner')).toContainText('8 March transmission complete');
   await expect(page.getByTestId('progress-text')).toContainText('1/1 words found');
 });

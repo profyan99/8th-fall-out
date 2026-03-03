@@ -22,7 +22,7 @@ type GameShellProps = {
 const toLetterGrid = (rows: string[]): string[][] => rows.map((row) => row.split(''));
 const bootLines = ['BOOTING CRT SHELL...', 'CALIBRATING PHOSPHOR GRID...', 'READY.'];
 
-export function GameShell({ level, enableBootSequence = !import.meta.env.TEST, bootDurationMs = 1800 }: GameShellProps) {
+export function GameShell({ level, enableBootSequence = false, bootDurationMs = 1800 }: GameShellProps) {
   const [state, dispatch] = useReducer(reduceGameState, level, createInitialGameState);
   const boot = useBootSequence({
     enabled: enableBootSequence,
@@ -67,8 +67,8 @@ export function GameShell({ level, enableBootSequence = !import.meta.env.TEST, b
 
             {isCompleted && (
               <section className="completion-banner" data-testid="completion-banner">
-                <h2>All words found</h2>
-                <p>Session complete.</p>
+                <h2>8 March transmission complete</h2>
+                <p>Congratulations. Terminal session archived with gratitude.</p>
               </section>
             )}
 

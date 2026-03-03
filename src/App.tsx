@@ -5,7 +5,7 @@ import { GameShell } from './components/GameShell';
 function App() {
   const level = loadLevel(level01);
 
-  return <GameShell level={level} />;
+  return <GameShell level={level} enableBootSequence />;
 }
 
 export default App;

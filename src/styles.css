@@ -113,10 +113,12 @@ body {
 }
 
 .completion-banner {
-  background: #d8e9df;
-  border: 1px solid #a5bea8;
+  background: rgba(12, 35, 12, 0.85);
+  color: var(--crt-phosphor);
+  border: 1px solid rgba(140, 255, 140, 0.4);
   border-radius: 12px;
   padding: 0.75rem 1rem;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .completion-banner h2 {
