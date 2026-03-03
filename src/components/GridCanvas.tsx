@@ -8,6 +8,7 @@ type GridCanvasProps = {
   onMouseMove: (event: React.MouseEvent<HTMLCanvasElement>) => void;
   onMouseEnd: () => void;
   isInputBlocked?: boolean;
+  isBooting?: boolean;
 };
 
 export function GridCanvas({
@@ -17,7 +18,8 @@ export function GridCanvas({
   onMouseStart,
   onMouseMove,
   onMouseEnd,
-  isInputBlocked = false
+  isInputBlocked = false,
+  isBooting = false
 }: GridCanvasProps) {
   const rows = gridLetters.length;
   const cols = gridLetters[0]?.length ?? 0;
@@ -32,6 +34,7 @@ export function GridCanvas({
         height={640}
         data-testid="grid-canvas"
         data-input-blocked={String(isInputBlocked)}
+        data-booting={String(isBooting)}
         onMouseDown={isInputBlocked ? undefined : onMouseStart}
         onMouseMove={isInputBlocked ? undefined : onMouseMove}
         onMouseUp={isInputBlocked ? undefined : onMouseEnd}
