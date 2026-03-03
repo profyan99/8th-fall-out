@@ -17,17 +17,23 @@ type GameShellProps = {
   level: LevelDefinition;
   enableBootSequence?: boolean;
   bootDurationMs?: number;
+  bootLineIntervalMs?: number;
 };
 
 const toLetterGrid = (rows: string[]): string[][] => rows.map((row) => row.split(''));
 const bootLines = ['BOOTING CRT SHELL...', 'CALIBRATING PHOSPHOR GRID...', 'READY.'];
 
-export function GameShell({ level, enableBootSequence = false, bootDurationMs = 1800 }: GameShellProps) {
+export function GameShell({
+  level,
+  enableBootSequence = false,
+  bootDurationMs = 1800,
+  bootLineIntervalMs = 350
+}: GameShellProps) {
   const [state, dispatch] = useReducer(reduceGameState, level, createInitialGameState);
   const boot = useBootSequence({
     enabled: enableBootSequence,
     durationMs: bootDurationMs,
-    lineIntervalMs: 350,
+    lineIntervalMs: bootLineIntervalMs,
     lines: bootLines
   });
 

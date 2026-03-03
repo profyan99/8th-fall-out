@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("captures crt visual states", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?visual=1");
 
   await expect(page.getByTestId("boot-overlay")).toBeVisible();
   await expect(page).toHaveScreenshot("boot-start.png");
