@@ -91,6 +91,27 @@ body {
   font-size: 1.5rem;
 }
 
+.terminal-hud {
+  border: 1px solid rgba(140, 255, 140, 0.35);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  color: var(--crt-phosphor);
+  font-family: "IBM Plex Mono", monospace;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.terminal-hud h1 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.terminal-hud-session {
+  margin: 0;
+  color: var(--crt-phosphor-dim);
+  font-size: 0.85rem;
+}
+
 .completion-banner {
   background: #d8e9df;
   border: 1px solid #a5bea8;
@@ -129,6 +150,23 @@ body {
   display: block;
   border: 1px solid #c9c1af;
   border-radius: 10px;
+}
+
+.progress-markers {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.progress-marker {
+  width: 12px;
+  height: 6px;
+  border: 1px solid #5f7f5f;
+  background: transparent;
+}
+
+.progress-marker-found {
+  background: var(--crt-phosphor-dim);
 }
 
 .video-overlay-backdrop {

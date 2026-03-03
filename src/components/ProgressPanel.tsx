@@ -10,6 +10,16 @@ export function ProgressPanel({ foundCount, totalCount }: ProgressPanelProps) {
       <p data-testid="progress-text">
         {foundCount}/{totalCount} words found
       </p>
+      <div className="progress-markers">
+        {Array.from({ length: totalCount }, (_, index) => (
+          <span
+            key={index}
+            data-testid="progress-marker"
+            className={index < foundCount ? 'progress-marker progress-marker-found' : 'progress-marker'}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
     </aside>
   );
 }

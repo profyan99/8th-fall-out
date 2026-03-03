@@ -10,6 +10,7 @@ import { MonitorFrame } from './scene/MonitorFrame';
 import { SceneStage } from './scene/SceneStage';
 import { ScreenViewport } from './scene/ScreenViewport';
 import { BootOverlay } from './terminal/BootOverlay';
+import { TerminalHud } from './terminal/TerminalHud';
 import { VideoOverlay } from './VideoOverlay';
 
 type GameShellProps = {
@@ -57,9 +58,12 @@ export function GameShell({ level, enableBootSequence = !import.meta.env.TEST, b
       <SceneStage>
         <MonitorFrame>
           <ScreenViewport>
-            <header className="game-header">
-              <h1>{level.title}</h1>
-            </header>
+            <TerminalHud
+              title={level.title}
+              sessionId={level.id}
+              foundCount={state.foundWordIds.size}
+              totalCount={level.words.length}
+            />
 
             {isCompleted && (
               <section className="completion-banner" data-testid="completion-banner">
