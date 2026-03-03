@@ -5,6 +5,9 @@ import { useGridSelection } from '../hooks/useGridSelection';
 import { FxLayer } from './FxLayer';
 import { GridCanvas } from './GridCanvas';
 import { ProgressPanel } from './ProgressPanel';
+import { MonitorFrame } from './scene/MonitorFrame';
+import { SceneStage } from './scene/SceneStage';
+import { ScreenViewport } from './scene/ScreenViewport';
 import { VideoOverlay } from './VideoOverlay';
 
 type GameShellProps = {
@@ -39,29 +42,35 @@ export function GameShell({ level }: GameShellProps) {
 
   return (
     <main className="game-shell">
-      <header className="game-header">
-        <h1>{level.title}</h1>
-      </header>
+      <SceneStage>
+        <MonitorFrame>
+          <ScreenViewport>
+            <header className="game-header">
+              <h1>{level.title}</h1>
+            </header>
 
-      {isCompleted && (
-        <section className="completion-banner" data-testid="completion-banner">
-          <h2>All words found</h2>
-          <p>Session complete.</p>
-        </section>
-      )}
+            {isCompleted && (
+              <section className="completion-banner" data-testid="completion-banner">
+                <h2>All words found</h2>
+                <p>Session complete.</p>
+              </section>
+            )}
 
-      <div className="game-main">
-        <GridCanvas
-          gridLetters={toLetterGrid(level.grid)}
-          activeSelection={activeSelection}
-          foundPaths={foundPaths}
-          onMouseStart={onMouseStart}
-          onMouseMove={onMouseMove}
-          onMouseEnd={onMouseEnd}
-          isInputBlocked={isVideoOpen}
-        />
-        <ProgressPanel foundCount={state.foundWordIds.size} totalCount={level.words.length} />
-      </div>
+            <div className="game-main">
+              <GridCanvas
+                gridLetters={toLetterGrid(level.grid)}
+                activeSelection={activeSelection}
+                foundPaths={foundPaths}
+                onMouseStart={onMouseStart}
+                onMouseMove={onMouseMove}
+                onMouseEnd={onMouseEnd}
+                isInputBlocked={isVideoOpen}
+              />
+              <ProgressPanel foundCount={state.foundWordIds.size} totalCount={level.words.length} />
+            </div>
+          </ScreenViewport>
+        </MonitorFrame>
+      </SceneStage>
 
       {isVideoOpen && activeVideoWord && (
         <VideoOverlay word={activeVideoWord} onClose={() => dispatch({ type: 'video_closed' })} />

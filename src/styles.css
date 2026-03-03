@@ -32,6 +32,40 @@ body {
   min-height: 100vh;
   padding: 2rem;
   display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.scene-stage {
+  width: min(1200px, 100%);
+  position: relative;
+}
+
+.parallax-backdrop {
+  position: absolute;
+  inset: -1rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(120, 98, 62, 0.25), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(94, 79, 54, 0.22), transparent 40%),
+    linear-gradient(135deg, #261f16, #1d1812);
+  z-index: 0;
+}
+
+.monitor-frame {
+  background: linear-gradient(160deg, var(--crt-bezel-edge), var(--crt-bezel));
+  border: 1px solid #3b463b;
+  border-radius: calc(var(--crt-frame-radius) + 8px);
+  padding: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.screen-viewport {
+  background: var(--crt-screen-bg);
+  border-radius: var(--crt-frame-radius);
+  padding: var(--crt-viewport-padding);
+  display: grid;
   gap: 1.25rem;
 }
 
