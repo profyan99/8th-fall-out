@@ -74,6 +74,24 @@ body {
   padding: 1.25rem;
   position: relative;
   z-index: 1;
+  box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.45), 0 24px 45px rgba(0, 0, 0, 0.35);
+}
+
+.monitor-glass,
+.monitor-reflection {
+  position: absolute;
+  inset: 1.25rem;
+  border-radius: var(--crt-frame-radius);
+  pointer-events: none;
+}
+
+.monitor-glass {
+  box-shadow: inset 0 0 24px rgba(124, 255, 124, 0.08);
+}
+
+.monitor-reflection {
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.1), transparent 35%);
+  opacity: 0.45;
 }
 
 .screen-viewport {
@@ -84,6 +102,8 @@ body {
   gap: 1.25rem;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(110, 160, 110, 0.25);
 }
 
 .game-header h1 {
@@ -247,7 +267,11 @@ body {
 }
 
 .phosphor-glow-layer {
-  background: radial-gradient(circle at 50% 50%, rgba(124, 255, 124, 0.08), transparent 65%);
+  background: radial-gradient(circle at 50% 50%, rgba(124, 255, 124, 0.11), transparent 62%);
+}
+
+.phosphor-glow-pulse {
+  animation: phosphor-pulse 1.8s ease-in-out infinite;
 }
 
 .boot-overlay {
@@ -311,5 +335,15 @@ body {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes phosphor-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
   }
 }
