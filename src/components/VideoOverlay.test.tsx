@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import type { WordDefinition } from '../domain/types';
+import { ru } from '../i18n/ru';
 import { VideoOverlay } from './VideoOverlay';
 
 const word: WordDefinition = {
@@ -32,10 +33,11 @@ describe('VideoOverlay', () => {
     const dialog = screen.getByRole('dialog');
     expect(dialog).toBeInTheDocument();
     expect(dialog).toHaveClass('video-overlay-lg');
-    expect(screen.getByText(/ALPHA/i)).toBeInTheDocument();
+    expect(screen.getByText(`${ru.overlay.signalLock}: ${word.value}`)).toBeInTheDocument();
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
     expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
+    expect(screen.getByRole('button', { name: ru.overlay.close })).toBeInTheDocument();
     expect(dialog).toHaveClass('signal-state-locked');
   });
 
@@ -47,7 +49,7 @@ describe('VideoOverlay', () => {
 
     expect(screen.getByTestId('video-fallback')).toBeInTheDocument();
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-loss');
-    const continueButton = screen.getByRole('button', { name: /continue/i });
+    const continueButton = screen.getByRole('button', { name: ru.overlay.continue });
     expect(continueButton).toHaveClass('terminal-action-button');
     fireEvent.click(continueButton);
     expect(onClose).toHaveBeenCalledTimes(1);
@@ -69,7 +71,7 @@ describe('VideoOverlay', () => {
 
     expect(screen.getByTestId('media-image-fallback')).toBeInTheDocument();
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-loss');
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }));
+    fireEvent.click(screen.getByRole('button', { name: ru.overlay.continue }));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

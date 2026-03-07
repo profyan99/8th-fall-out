@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import type { LevelDefinition } from '../domain/types';
+import { ru } from '../i18n/ru';
 import { GameShell } from './GameShell';
 
 const level: LevelDefinition = {
@@ -50,10 +51,10 @@ describe('GameShell drag integration', () => {
     expect(canvas).toHaveAttribute('data-grid-highlight', 'phosphor-v2');
     expect(backdrop).toHaveStyle({ pointerEvents: 'none' });
     expect(decorLayer).toHaveStyle({ pointerEvents: 'none' });
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 1 OF 1');
-    fireEvent.click(screen.getByRole('button', { name: /close/i }));
+    expect(screen.getByTestId('progress-text')).toHaveTextContent(`${ru.progress.words}: 1 ${ru.progress.of} 1`);
+    fireEvent.click(screen.getByRole('button', { name: ru.overlay.close }));
     const completionBanner = screen.getByTestId('completion-banner');
-    expect(completionBanner).toHaveTextContent('8 March transmission complete');
+    expect(completionBanner).toHaveTextContent(ru.completion.title);
     expect(completionBanner).not.toHaveClass('completion-banner-overlay');
     expect(screen.getByTestId('hud-progress')).toBeInTheDocument();
     expect(screen.getByTestId('grid-canvas')).toBeInTheDocument();

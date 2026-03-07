@@ -1,6 +1,7 @@
 import { useMemo, useReducer } from 'react';
 import { createInitialGameState, reduceGameState } from '../domain/gameState';
 import type { GridCell, LevelDefinition } from '../domain/types';
+import { ru } from '../i18n/ru';
 import { useGridSelection } from '../hooks/useGridSelection';
 import { useParallax } from '../hooks/useParallax';
 import { useBootSequence } from '../hooks/useBootSequence';
@@ -23,7 +24,7 @@ type GameShellProps = {
 };
 
 const toLetterGrid = (rows: string[]): string[][] => rows.map((row) => row.split(''));
-const bootLines = ['BOOTING CRT SHELL...', 'CALIBRATING PHOSPHOR GRID...', 'READY.'];
+const bootLines = ru.boot.lines;
 const GRID_CANVAS_SIZE = 640;
 
 export function GameShell({
@@ -90,8 +91,8 @@ export function GameShell({
 
             {isCompleted && (
               <section className="completion-banner" data-testid="completion-banner">
-                <h2>8 March transmission complete</h2>
-                <p>Congratulations. Terminal session archived with gratitude.</p>
+                <h2>{ru.completion.title}</h2>
+                <p>{ru.completion.subtitle}</p>
               </section>
             )}
 

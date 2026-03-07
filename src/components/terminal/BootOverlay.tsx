@@ -1,4 +1,5 @@
 import type { BootPhase } from "../../hooks/useBootSequence";
+import { ru } from "../../i18n/ru";
 
 type BootOverlayProps = {
   lines: string[];
@@ -13,6 +14,7 @@ export function BootOverlay({ lines, visibleLineCount, phase }: BootOverlayProps
       data-testid="boot-overlay"
       data-boot-phase={phase}
       aria-live="polite"
+      aria-label={ru.boot.overlayAria}
     >
       {lines.slice(0, visibleLineCount).map((line) => (
         <p key={line}>{line}</p>

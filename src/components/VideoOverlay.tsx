@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ru } from '../i18n/ru';
 import type { WordDefinition } from '../domain/types';
 
 type VideoOverlayProps = {
@@ -21,9 +22,9 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
         className={`video-overlay video-overlay-lg signal-capture-dialog ${dialogSignalClass}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Word video"
+        aria-label={ru.overlay.ariaLabel}
       >
-        <h2>SIGNAL LOCK: {word.value}</h2>
+        <h2>{ru.overlay.signalLock}: {word.value}</h2>
 
         {word.mediaType === 'video' ? (
           !hasError ? (
@@ -37,9 +38,9 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
             />
           ) : (
             <div data-testid="video-fallback" className="video-fallback">
-              <p>Video unavailable. Continue to the game.</p>
+              <p>{ru.overlay.videoUnavailable}</p>
               <button type="button" className="terminal-action-button" onClick={onClose}>
-                Continue
+                {ru.overlay.continue}
               </button>
             </div>
           )
@@ -48,20 +49,20 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
             data-testid="media-image"
             className="media-image"
             src={word.imageSrc}
-            alt={`${word.value} media`}
+            alt={`${word.value} медиа`}
             onError={() => setHasError(true)}
           />
         ) : (
           <div data-testid="media-image-fallback" className="video-fallback">
-            <p>Image unavailable. Continue to the game.</p>
+            <p>{ru.overlay.imageUnavailable}</p>
             <button type="button" className="terminal-action-button" onClick={onClose}>
-              Continue
+              {ru.overlay.continue}
             </button>
           </div>
         )}
 
         <button type="button" className="terminal-action-button" onClick={onClose} data-testid="video-close-button">
-          Close
+          {ru.overlay.close}
         </button>
       </section>
     </div>
