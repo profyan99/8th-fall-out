@@ -55,8 +55,9 @@ describe('GameShell video flow', () => {
     fireEvent.mouseUp(canvas);
 
     expect(hazeLayer).toHaveStyle({ pointerEvents: 'none' });
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toHaveClass('video-overlay-lg');
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
+    expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
     fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });

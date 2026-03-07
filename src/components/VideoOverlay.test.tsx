@@ -17,10 +17,13 @@ describe('VideoOverlay', () => {
   test('renders video modal and word label', () => {
     render(<VideoOverlay word={word} onClose={() => undefined} />);
 
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeInTheDocument();
+    expect(dialog).toHaveClass('video-overlay-lg');
     expect(screen.getByText(/ALPHA/i)).toBeInTheDocument();
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
+    expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
   });
 
   test('shows fallback UI on video error and allows continue', () => {
@@ -30,7 +33,9 @@ describe('VideoOverlay', () => {
     fireEvent.error(screen.getByTestId('video-element'));
 
     expect(screen.getByTestId('video-fallback')).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: /continue/i }));
+    const continueButton = screen.getByRole('button', { name: /continue/i });
+    expect(continueButton).toHaveClass('terminal-action-button');
+    fireEvent.click(continueButton);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });
