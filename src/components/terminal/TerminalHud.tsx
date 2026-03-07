@@ -1,3 +1,5 @@
+import { ru } from '../../i18n/ru';
+
 type TerminalHudProps = {
   title: string;
   sessionId: string;
@@ -9,9 +11,9 @@ export function TerminalHud({ title, sessionId, foundCount, totalCount }: Termin
   return (
     <header className="terminal-hud">
       <h1>{title}</h1>
-      <p className="terminal-hud-session">SESSION::{sessionId}</p>
-      <p className="terminal-hud-status">LINK STABLE</p>
-      <p className="terminal-hud-progress" data-testid="hud-progress">{`WORDS LOCATED ${foundCount}/${totalCount}`}</p>
+      <p className="terminal-hud-session">{ru.hud.sessionPrefix}{sessionId}</p>
+      <p className="terminal-hud-status">{ru.hud.linkStable}</p>
+      <p className="terminal-hud-progress" data-testid="hud-progress">{`${ru.hud.wordsLocated} ${foundCount}/${totalCount}`}</p>
     </header>
   );
 }

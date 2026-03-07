@@ -32,8 +32,9 @@ describe("ProgressPanel", () => {
       />
     );
 
-    expect(screen.getByText("RESULT")).toBeInTheDocument();
-    expect(screen.getByTestId("progress-text")).toHaveTextContent("WORDS: 2 OF 4");
+    expect(screen.getByText(ru.progress.title)).toBeInTheDocument();
+    expect(screen.getByText(ru.progress.caption)).toBeInTheDocument();
+    expect(screen.getByTestId("progress-text")).toHaveTextContent(`${ru.progress.words}: 2 ${ru.progress.of} 4`);
     expect(screen.getAllByTestId("progress-marker")).toHaveLength(4);
     expect(screen.getByRole("button", { name: "ALPHA" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "GAMMA" })).toBeInTheDocument();

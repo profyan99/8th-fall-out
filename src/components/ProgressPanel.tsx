@@ -1,3 +1,5 @@
+import { ru } from '../i18n/ru';
+
 type ProgressPanelProps = {
   foundCount: number;
   totalCount: number;
@@ -13,9 +15,9 @@ export function ProgressPanel({
 }: ProgressPanelProps) {
   return (
     <aside className="progress-panel">
-      <h2>RESULT</h2>
-      <p className="progress-caption">TERMINAL INDEX</p>
-      <p data-testid="progress-text">{`WORDS: ${foundCount} OF ${totalCount}`}</p>
+      <h2>{ru.progress.title}</h2>
+      <p className="progress-caption">{ru.progress.caption}</p>
+      <p data-testid="progress-text">{`${ru.progress.words}: ${foundCount} ${ru.progress.of} ${totalCount}`}</p>
       <div className="progress-markers">
         {Array.from({ length: totalCount }, (_, index) => (
           <span
