@@ -38,7 +38,7 @@ describe('GameShell drag integration', () => {
     render(<GameShell level={level} />);
 
     const canvas = screen.getByTestId('grid-canvas');
-    const backdrop = screen.getByTestId('parallax-backdrop');
+    const backdrop = screen.getByTestId('global-parallax-backdrop');
     const decorLayer = screen.getByTestId('parallax-layer-2');
 
     fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });

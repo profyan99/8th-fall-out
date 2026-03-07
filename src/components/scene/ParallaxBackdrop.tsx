@@ -1,12 +1,18 @@
 type ParallaxBackdropProps = {
   layerTransforms: string[];
+  className?: string;
+  testId?: string;
 };
 
 const SCENE_LAYER_CLASSES = ["bunker-wall", "bunker-props", "march-decor", "ambient-haze"] as const;
 
-export function ParallaxBackdrop({ layerTransforms }: ParallaxBackdropProps) {
+export function ParallaxBackdrop({
+  layerTransforms,
+  className = "parallax-backdrop",
+  testId = "parallax-backdrop",
+}: ParallaxBackdropProps) {
   return (
-    <div className="parallax-backdrop" data-testid="parallax-backdrop" aria-hidden="true" style={{ pointerEvents: "none" }}>
+    <div className={className} data-testid={testId} aria-hidden="true" style={{ pointerEvents: "none" }}>
       {SCENE_LAYER_CLASSES.map((layerClass, index) => (
         <div
           key={index}

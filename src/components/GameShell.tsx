@@ -2,11 +2,13 @@ import { useMemo, useReducer } from 'react';
 import { createInitialGameState, reduceGameState } from '../domain/gameState';
 import type { GridCell, LevelDefinition } from '../domain/types';
 import { useGridSelection } from '../hooks/useGridSelection';
+import { useParallax } from '../hooks/useParallax';
 import { useBootSequence } from '../hooks/useBootSequence';
 import { FxLayer } from './FxLayer';
 import { GridCanvas } from './GridCanvas';
 import { ProgressPanel } from './ProgressPanel';
 import { MonitorFrame } from './scene/MonitorFrame';
+import { ParallaxBackdrop } from './scene/ParallaxBackdrop';
 import { SceneStage } from './scene/SceneStage';
 import { ScreenViewport } from './scene/ScreenViewport';
 import { BootOverlay } from './terminal/BootOverlay';
@@ -55,6 +57,7 @@ export function GameShell({
       dispatch({ type: 'selection_committed', path });
     }
   });
+  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax('medium');
 
   const isVideoOpen = state.phase === 'video_open' && activeVideoWord !== null;
   const isCompleted = state.phase === 'completed';
@@ -62,7 +65,12 @@ export function GameShell({
 
   return (
     <main className="game-shell">
-      <SceneStage>
+      <ParallaxBackdrop
+        layerTransforms={layerTransforms}
+        className="parallax-backdrop parallax-backdrop-global"
+        testId="global-parallax-backdrop"
+      />
+      <SceneStage onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
         <MonitorFrame>
           <ScreenViewport>
             <TerminalHud
