@@ -58,6 +58,8 @@ describe('GridCanvas', () => {
     expect(screen.queryByText(/rows:\d+/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/selection:\d+/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/found-cells:\d+/i)).not.toBeInTheDocument();
+    expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-grid-highlight', 'phosphor-v2');
+    expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-grid-pulse', 'steady');
   });
 
   test('draws letters on canvas', () => {

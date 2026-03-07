@@ -32,6 +32,7 @@ export function GridCanvas({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rows = gridLetters.length;
   const cols = gridLetters[0]?.length ?? 0;
+  const pulseState = activeSelection.length > 0 ? "tracking" : "steady";
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -56,7 +57,7 @@ export function GridCanvas({
         const isFound = foundPaths.some((path) => isCellInPath(cell, path));
 
         if (isFound || isActive) {
-          context.fillStyle = isFound ? 'rgba(95, 255, 130, 0.30)' : 'rgba(140, 255, 140, 0.22)';
+          context.fillStyle = isFound ? 'rgba(92, 255, 124, 0.36)' : 'rgba(152, 255, 162, 0.24)';
           context.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
         }
 
@@ -88,6 +89,8 @@ export function GridCanvas({
         data-input-blocked={String(isInputBlocked)}
         data-booting={String(isBooting)}
         data-layout-mode={layoutMode}
+        data-grid-highlight="phosphor-v2"
+        data-grid-pulse={pulseState}
         onMouseDown={isInputBlocked ? undefined : onMouseStart}
         onMouseMove={isInputBlocked ? undefined : onMouseMove}
         onMouseUp={isInputBlocked ? undefined : onMouseEnd}
