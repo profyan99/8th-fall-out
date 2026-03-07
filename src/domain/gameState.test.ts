@@ -11,6 +11,7 @@ const level: LevelDefinition = {
     {
       id: 'word-alpha',
       value: 'ALPHA',
+      mediaType: 'video',
       videoSrc: '/videos/alpha.mp4',
       path: [
         { row: 0, col: 0 },

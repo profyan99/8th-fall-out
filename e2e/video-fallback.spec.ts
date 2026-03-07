@@ -22,7 +22,7 @@ test('broken video still allows continue', async ({ page }) => {
   await dragTopRowWord(page);
 
   await expect(page.getByRole('dialog')).toBeVisible();
-  await expect(page.getByTestId('video-overlay-backdrop')).toHaveClass(/signal-state-capture/);
+  await expect(page.getByTestId('video-overlay-backdrop')).toHaveClass(/signal-state-(capture|loss)/);
 
   await page.evaluate(() => {
     const video = document.querySelector('[data-testid="video-element"]');

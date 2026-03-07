@@ -1,4 +1,4 @@
-import type { GridCell, LevelDefinition, WordDefinition } from './types';
+import type { GeneratedWordPayload, GridCell, LevelDefinition, WordDefinition } from './types';
 import { generateGridFromWords } from './generateGrid';
 
 const SUPPORTED_GRID_SIZES = new Set([8, 10, 12]);
@@ -9,7 +9,11 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const isGridCell = (value: unknown): value is GridCell =>
   isRecord(value) && typeof value.row === 'number' && typeof value.col === 'number';
 
-const parseWordMedia = (value: Record<string, unknown>) => {
+type ParsedMediaSources =
+  | { videoSrc: string; imageSrc?: never }
+  | { imageSrc: string; videoSrc?: never };
+
+const parseWordMedia = (value: Record<string, unknown>): ParsedMediaSources => {
   const hasVideo = typeof value.videoSrc === 'string';
   const hasImage = typeof value.imageSrc === 'string';
 
@@ -18,10 +22,10 @@ const parseWordMedia = (value: Record<string, unknown>) => {
   }
 
   if (hasVideo) {
-    return { mediaType: 'video' as const, videoSrc: value.videoSrc as string };
+    return { videoSrc: value.videoSrc as string };
   }
 
-  return { mediaType: 'image' as const, imageSrc: value.imageSrc as string };
+  return { imageSrc: value.imageSrc as string };
 };
 
 const parseWord = (value: unknown): WordDefinition => {
@@ -38,16 +42,20 @@ const parseWord = (value: unknown): WordDefinition => {
   }
 
   const media = parseWordMedia(value);
+  const mediaWord =
+    typeof media.videoSrc === 'string'
+      ? { mediaType: 'video' as const, videoSrc: media.videoSrc }
+      : { mediaType: 'image' as const, imageSrc: media.imageSrc };
 
   return {
     id: value.id,
     value: value.value,
-    ...media,
+    ...mediaWord,
     path: value.path
   };
 };
 
-type WordSeedInput = Omit<WordDefinition, 'path'>;
+type WordSeedInput = GeneratedWordPayload;
 
 const parseWordSeedInput = (value: unknown): WordSeedInput => {
   if (!isRecord(value)) {
@@ -63,7 +71,7 @@ const parseWordSeedInput = (value: unknown): WordSeedInput => {
   return {
     id: value.id,
     value: value.value,
-    ...media
+    ...(typeof media.videoSrc === 'string' ? { videoSrc: media.videoSrc } : { imageSrc: media.imageSrc })
   };
 };
 
