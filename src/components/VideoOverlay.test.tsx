@@ -6,7 +6,19 @@ import { VideoOverlay } from './VideoOverlay';
 const word: WordDefinition = {
   id: 'word-1',
   value: 'ALPHA',
+  mediaType: 'video',
   videoSrc: '/videos/alpha.mp4',
+  path: [
+    { row: 0, col: 0 },
+    { row: 0, col: 1 }
+  ]
+};
+
+const imageWord: WordDefinition = {
+  id: 'word-2',
+  value: 'POSTER',
+  mediaType: 'image',
+  imageSrc: '/images/poster.png',
   path: [
     { row: 0, col: 0 },
     { row: 0, col: 1 }
@@ -38,6 +50,26 @@ describe('VideoOverlay', () => {
     const continueButton = screen.getByRole('button', { name: /continue/i });
     expect(continueButton).toHaveClass('terminal-action-button');
     fireEvent.click(continueButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  test('renders image branch when mediaType is image', () => {
+    render(<VideoOverlay word={imageWord} onClose={() => undefined} />);
+
+    expect(screen.queryByTestId('video-element')).not.toBeInTheDocument();
+    expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/poster.png');
+    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
+  });
+
+  test('shows image fallback UI on image load error and allows continue', () => {
+    const onClose = vi.fn();
+    render(<VideoOverlay word={imageWord} onClose={onClose} />);
+
+    fireEvent.error(screen.getByTestId('media-image'));
+
+    expect(screen.getByTestId('media-image-fallback')).toBeInTheDocument();
+    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-loss');
+    fireEvent.click(screen.getByRole('button', { name: /continue/i }));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });
