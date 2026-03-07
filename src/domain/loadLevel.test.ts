@@ -82,4 +82,46 @@ describe('loadLevel', () => {
     expect(level.words[0].path.length).toBe(level.words[0].value.length);
     expect(level.words[1].path.length).toBe(level.words[1].value.length);
   });
+
+  test('supports dynamic 10x10 cyrillic payload with explicit alphabet', () => {
+    const level = loadLevel({
+      id: 'generated-ru',
+      title: 'Generated RU',
+      gridSize: 10,
+      alphabet: 'cyrillic',
+      seed: 'ru-seed',
+      words: [
+        { id: 'w1', value: 'лампа', videoSrc: '/videos/lampa.mp4' },
+        { id: 'w2', value: 'сигнал', videoSrc: '/videos/signal.mp4' }
+      ]
+    });
+
+    expect(level.gridSize).toBe(10);
+    expect(level.grid).toHaveLength(10);
+    for (const row of level.grid) {
+      expect(row).toHaveLength(10);
+      expect(row).toMatch(/^[А-ЯЁ]+$/);
+    }
+    for (const word of level.words) {
+      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
+    }
+  });
+
+  test('keeps dynamic payload backward compatible when alphabet is omitted', () => {
+    const level = loadLevel({
+      id: 'generated-latin-default',
+      title: 'Generated Latin',
+      gridSize: 10,
+      seed: 'latin-default',
+      words: [
+        { id: 'w1', value: 'helio', videoSrc: '/videos/helio.mp4' },
+        { id: 'w2', value: 'trace', videoSrc: '/videos/trace.mp4' }
+      ]
+    });
+
+    expect(level.gridSize).toBe(10);
+    for (const row of level.grid) {
+      expect(row).toMatch(/^[A-Z]+$/);
+    }
+  });
 });
