@@ -242,6 +242,20 @@ body {
   margin: 0;
   color: var(--crt-phosphor-dim);
   font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.terminal-hud-status {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(170, 255, 170, 0.9);
+}
+
+.terminal-hud-progress {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
 }
 
 .completion-banner {
@@ -305,6 +319,18 @@ body {
 
 .progress-marker-found {
   background: var(--crt-phosphor-dim);
+}
+
+.progress-panel h2 {
+  margin: 0 0 0.3rem;
+  letter-spacing: 0.08em;
+}
+
+.progress-caption {
+  margin: 0 0 0.35rem;
+  color: var(--crt-phosphor-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
 }
 
 .progress-replay-list {
