@@ -53,5 +53,5 @@ test('broken image still allows continue', async ({ page }) => {
   await expect(page.getByTestId('media-image-fallback')).toBeVisible();
   await page.getByRole('button', { name: /continue/i }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
-  await expect(page.getByTestId('progress-text')).toContainText('WORDS INDEXED: 1 OF 2');
+  await expect(page.getByTestId('progress-text')).toContainText('WORDS: 1 OF 2');
 });

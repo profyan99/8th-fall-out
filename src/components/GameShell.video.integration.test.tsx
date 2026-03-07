@@ -63,7 +63,7 @@ describe('GameShell video flow', () => {
     expect(screen.getByRole('dialog')).toHaveClass('signal-state-locked');
     expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
     expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 1 OF 2');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 1 OF 2');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
     fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
@@ -72,7 +72,7 @@ describe('GameShell video flow', () => {
     expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
 
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
-    fireEvent.click(screen.getByRole('button', { name: /replay record beta/i }));
+    fireEvent.click(screen.getByRole('button', { name: /^beta$/i }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
@@ -81,6 +81,6 @@ describe('GameShell video flow', () => {
     fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 2 OF 2');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 2 OF 2');
   });
 });
