@@ -3,7 +3,7 @@ import { useParallax } from "../../hooks/useParallax";
 import { ParallaxBackdrop } from "./ParallaxBackdrop";
 
 export function SceneStage({ children }: PropsWithChildren) {
-  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax("high");
+  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax("medium");
 
   return (
     <section

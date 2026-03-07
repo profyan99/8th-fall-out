@@ -4,7 +4,11 @@ import type { QualityMode } from "../theme/qualityMode";
 
 type Point = { x: number; y: number };
 
-const LAYER_FACTORS = [0.35, 0.6, 1] as const;
+const LAYER_FACTORS_BY_MODE = {
+  safe: [0.18, 0.38, 0.64, 0.9],
+  medium: [0.2, 0.42, 0.7, 0.95],
+  high: [0.2, 0.45, 0.75, 1],
+} as const;
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
@@ -28,25 +32,38 @@ export function getParallaxAmplitude(mode: QualityMode): number {
   return 8;
 }
 
+export function getLayerFactors(mode: QualityMode): readonly number[] {
+  return LAYER_FACTORS_BY_MODE[mode];
+}
+
+export function interpolateTowardTarget(current: Point, target: Point, smoothing: number): Point {
+  return {
+    x: current.x + (target.x - current.x) * smoothing,
+    y: current.y + (target.y - current.y) * smoothing,
+  };
+}
+
 export function useParallax(qualityMode: QualityMode = "high"): {
   layerTransforms: string[];
   onPointerMove: PointerEventHandler<HTMLDivElement>;
   onPointerLeave: PointerEventHandler<HTMLDivElement>;
 } {
   const [current, setCurrent] = useState<Point>({ x: 0, y: 0 });
+  const currentRef = useRef<Point>({ x: 0, y: 0 });
   const targetRef = useRef<Point>({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
   const amplitude = getParallaxAmplitude(qualityMode);
+  const layerFactors = getLayerFactors(qualityMode);
 
   const tick = () => {
     setCurrent((prev) => {
-      const nextX = prev.x + (targetRef.current.x - prev.x) * 0.16;
-      const nextY = prev.y + (targetRef.current.y - prev.y) * 0.16;
-      return { x: nextX, y: nextY };
+      const next = interpolateTowardTarget(prev, targetRef.current, 0.16);
+      currentRef.current = next;
+      return next;
     });
 
-    const dx = Math.abs(targetRef.current.x - current.x);
-    const dy = Math.abs(targetRef.current.y - current.y);
+    const dx = Math.abs(targetRef.current.x - currentRef.current.x);
+    const dy = Math.abs(targetRef.current.y - currentRef.current.y);
     if (dx < 0.01 && dy < 0.01) {
       rafRef.current = null;
       return;
@@ -77,13 +94,12 @@ export function useParallax(qualityMode: QualityMode = "high"): {
 
   const layerTransforms = useMemo(
     () =>
-      LAYER_FACTORS.map(
+      layerFactors.map(
         (factor) =>
           `translate3d(${(current.x * amplitude * factor).toFixed(3)}px, ${(current.y * amplitude * factor).toFixed(3)}px, 0)`
       ),
-    [amplitude, current.x, current.y]
+    [amplitude, current.x, current.y, layerFactors]
   );
 
   return { layerTransforms, onPointerMove, onPointerLeave };
 }
-
