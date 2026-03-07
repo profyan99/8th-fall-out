@@ -1,17 +1,17 @@
 {
   "id": "level-test",
-  "title": "Test Grid",
+  "title": "Тестовая сетка",
   "gridSize": 10,
   "seed": "test-level-seed",
   "words": [
     {
       "id": "word-alpha",
-      "value": "ALPHA",
+      "value": "АЛЬФА",
       "videoSrc": "/videos/alpha.mp4"
     },
     {
       "id": "word-beta",
-      "value": "BETA",
+      "value": "БЕТА",
       "imageSrc": "/images/beta.png"
     }
   ]

@@ -55,6 +55,8 @@ describe('resolveLevelPayload', () => {
       grid: expect.any(Array)
     });
     expect(result.payload.words[0]).toHaveProperty('path');
+    expect(result.payload.title).toMatch(/[А-Яа-яЁё]/);
+    expect(result.payload.words[0].value).toMatch(/[А-Яа-яЁё]/);
   });
 
   test('supports generated payload shape for level=test', () => {
@@ -68,9 +70,11 @@ describe('resolveLevelPayload', () => {
       id: 'level-test',
       gridSize: 10
     });
+    expect(result.payload.title).toMatch(/[А-Яа-яЁё]/);
     expect(result.payload).not.toHaveProperty('grid');
     expect(result.payload.words[0]).not.toHaveProperty('path');
     expect(result.payload.words.some((word) => 'imageSrc' in word)).toBe(true);
+    expect(result.payload.words.every((word) => /[А-Яа-яЁё]/.test(word.value))).toBe(true);
   });
 
   test('loads level=test with at least one image-backed word after parse', () => {

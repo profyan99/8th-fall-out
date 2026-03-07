@@ -1,8 +1,8 @@
 {
   "id": "level-01",
-  "title": "ROBCO TERMINAL // 8 MARCH PROTOCOL",
+  "title": "ТЕРМИНАЛ ROBCO // ПРОТОКОЛ 8 МАРТА",
   "grid": [
-    "MARCHGREEN",
+    "ПРАЗДНКИНО",
     "QWERTYUIOP",
     "ASDFGHJKLZ",
     "XCVBNMQWER",
@@ -16,7 +16,7 @@
   "words": [
     {
       "id": "word-march",
-      "value": "MARCHG",
+      "value": "ПРАЗДН",
       "videoSrc": "/videos/march.mp4",
       "path": [
         { "row": 0, "col": 0 },

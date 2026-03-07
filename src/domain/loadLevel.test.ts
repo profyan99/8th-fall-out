@@ -1,4 +1,6 @@
 import { describe, expect, test } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { loadLevel } from './loadLevel';
 import type { GeneratedWordPayload, WordDefinition } from './types';
 
@@ -294,5 +296,22 @@ describe('loadLevel', () => {
     for (const row of level.grid) {
       expect(row).toMatch(/^[A-Z]+$/);
     }
+  });
+
+  test('loads bundled levels with russian user-facing title and words', () => {
+    const level01Payload = JSON.parse(
+      readFileSync(resolve(process.cwd(), 'content/levels/level-01.json'), 'utf8')
+    );
+    const levelTestPayload = JSON.parse(
+      readFileSync(resolve(process.cwd(), 'content/levels/level-test.json'), 'utf8')
+    );
+
+    const level01 = loadLevel(level01Payload);
+    const levelTest = loadLevel(levelTestPayload);
+
+    expect(level01.title).toMatch(/[А-Яа-яЁё]/);
+    expect(level01.words[0].value).toMatch(/[А-Яа-яЁё]/);
+    expect(levelTest.title).toMatch(/[А-Яа-яЁё]/);
+    expect(levelTest.words.every((word) => /[А-Яа-яЁё]/.test(word.value))).toBe(true);
   });
 });
