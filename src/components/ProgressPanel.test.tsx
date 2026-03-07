@@ -1,8 +1,23 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { ru } from "../i18n/ru";
 import { ProgressPanel } from "./ProgressPanel";
 
 describe("ProgressPanel", () => {
+  it("renders russian replay labels from dictionary-provided words", () => {
+    render(
+      <ProgressPanel
+        foundCount={1}
+        totalCount={1}
+        replayItems={[{ wordId: "alpha", label: ru.level.sampleReplayWord, found: true }]}
+        onReplayRequested={() => undefined}
+      />
+    );
+
+    expect(screen.getByRole("button", { name: ru.level.sampleReplayWord })).toBeInTheDocument();
+    expect(ru.level.sampleReplayWord).toMatch(/[А-Яа-яЁё]/);
+  });
+
   it("shows accurate found words and marker count", () => {
     render(
       <ProgressPanel
