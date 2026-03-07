@@ -44,7 +44,7 @@ const level: LevelDefinition = {
 };
 
 describe('GameShell video flow', () => {
-  test('opens overlay on found word and blocks input until close', () => {
+  test('opens overlay on found word, allows replay from progress panel, and blocks input until close', () => {
     render(<GameShell level={level} />);
 
     const canvas = screen.getByTestId('grid-canvas');
@@ -55,8 +55,9 @@ describe('GameShell video flow', () => {
     fireEvent.mouseUp(canvas);
 
     expect(hazeLayer).toHaveStyle({ pointerEvents: 'none' });
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toHaveClass('video-overlay-lg');
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
+    expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
     fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });
@@ -65,6 +66,10 @@ describe('GameShell video flow', () => {
 
     expect(screen.getByTestId('progress-text')).toHaveTextContent('1/2 words found');
 
+    fireEvent.click(screen.getByRole('button', { name: /close/i }));
+    fireEvent.click(screen.getByRole('button', { name: /replay alpha/i }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
 
     fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });

@@ -15,7 +15,7 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
       role="presentation"
       data-testid="video-overlay-backdrop"
     >
-      <section className="video-overlay signal-capture-dialog" role="dialog" aria-modal="true" aria-label="Word video">
+      <section className="video-overlay video-overlay-lg signal-capture-dialog" role="dialog" aria-modal="true" aria-label="Word video">
         <h2>SIGNAL LOCK: {word.value}</h2>
 
         {!hasError ? (
@@ -30,13 +30,13 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
         ) : (
           <div data-testid="video-fallback" className="video-fallback">
             <p>Video unavailable. Continue to the game.</p>
-            <button type="button" onClick={onClose}>
+            <button type="button" className="terminal-action-button" onClick={onClose}>
               Continue
             </button>
           </div>
         )}
 
-        <button type="button" onClick={onClose} data-testid="video-close-button">
+        <button type="button" className="terminal-action-button" onClick={onClose} data-testid="video-close-button">
           Close
         </button>
       </section>

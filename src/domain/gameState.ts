@@ -16,7 +16,8 @@ export type GameAction =
   | { type: 'selection_updated'; path: GridCell[] }
   | { type: 'selection_committed'; path: GridCell[] }
   | { type: 'selection_cleared' }
-  | { type: 'video_closed' };
+  | { type: 'video_closed' }
+  | { type: 'video_replay_requested'; wordId: string };
 
 export const createInitialGameState = (level: LevelDefinition): GameState => ({
   level,
@@ -92,6 +93,19 @@ export const reduceGameState = (state: GameState, action: GameAction): GameState
       return {
         ...nextState,
         phase: nextPhaseAfterVideoClose(nextState)
+      };
+    }
+
+    case 'video_replay_requested': {
+      if (!state.foundWordIds.has(action.wordId)) {
+        return state;
+      }
+
+      return {
+        ...state,
+        phase: 'video_open',
+        activeSelection: [],
+        activeVideoWordId: action.wordId
       };
     }
 
