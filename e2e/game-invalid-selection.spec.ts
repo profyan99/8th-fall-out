@@ -10,5 +10,5 @@ test('invalid drag does not mark word', async ({ page }) => {
   await canvas.hover({ position: { x: 220, y: 220 } });
   await page.mouse.up();
 
-  await expect(page.getByTestId('progress-text')).toContainText('WORDS INDEXED: 0 OF 1');
+  await expect(page.getByTestId('progress-text')).toContainText('WORDS: 0 OF 1');
 });

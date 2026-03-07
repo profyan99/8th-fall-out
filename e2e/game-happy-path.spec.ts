@@ -32,5 +32,15 @@ test('completes level on happy path', async ({ page }) => {
 
   await expect(page.getByTestId('completion-banner')).toBeVisible();
   await expect(page.getByTestId('completion-banner')).toContainText('8 March transmission complete');
-  await expect(page.getByTestId('progress-text')).toContainText('WORDS INDEXED: 1 OF 1');
+  await expect(page.getByRole('heading', { name: 'Result' })).toBeVisible();
+  await expect(page.getByTestId('progress-text')).toContainText('WORDS: 1 OF 1');
+  const replayButton = page.getByTestId('progress-replay-list').getByRole('button').first();
+  await expect(replayButton).toBeVisible();
+  await expect(replayButton).not.toContainText(/replay record/i);
+
+  const hasVerticalPageScroll = await page.evaluate(() => {
+    const root = document.documentElement;
+    return root.scrollHeight > root.clientHeight;
+  });
+  expect(hasVerticalPageScroll).toBe(false);
 });
