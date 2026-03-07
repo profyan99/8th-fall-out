@@ -10,6 +10,8 @@ type GridCanvasProps = {
   onMouseEnd: () => void;
   isInputBlocked?: boolean;
   isBooting?: boolean;
+  canvasSize?: number;
+  layoutMode?: "default" | "viewport-fit";
 };
 
 const isCellInPath = (cell: GridCell, path: GridCell[]): boolean =>
@@ -23,7 +25,9 @@ export function GridCanvas({
   onMouseMove,
   onMouseEnd,
   isInputBlocked = false,
-  isBooting = false
+  isBooting = false,
+  canvasSize = 700,
+  layoutMode = "default",
 }: GridCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rows = gridLetters.length;
@@ -78,11 +82,12 @@ export function GridCanvas({
       <canvas
         ref={canvasRef}
         aria-label="Word grid"
-        width={700}
-        height={700}
+        width={canvasSize}
+        height={canvasSize}
         data-testid="grid-canvas"
         data-input-blocked={String(isInputBlocked)}
         data-booting={String(isBooting)}
+        data-layout-mode={layoutMode}
         onMouseDown={isInputBlocked ? undefined : onMouseStart}
         onMouseMove={isInputBlocked ? undefined : onMouseMove}
         onMouseUp={isInputBlocked ? undefined : onMouseEnd}

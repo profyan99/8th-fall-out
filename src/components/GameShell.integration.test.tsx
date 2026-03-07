@@ -45,6 +45,7 @@ describe('GameShell drag integration', () => {
     fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
+    expect(canvas).toHaveAttribute('data-layout-mode', 'viewport-fit');
     expect(backdrop).toHaveStyle({ pointerEvents: 'none' });
     expect(decorLayer).toHaveStyle({ pointerEvents: 'none' });
     expect(screen.getByTestId('progress-text')).toHaveTextContent('1/1 words found');
