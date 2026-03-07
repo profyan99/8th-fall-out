@@ -66,10 +66,10 @@ describe('GameShell video flow', () => {
     fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 1 OF 2');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 1 OF 2');
 
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
-    fireEvent.click(screen.getByRole('button', { name: /replay record alpha/i }));
+    fireEvent.click(screen.getByRole('button', { name: 'ALPHA' }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
@@ -78,6 +78,6 @@ describe('GameShell video flow', () => {
     fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 2 OF 2');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 2 OF 2');
   });
 });

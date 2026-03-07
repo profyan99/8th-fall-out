@@ -276,6 +276,15 @@ body {
   margin: 0;
 }
 
+.completion-banner-overlay {
+  position: absolute;
+  top: calc(var(--crt-viewport-padding) + 7rem);
+  left: var(--crt-viewport-padding);
+  right: var(--crt-viewport-padding);
+  z-index: 3;
+  pointer-events: none;
+}
+
 .game-main {
   display: grid;
   gap: 0.6rem;
