@@ -42,6 +42,7 @@ describe("Scene shell", () => {
     expect(screen.getByTestId("screen-viewport")).toBeInTheDocument();
 
     const backdrop = screen.getByTestId("global-parallax-backdrop");
+    expect(backdrop).toHaveClass("bunker-scene-art");
     expect(backdrop.querySelector(".march-decor")).toBeInTheDocument();
     expect(backdrop.querySelector(".ambient-haze")).toBeInTheDocument();
   });

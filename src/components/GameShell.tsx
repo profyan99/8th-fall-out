@@ -24,7 +24,7 @@ type GameShellProps = {
 
 const toLetterGrid = (rows: string[]): string[][] => rows.map((row) => row.split(''));
 const bootLines = ['BOOTING CRT SHELL...', 'CALIBRATING PHOSPHOR GRID...', 'READY.'];
-const GRID_CANVAS_SIZE = 700;
+const GRID_CANVAS_SIZE = 640;
 
 export function GameShell({
   level,
@@ -57,7 +57,7 @@ export function GameShell({
       dispatch({ type: 'selection_committed', path });
     }
   });
-  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax('medium');
+  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax('high');
 
   const isVideoOpen = state.phase === 'video_open' && activeVideoWord !== null;
   const isCompleted = state.phase === 'completed';
@@ -67,7 +67,7 @@ export function GameShell({
     <main className="game-shell">
       <ParallaxBackdrop
         layerTransforms={layerTransforms}
-        className="parallax-backdrop parallax-backdrop-global"
+        className="parallax-backdrop parallax-backdrop-global bunker-scene-art"
         testId="global-parallax-backdrop"
       />
       <SceneStage onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
@@ -97,6 +97,8 @@ export function GameShell({
                 onMouseEnd={onMouseEnd}
                 isInputBlocked={isVideoOpen || isBooting}
                 isBooting={isBooting}
+                canvasSize={GRID_CANVAS_SIZE}
+                layoutMode="viewport-fit"
               />
               <ProgressPanel foundCount={state.foundWordIds.size} totalCount={level.words.length} />
             </div>

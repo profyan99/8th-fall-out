@@ -4,7 +4,7 @@ type ParallaxBackdropProps = {
   testId?: string;
 };
 
-const SCENE_LAYER_CLASSES = ["bunker-wall", "bunker-props", "march-decor", "ambient-haze"] as const;
+const SCENE_LAYER_CLASSES = ["bunker-architecture", "bunker-interior", "march-decor", "ambient-haze"] as const;
 
 export function ParallaxBackdrop({
   layerTransforms,
@@ -18,6 +18,7 @@ export function ParallaxBackdrop({
           key={index}
           className={`parallax-layer parallax-layer-${index} ${layerClass}`}
           data-testid={`parallax-layer-${index}`}
+          data-semantic-layer={layerClass}
           aria-hidden="true"
           style={{ transform: layerTransforms[index] ?? "translate3d(0px, 0px, 0)", pointerEvents: "none" }}
         />

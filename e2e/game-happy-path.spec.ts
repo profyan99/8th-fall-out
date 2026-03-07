@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('completes level on happy path', async ({ page }) => {
   await page.goto('/?level=01');
-  await expect(page.getByTestId('parallax-backdrop')).toBeVisible();
+  await expect(page.getByTestId('global-parallax-backdrop')).toBeVisible();
   await expect(page.getByTestId('parallax-layer-0')).toBeVisible();
   await expect(page.getByTestId('parallax-layer-1')).toBeVisible();
   await expect(page.getByTestId('parallax-layer-2')).toBeVisible();

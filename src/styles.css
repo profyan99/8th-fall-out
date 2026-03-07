@@ -38,8 +38,9 @@ body {
 }
 
 .scene-stage {
-  width: min(92vw, 1200px);
-  height: min(88vh, 860px);
+  width: min(92vw, 1080px);
+  height: min(86vh, 760px);
+  max-height: calc(100vh - 1rem);
   position: relative;
   z-index: 1;
   display: grid;
@@ -54,9 +55,9 @@ body {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 10%, rgba(241, 194, 110, 0.14), transparent 32%),
-    radial-gradient(circle at 86% 15%, rgba(228, 96, 56, 0.08), transparent 30%),
-    linear-gradient(180deg, #261f19 0%, #191510 45%, #12120f 100%);
+    radial-gradient(circle at 15% 8%, rgba(255, 195, 112, 0.16), transparent 33%),
+    radial-gradient(circle at 88% 15%, rgba(247, 128, 96, 0.12), transparent 34%),
+    linear-gradient(180deg, #2b241d 0%, #1b1713 54%, #11110f 100%);
 }
 
 .parallax-backdrop-global {
@@ -74,36 +75,29 @@ body {
 }
 
 .parallax-layer-0 {
-  opacity: 0.95;
+  opacity: 0.97;
   background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 68px,
-      rgba(0, 0, 0, 0.2) 68px,
-      rgba(0, 0, 0, 0.2) 72px
-    ),
-    linear-gradient(180deg, rgba(108, 92, 76, 0.4), rgba(20, 18, 15, 0.8) 66%),
-    radial-gradient(circle at 50% -20%, rgba(255, 197, 132, 0.16), transparent 58%);
+    radial-gradient(circle at 50% -20%, rgba(255, 212, 146, 0.16), transparent 48%),
+    linear-gradient(180deg, rgba(104, 92, 74, 0.3), rgba(32, 28, 23, 0.9) 72%),
+    linear-gradient(90deg, rgba(20, 18, 15, 0.55) 0 6%, transparent 6% 94%, rgba(20, 18, 15, 0.55) 94% 100%);
 }
 
 .parallax-layer-1 {
   opacity: 0.85;
   background:
-    linear-gradient(130deg, transparent 0 18%, rgba(26, 37, 33, 0.45) 18% 23%, transparent 23% 100%),
-    linear-gradient(45deg, transparent 0 70%, rgba(252, 193, 74, 0.4) 70% 73%, transparent 73% 100%),
-    radial-gradient(circle at 78% 32%, rgba(132, 171, 125, 0.12), transparent 32%),
-    radial-gradient(circle at 18% 72%, rgba(60, 74, 65, 0.35), transparent 30%);
+    radial-gradient(circle at 80% 30%, rgba(124, 160, 119, 0.12), transparent 30%),
+    radial-gradient(circle at 18% 72%, rgba(70, 54, 43, 0.5), transparent 24%),
+    linear-gradient(130deg, transparent 0 16%, rgba(28, 40, 35, 0.45) 16% 21%, transparent 21% 100%),
+    linear-gradient(90deg, transparent 0 35%, rgba(255, 170, 117, 0.16) 35% 37%, transparent 37% 63%, rgba(255, 170, 117, 0.16) 63% 65%, transparent 65% 100%);
 }
 
 .parallax-layer-2 {
   opacity: 0.86;
   background:
-    radial-gradient(circle at 14% 20%, rgba(255, 147, 116, 0.24), transparent 20%),
-    radial-gradient(circle at 86% 22%, rgba(255, 192, 126, 0.22), transparent 18%),
-    radial-gradient(circle at 30% 16%, rgba(255, 223, 188, 0.5) 0 1px, transparent 2px),
-    radial-gradient(circle at 68% 18%, rgba(255, 223, 188, 0.45) 0 1px, transparent 2px),
-    linear-gradient(180deg, transparent 0 58%, rgba(94, 38, 31, 0.28) 58% 68%, transparent 68% 100%);
+    radial-gradient(circle at 22% 22%, rgba(255, 133, 176, 0.33), transparent 16%),
+    radial-gradient(circle at 78% 18%, rgba(255, 186, 160, 0.28), transparent 15%),
+    radial-gradient(circle at 42% 17%, rgba(255, 239, 208, 0.5) 0 1px, transparent 2px),
+    linear-gradient(180deg, transparent 0 56%, rgba(126, 62, 78, 0.2) 56% 66%, transparent 66% 100%);
 }
 
 .parallax-layer-3 {
@@ -115,8 +109,8 @@ body {
   animation: ambient-haze-drift 9s ease-in-out infinite alternate;
 }
 
-.bunker-wall::before,
-.bunker-props::before,
+.bunker-architecture::before,
+.bunker-interior::before,
 .march-decor::before,
 .ambient-haze::before {
   content: "";
@@ -125,29 +119,25 @@ body {
   pointer-events: none;
 }
 
-.bunker-wall::before {
+.bunker-architecture::before {
   background:
-    linear-gradient(180deg, transparent 0 24%, rgba(0, 0, 0, 0.22) 24% 25%, transparent 25% 52%, rgba(0, 0, 0, 0.2) 52% 53%, transparent 53% 100%),
-    radial-gradient(circle at 50% 8%, rgba(255, 231, 166, 0.16), transparent 30%);
+    linear-gradient(180deg, transparent 0 20%, rgba(0, 0, 0, 0.24) 20% 21%, transparent 21% 49%, rgba(0, 0, 0, 0.2) 49% 50%, transparent 50% 100%),
+    linear-gradient(90deg, rgba(16, 14, 12, 0.45) 0 4%, transparent 4% 96%, rgba(16, 14, 12, 0.45) 96% 100%);
 }
 
-.bunker-props::before {
+.bunker-interior::before {
   background:
-    linear-gradient(90deg, transparent 0 12%, rgba(56, 70, 61, 0.45) 12% 16%, transparent 16% 84%, rgba(56, 70, 61, 0.4) 84% 88%, transparent 88% 100%),
-    radial-gradient(circle at 12% 76%, rgba(82, 56, 34, 0.36), transparent 20%),
-    radial-gradient(circle at 88% 74%, rgba(75, 52, 33, 0.33), transparent 18%);
+    radial-gradient(circle at 14% 74%, rgba(77, 54, 37, 0.52), transparent 17%),
+    radial-gradient(circle at 84% 72%, rgba(66, 48, 36, 0.48), transparent 16%),
+    linear-gradient(180deg, transparent 0 70%, rgba(39, 56, 49, 0.42) 70% 79%, transparent 79% 100%);
 }
 
 .march-decor::before {
   background:
-    repeating-linear-gradient(
-      160deg,
-      transparent 0 32px,
-      rgba(218, 80, 64, 0.32) 32px 36px,
-      rgba(245, 190, 116, 0.28) 36px 40px,
-      transparent 40px 76px
-    ),
-    linear-gradient(180deg, rgba(255, 150, 125, 0.2), transparent 40%);
+    radial-gradient(circle at 24% 24%, rgba(255, 130, 188, 0.32), transparent 12%),
+    radial-gradient(circle at 76% 22%, rgba(255, 176, 155, 0.3), transparent 11%),
+    linear-gradient(180deg, rgba(255, 143, 178, 0.18), transparent 38%),
+    linear-gradient(90deg, transparent 0 30%, rgba(255, 179, 202, 0.24) 30% 32%, transparent 32% 68%, rgba(255, 179, 202, 0.24) 68% 70%, transparent 70% 100%);
 }
 
 .ambient-haze::before {
@@ -169,6 +159,7 @@ body {
   box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.45), 0 24px 45px rgba(0, 0, 0, 0.35);
   width: 100%;
   height: 100%;
+  max-height: 100%;
   display: grid;
   grid-template-rows: 1fr;
 }
@@ -201,6 +192,7 @@ body {
   z-index: 1;
   border: 1px solid rgba(110, 160, 110, 0.25);
   height: 100%;
+  min-height: 0;
   grid-template-rows: auto auto 1fr;
 }
 
@@ -250,7 +242,7 @@ body {
 
 .game-main {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.6rem;
   grid-template-columns: minmax(0, 1fr) minmax(190px, 220px);
   align-items: stretch;
   min-height: 0;
@@ -266,7 +258,7 @@ body {
 }
 
 .grid-canvas-wrap canvas {
-  width: min(70vh, 70vw, 760px);
+  width: clamp(260px, 56vh, 640px);
   max-width: 100%;
   aspect-ratio: 1;
   display: block;

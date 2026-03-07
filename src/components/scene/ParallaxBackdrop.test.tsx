@@ -21,9 +21,14 @@ describe("ParallaxBackdrop", () => {
     expect(screen.getByTestId("parallax-layer-3")).toBeInTheDocument();
 
     const backdrop = screen.getByTestId("parallax-backdrop");
-    expect(backdrop.querySelector(".bunker-wall")).toBeInTheDocument();
-    expect(backdrop.querySelector(".bunker-props")).toBeInTheDocument();
+    expect(backdrop.querySelector(".bunker-architecture")).toBeInTheDocument();
+    expect(backdrop.querySelector(".bunker-interior")).toBeInTheDocument();
     expect(backdrop.querySelector(".march-decor")).toBeInTheDocument();
     expect(backdrop.querySelector(".ambient-haze")).toBeInTheDocument();
+
+    expect(backdrop.querySelector('[data-semantic-layer="bunker-architecture"]')).toBeInTheDocument();
+    expect(backdrop.querySelector('[data-semantic-layer="bunker-interior"]')).toBeInTheDocument();
+    expect(backdrop.querySelector('[data-semantic-layer="march-decor"]')).toBeInTheDocument();
+    expect(backdrop.querySelector('[data-semantic-layer="ambient-haze"]')).toBeInTheDocument();
   });
 });

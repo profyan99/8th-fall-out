@@ -15,15 +15,20 @@ describe("normalizePointer", () => {
 });
 
 describe("getParallaxAmplitude", () => {
-  it("reduces amplitude for safe mode", () => {
-    expect(getParallaxAmplitude("safe")).toBeLessThan(getParallaxAmplitude("high"));
-    expect(getParallaxAmplitude("safe")).toBeLessThanOrEqual(2);
+  it("uses stronger amplitudes while keeping safe mode conservative", () => {
+    expect(getParallaxAmplitude("high")).toBeGreaterThanOrEqual(10);
+    expect(getParallaxAmplitude("medium")).toBeGreaterThanOrEqual(6);
+    expect(getParallaxAmplitude("safe")).toBeLessThan(getParallaxAmplitude("medium"));
+    expect(getParallaxAmplitude("safe")).toBeLessThanOrEqual(3);
   });
 });
 
 describe("getLayerFactors", () => {
-  it("returns depth factors for 4 parallax layers", () => {
-    expect(getLayerFactors("high")).toEqual([0.2, 0.45, 0.75, 1]);
+  it("returns 4-layer profile with stronger foreground motion", () => {
+    const factors = getLayerFactors("high");
+    expect(factors).toHaveLength(4);
+    expect(factors[3]).toBeGreaterThan(factors[0]);
+    expect(factors[3] - factors[0]).toBeGreaterThanOrEqual(1);
   });
 });
 
