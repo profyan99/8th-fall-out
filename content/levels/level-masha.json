@@ -1,0 +1,59 @@
+{
+  "id": "masha",
+  "title": "Masha's challenge",
+  "gridSize": 10,
+  "alphabet": "cyrillic",
+  "seed": "masha-challenge-seed",
+  "words": [
+    {
+      "id": "word-kinovoyska",
+      "value": "киновойска",
+      "videoSrc": "/videos/kinovoyska.mp4"
+    },
+    {
+      "id": "word-tranduil",
+      "value": "трандуил",
+      "videoSrc": "/videos/tranduil.mp4"
+    },
+    {
+      "id": "word-balmont",
+      "value": "бальмонт",
+      "videoSrc": "/videos/balmont.mp4"
+    },
+    {
+      "id": "word-matvey",
+      "value": "матвей",
+      "videoSrc": "/videos/matvey.mp4"
+    },
+    {
+      "id": "word-yulya",
+      "value": "юля",
+      "videoSrc": "/videos/yulya.mp4"
+    },
+    {
+      "id": "word-kostya",
+      "value": "костя",
+      "videoSrc": "/videos/kostya.mp4"
+    },
+    {
+      "id": "word-tsvety",
+      "value": "цветы",
+      "videoSrc": "/videos/tsvety.mp4"
+    },
+    {
+      "id": "word-egor",
+      "value": "егор",
+      "videoSrc": "/videos/egor.mp4"
+    },
+    {
+      "id": "word-ilya",
+      "value": "илья",
+      "videoSrc": "/videos/ilya.mp4"
+    },
+    {
+      "id": "word-roma",
+      "value": "рома",
+      "videoSrc": "/videos/roma.mp4"
+    }
+  ]
+}
