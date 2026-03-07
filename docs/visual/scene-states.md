@@ -7,7 +7,7 @@ Captured states:
 - `boot-start` - boot overlay appears before gameplay input.
 - `boot-finish` - boot overlay hidden, scene warmed up.
 - `playing` - default gameplay view in monitor shell.
-- `video-overlay` - signal-capture dialog state.
+- `video-overlay` - signal-capture dialog state (`signal-state-capture` backdrop).
 - `completion` - final terminal completion banner.
 
 ## Updating snapshots intentionally
