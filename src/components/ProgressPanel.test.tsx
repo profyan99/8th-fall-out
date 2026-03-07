@@ -44,4 +44,26 @@ describe("ProgressPanel", () => {
     expect(onReplayRequested).toHaveBeenCalledTimes(1);
     expect(onReplayRequested).toHaveBeenCalledWith("alpha");
   });
+
+  it("renders found words inside dedicated replay scroll container", () => {
+    const replayItems = Array.from({ length: 12 }, (_, index) => ({
+      wordId: `word-${index + 1}`,
+      label: `WORD-${index + 1}`,
+      found: true,
+    }));
+
+    render(
+      <ProgressPanel
+        foundCount={12}
+        totalCount={12}
+        replayItems={replayItems}
+        onReplayRequested={() => undefined}
+      />
+    );
+
+    const scrollContainer = screen.getByTestId("progress-replay-scroll");
+    expect(scrollContainer).toBeInTheDocument();
+    expect(scrollContainer.querySelectorAll("button")).toHaveLength(12);
+    expect(screen.getByRole("button", { name: "WORD-12" })).toBeInTheDocument();
+  });
 });

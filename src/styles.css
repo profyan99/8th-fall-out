@@ -346,10 +346,31 @@ body {
 }
 
 .progress-replay-list {
-  margin-top: 0.65rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
+}
+
+.progress-replay-scroll {
+  margin-top: 0.65rem;
+  max-height: min(12rem, 35vh);
+  overflow-y: auto;
+  padding-right: 0.15rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(141, 255, 141, 0.45) rgba(5, 20, 5, 0.8);
+}
+
+.progress-replay-scroll::-webkit-scrollbar {
+  width: 0.42rem;
+}
+
+.progress-replay-scroll::-webkit-scrollbar-track {
+  background: rgba(5, 20, 5, 0.8);
+}
+
+.progress-replay-scroll::-webkit-scrollbar-thumb {
+  background: rgba(141, 255, 141, 0.45);
+  border-radius: 999px;
 }
 
 .progress-replay-button {
