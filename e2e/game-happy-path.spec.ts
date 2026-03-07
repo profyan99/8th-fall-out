@@ -28,6 +28,7 @@ test('completes level on happy path', async ({ page }) => {
   await dragTopRowWord(page);
 
   await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByTestId('video-element')).toBeVisible();
   await page.getByRole('button', { name: /close/i }).click();
 
   await expect(page.getByTestId('completion-banner')).toBeVisible();
