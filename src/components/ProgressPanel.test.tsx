@@ -17,12 +17,12 @@ describe("ProgressPanel", () => {
       />
     );
 
-    expect(screen.getByText("RETRIEVAL LOG")).toBeInTheDocument();
-    expect(screen.getByTestId("progress-text")).toHaveTextContent("WORDS INDEXED: 2 OF 4");
+    expect(screen.getByText("RESULT")).toBeInTheDocument();
+    expect(screen.getByTestId("progress-text")).toHaveTextContent("WORDS: 2 OF 4");
     expect(screen.getAllByTestId("progress-marker")).toHaveLength(4);
-    expect(screen.getByRole("button", { name: /replay record alpha/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /replay record gamma/i })).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /replay record beta/i })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "ALPHA" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "GAMMA" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "BETA" })).not.toBeInTheDocument();
   });
 
   it("emits replay callback with found word id", () => {
@@ -39,7 +39,7 @@ describe("ProgressPanel", () => {
       />
     );
 
-    const replayButton = screen.getByRole("button", { name: /replay record alpha/i });
+    const replayButton = screen.getByRole("button", { name: "ALPHA" });
     fireEvent.click(replayButton);
     expect(onReplayRequested).toHaveBeenCalledTimes(1);
     expect(onReplayRequested).toHaveBeenCalledWith("alpha");

@@ -13,9 +13,9 @@ export function ProgressPanel({
 }: ProgressPanelProps) {
   return (
     <aside className="progress-panel">
-      <h2>RETRIEVAL LOG</h2>
+      <h2>RESULT</h2>
       <p className="progress-caption">TERMINAL INDEX</p>
-      <p data-testid="progress-text">{`WORDS INDEXED: ${foundCount} OF ${totalCount}`}</p>
+      <p data-testid="progress-text">{`WORDS: ${foundCount} OF ${totalCount}`}</p>
       <div className="progress-markers">
         {Array.from({ length: totalCount }, (_, index) => (
           <span
@@ -36,9 +36,9 @@ export function ProgressPanel({
                 type="button"
                 className="terminal-action-button progress-replay-button"
                 onClick={() => onReplayRequested?.(item.wordId)}
-                aria-label={`Replay record ${item.label}`}
+                aria-label={item.label}
               >
-                Replay record {item.label}
+                {item.label}
               </button>
             ))}
         </div>
