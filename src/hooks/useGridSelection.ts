@@ -7,37 +7,31 @@ const clamp = (value: number, min: number, max: number): number =>
 
 const toCell = (
   event: React.MouseEvent<HTMLCanvasElement>,
-  gridSize: number,
-  canvasSize: number
+  gridSize: number
 ): GridCell => {
-  const cellSize = canvasSize / gridSize;
-  const eventWithOffsets = event.nativeEvent as MouseEvent & {
-    offsetX?: number;
-    offsetY?: number;
-  };
-  const rawOffsetX =
-    Number.isFinite(eventWithOffsets.offsetX) && eventWithOffsets.offsetX !== undefined
-      ? eventWithOffsets.offsetX
-      : event.clientX;
-  const rawOffsetY =
-    Number.isFinite(eventWithOffsets.offsetY) && eventWithOffsets.offsetY !== undefined
-      ? eventWithOffsets.offsetY
-      : event.clientY;
-  const row = clamp(Math.floor(rawOffsetY / cellSize), 0, gridSize - 1);
-  const col = clamp(Math.floor(rawOffsetX / cellSize), 0, gridSize - 1);
+  const canvas = event.currentTarget;
+  const rect = canvas.getBoundingClientRect();
+  const rectWidth = rect.width > 0 ? rect.width : canvas.width || 1;
+  const rectHeight = rect.height > 0 ? rect.height : canvas.height || 1;
+  const scaleX = canvas.width / rectWidth;
+  const scaleY = canvas.height / rectHeight;
+  const x = (event.clientX - rect.left) * scaleX;
+  const y = (event.clientY - rect.top) * scaleY;
+  const cellWidth = canvas.width / gridSize;
+  const cellHeight = canvas.height / gridSize;
+  const row = clamp(Math.floor(y / cellHeight), 0, gridSize - 1);
+  const col = clamp(Math.floor(x / cellWidth), 0, gridSize - 1);
 
   return { row, col };
 };
 
 type UseGridSelectionArgs = {
   gridSize: number;
-  canvasSize: number;
   onSelectionCommitted: (path: GridCell[]) => void;
 };
 
 export const useGridSelection = ({
   gridSize,
-  canvasSize,
   onSelectionCommitted
 }: UseGridSelectionArgs) => {
   const [startCell, setStartCell] = useState<GridCell | null>(null);
@@ -48,7 +42,7 @@ export const useGridSelection = ({
   const handlers = useMemo(
     () => ({
       onMouseStart: (event: React.MouseEvent<HTMLCanvasElement>) => {
-        const cell = toCell(event, gridSize, canvasSize);
+        const cell = toCell(event, gridSize);
         setStartCell(cell);
         startCellRef.current = cell;
         setActiveSelection([cell]);
@@ -59,7 +53,7 @@ export const useGridSelection = ({
           return;
         }
 
-        const endCell = toCell(event, gridSize, canvasSize);
+        const endCell = toCell(event, gridSize);
         const path = buildSelectionPath(startCellRef.current, endCell);
         const nextPath = path ?? [startCellRef.current];
         setActiveSelection(nextPath);
@@ -76,7 +70,7 @@ export const useGridSelection = ({
         selectionRef.current = [];
       }
     }),
-    [canvasSize, gridSize, onSelectionCommitted, startCell]
+    [gridSize, onSelectionCommitted, startCell]
   );
 
   return {

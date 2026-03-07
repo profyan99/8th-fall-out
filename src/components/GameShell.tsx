@@ -52,7 +52,6 @@ export function GameShell({
 
   const { activeSelection, onMouseStart, onMouseMove, onMouseEnd } = useGridSelection({
     gridSize: level.gridSize,
-    canvasSize: GRID_CANVAS_SIZE,
     onSelectionCommitted: (path: GridCell[]) => {
       dispatch({ type: 'selection_committed', path });
     }
