@@ -1,10 +1,12 @@
 import defaultLevel from '../../content/levels/level-01.json';
 import testLevel from '../../content/levels/level-test.json';
+import ruTestLevel from '../../content/levels/level-ru-test.json';
 import type { LevelPayload } from './types';
 
 const LEVELS: Record<string, LevelPayload> = {
   '01': defaultLevel,
-  test: testLevel
+  test: testLevel,
+  'ru-test': ruTestLevel
 };
 
 export type ResolveLevelResult =

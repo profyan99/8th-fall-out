@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { loadLevel } from './loadLevel';
 import { resolveLevelPayload } from './levelCatalog';
 
 describe('resolveLevelPayload', () => {
@@ -69,5 +70,36 @@ describe('resolveLevelPayload', () => {
     });
     expect(result.payload).not.toHaveProperty('grid');
     expect(result.payload.words[0]).not.toHaveProperty('path');
+  });
+
+  test('resolves cyrillic dynamic payload by key ru-test', () => {
+    const result = resolveLevelPayload('?level=ru-test');
+    expect(result.status).toBe('ok');
+    if (result.status !== 'ok') {
+      return;
+    }
+
+    expect(result.levelKey).toBe('ru-test');
+    expect(result.payload).toMatchObject({
+      id: 'level-ru-test',
+      gridSize: 10,
+      alphabet: 'cyrillic'
+    });
+  });
+
+  test('loads ru-test payload through existing loadLevel flow', () => {
+    const result = resolveLevelPayload('?level=ru-test');
+    expect(result.status).toBe('ok');
+    if (result.status !== 'ok') {
+      return;
+    }
+
+    const level = loadLevel(result.payload);
+    expect(level.gridSize).toBe(10);
+    expect(level.grid).toHaveLength(10);
+    expect(level.words.length).toBeGreaterThan(0);
+    for (const word of level.words) {
+      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
+    }
   });
 });
