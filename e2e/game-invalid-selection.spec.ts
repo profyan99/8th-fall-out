@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('invalid drag does not mark word', async ({ page }) => {
   await page.goto('/?level=01');
+  await expect(page.getByTestId('boot-overlay')).not.toBeVisible({ timeout: 5000 });
 
   const canvas = page.getByTestId('grid-canvas');
   await canvas.hover({ position: { x: 10, y: 70 } });
@@ -9,5 +10,5 @@ test('invalid drag does not mark word', async ({ page }) => {
   await canvas.hover({ position: { x: 220, y: 220 } });
   await page.mouse.up();
 
-  await expect(page.getByTestId('progress-text')).toContainText('0/1 words found');
+  await expect(page.getByTestId('progress-text')).toContainText('WORDS INDEXED: 0 OF 1');
 });

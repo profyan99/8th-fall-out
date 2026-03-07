@@ -1,13 +1,25 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function dragTopRowWord(page: Page) {
+  const canvas = page.getByTestId('grid-canvas');
+  const box = await canvas.boundingBox();
+  if (!box) {
+    throw new Error('grid canvas not visible');
+  }
+
+  const y = box.y + box.height * 0.06;
+  const startX = box.x + box.width * 0.06;
+  const endX = box.x + box.width * 0.57;
+  await page.mouse.move(startX, y);
+  await page.mouse.down();
+  await page.mouse.move(endX, y);
+  await page.mouse.up();
+}
 
 test('broken video still allows continue', async ({ page }) => {
   await page.goto('/?level=01');
-
-  const canvas = page.getByTestId('grid-canvas');
-  await canvas.hover({ position: { x: 10, y: 10 } });
-  await page.mouse.down();
-  await canvas.hover({ position: { x: 350, y: 10 } });
-  await page.mouse.up();
+  await expect(page.getByTestId('boot-overlay')).not.toBeVisible({ timeout: 5000 });
+  await dragTopRowWord(page);
 
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByTestId('video-overlay-backdrop')).toHaveClass(/signal-state-capture/);
