@@ -64,4 +64,22 @@ describe('loadLevel', () => {
       })
     ).toThrow(/grid size/i);
   });
+
+  test('generates grid and paths for dynamic 10x10 level payload with words only', () => {
+    const level = loadLevel({
+      id: 'generated-10',
+      title: 'Generated',
+      gridSize: 10,
+      seed: 'seed-1',
+      words: [
+        { id: 'w1', value: 'HELIO', videoSrc: '/videos/helio.mp4' },
+        { id: 'w2', value: 'TRACE', videoSrc: '/videos/trace.mp4' }
+      ]
+    });
+
+    expect(level.gridSize).toBe(10);
+    expect(level.grid).toHaveLength(10);
+    expect(level.words[0].path.length).toBe(level.words[0].value.length);
+    expect(level.words[1].path.length).toBe(level.words[1].value.length);
+  });
 });
