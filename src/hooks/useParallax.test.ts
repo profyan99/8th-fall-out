@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { getLayerFactors, getParallaxAmplitude, interpolateTowardTarget, normalizePointer } from "./useParallax";
+import {
+  clampParallaxTarget,
+  getLayerFactors,
+  getParallaxAmplitude,
+  getParallaxSmoothing,
+  interpolateTowardTarget,
+  normalizePointer,
+} from "./useParallax";
 
 describe("normalizePointer", () => {
   it("normalizes pointer to a -1..1 range around center", () => {
@@ -19,7 +26,14 @@ describe("getParallaxAmplitude", () => {
     expect(getParallaxAmplitude("high")).toBeGreaterThanOrEqual(10);
     expect(getParallaxAmplitude("medium")).toBeGreaterThanOrEqual(6);
     expect(getParallaxAmplitude("safe")).toBeLessThan(getParallaxAmplitude("medium"));
-    expect(getParallaxAmplitude("safe")).toBeLessThanOrEqual(3);
+    expect(getParallaxAmplitude("safe")).toBeLessThanOrEqual(2);
+  });
+});
+
+describe("getParallaxSmoothing", () => {
+  it("keeps safe mode slower for gentler inertial response", () => {
+    expect(getParallaxSmoothing("safe")).toBeLessThan(getParallaxSmoothing("medium"));
+    expect(getParallaxSmoothing("medium")).toBeLessThan(getParallaxSmoothing("high"));
   });
 });
 
@@ -33,11 +47,25 @@ describe("getLayerFactors", () => {
 });
 
 describe("interpolateTowardTarget", () => {
-  it("returns pointer state toward neutral after leave", () => {
-    const next = interpolateTowardTarget({ x: 0.8, y: -0.6 }, { x: 0, y: 0 }, 0.16);
-    expect(Math.abs(next.x)).toBeLessThan(0.8);
-    expect(Math.abs(next.y)).toBeLessThan(0.6);
-    expect(next.x).toBeGreaterThan(0);
-    expect(next.y).toBeLessThan(0);
+  it("returns pointer state toward neutral with slower safe smoothing", () => {
+    const safe = interpolateTowardTarget({ x: 0.8, y: -0.6 }, { x: 0, y: 0 }, getParallaxSmoothing("safe"));
+    const high = interpolateTowardTarget({ x: 0.8, y: -0.6 }, { x: 0, y: 0 }, getParallaxSmoothing("high"));
+
+    expect(Math.abs(safe.x)).toBeGreaterThan(Math.abs(high.x));
+    expect(Math.abs(safe.y)).toBeGreaterThan(Math.abs(high.y));
+    expect(safe.x).toBeGreaterThan(0);
+    expect(safe.y).toBeLessThan(0);
+  });
+});
+
+describe("clampParallaxTarget", () => {
+  it("applies tighter pointer clamp in safe mode", () => {
+    const safe = clampParallaxTarget({ x: 0.9, y: -0.9 }, "safe");
+    const high = clampParallaxTarget({ x: 0.9, y: -0.9 }, "high");
+
+    expect(Math.abs(safe.x)).toBeLessThan(Math.abs(high.x));
+    expect(Math.abs(safe.y)).toBeLessThan(Math.abs(high.y));
+    expect(Math.abs(safe.x)).toBeLessThanOrEqual(0.55);
+    expect(Math.abs(safe.y)).toBeLessThanOrEqual(0.55);
   });
 });

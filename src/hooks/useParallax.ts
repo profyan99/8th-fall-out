@@ -5,9 +5,21 @@ import type { QualityMode } from "../theme/qualityMode";
 type Point = { x: number; y: number };
 
 const LAYER_FACTORS_BY_MODE = {
-  safe: [0.14, 0.3, 0.54, 0.8],
+  safe: [0.12, 0.25, 0.42, 0.7],
   medium: [0.18, 0.44, 0.84, 1.2],
   high: [0.2, 0.52, 0.98, 1.35],
+} as const;
+
+const CLAMP_LIMIT_BY_MODE = {
+  safe: 0.55,
+  medium: 0.8,
+  high: 1,
+} as const;
+
+const SMOOTHING_BY_MODE = {
+  safe: 0.1,
+  medium: 0.14,
+  high: 0.2,
 } as const;
 
 function clamp(value: number, min: number, max: number): number {
@@ -24,7 +36,7 @@ export function normalizePointer(position: number, size: number): number {
 
 export function getParallaxAmplitude(mode: QualityMode): number {
   if (mode === "safe") {
-    return 3;
+    return 2;
   }
   if (mode === "medium") {
     return 7;
@@ -32,8 +44,20 @@ export function getParallaxAmplitude(mode: QualityMode): number {
   return 11;
 }
 
+export function getParallaxSmoothing(mode: QualityMode): number {
+  return SMOOTHING_BY_MODE[mode];
+}
+
 export function getLayerFactors(mode: QualityMode): readonly number[] {
   return LAYER_FACTORS_BY_MODE[mode];
+}
+
+export function clampParallaxTarget(target: Point, mode: QualityMode): Point {
+  const limit = CLAMP_LIMIT_BY_MODE[mode];
+  return {
+    x: clamp(target.x, -limit, limit),
+    y: clamp(target.y, -limit, limit),
+  };
 }
 
 export function interpolateTowardTarget(current: Point, target: Point, smoothing: number): Point {
@@ -53,11 +77,12 @@ export function useParallax(qualityMode: QualityMode = "high"): {
   const targetRef = useRef<Point>({ x: 0, y: 0 });
   const rafRef = useRef<number | null>(null);
   const amplitude = getParallaxAmplitude(qualityMode);
+  const smoothing = getParallaxSmoothing(qualityMode);
   const layerFactors = getLayerFactors(qualityMode);
 
   const tick = () => {
     setCurrent((prev) => {
-      const next = interpolateTowardTarget(prev, targetRef.current, 0.16);
+      const next = interpolateTowardTarget(prev, targetRef.current, smoothing);
       currentRef.current = next;
       return next;
     });
@@ -80,10 +105,10 @@ export function useParallax(qualityMode: QualityMode = "high"): {
 
   const onPointerMove: PointerEventHandler<HTMLDivElement> = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    targetRef.current = {
+    targetRef.current = clampParallaxTarget({
       x: normalizePointer(event.clientX - rect.left, rect.width),
       y: normalizePointer(event.clientY - rect.top, rect.height),
-    };
+    }, qualityMode);
     start();
   };
 
