@@ -70,6 +70,18 @@ describe('resolveLevelPayload', () => {
     });
     expect(result.payload).not.toHaveProperty('grid');
     expect(result.payload.words[0]).not.toHaveProperty('path');
+    expect(result.payload.words.some((word) => 'imageSrc' in word)).toBe(true);
+  });
+
+  test('loads level=test with at least one image-backed word after parse', () => {
+    const result = resolveLevelPayload('?level=test');
+    expect(result.status).toBe('ok');
+    if (result.status !== 'ok') {
+      return;
+    }
+
+    const level = loadLevel(result.payload);
+    expect(level.words.some((word) => word.mediaType === 'image')).toBe(true);
   });
 
   test('resolves cyrillic dynamic payload by key ru-test', () => {

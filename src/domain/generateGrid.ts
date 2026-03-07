@@ -135,12 +135,23 @@ export const generateGridFromWords = ({
         }
 
         placeWord(grid, word.value, path);
-        placed.push({
-          id: word.id,
-          value: word.value,
-          videoSrc: word.videoSrc,
-          path
-        });
+        if (word.mediaType === 'video') {
+          placed.push({
+            id: word.id,
+            value: word.value,
+            mediaType: 'video',
+            videoSrc: word.videoSrc,
+            path
+          });
+        } else {
+          placed.push({
+            id: word.id,
+            value: word.value,
+            mediaType: 'image',
+            imageSrc: word.imageSrc,
+            path
+          });
+        }
         placedWord = true;
         break;
       }

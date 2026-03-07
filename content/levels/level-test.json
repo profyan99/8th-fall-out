@@ -12,7 +12,7 @@
     {
       "id": "word-beta",
       "value": "BETA",
-      "videoSrc": "/videos/beta.mp4"
+      "imageSrc": "/images/beta.png"
     }
   ]
 }
