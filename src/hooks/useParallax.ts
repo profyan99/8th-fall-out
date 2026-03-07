@@ -5,9 +5,9 @@ import type { QualityMode } from "../theme/qualityMode";
 type Point = { x: number; y: number };
 
 const LAYER_FACTORS_BY_MODE = {
-  safe: [0.18, 0.38, 0.64, 0.9],
-  medium: [0.2, 0.42, 0.7, 0.95],
-  high: [0.2, 0.45, 0.75, 1],
+  safe: [0.14, 0.3, 0.54, 0.8],
+  medium: [0.18, 0.44, 0.84, 1.2],
+  high: [0.2, 0.52, 0.98, 1.35],
 } as const;
 
 function clamp(value: number, min: number, max: number): number {
@@ -24,12 +24,12 @@ export function normalizePointer(position: number, size: number): number {
 
 export function getParallaxAmplitude(mode: QualityMode): number {
   if (mode === "safe") {
-    return 2;
+    return 3;
   }
   if (mode === "medium") {
-    return 5;
+    return 7;
   }
-  return 8;
+  return 11;
 }
 
 export function getLayerFactors(mode: QualityMode): readonly number[] {

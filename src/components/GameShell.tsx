@@ -57,7 +57,7 @@ export function GameShell({
       dispatch({ type: 'selection_committed', path });
     }
   });
-  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax('medium');
+  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax('high');
 
   const isVideoOpen = state.phase === 'video_open' && activeVideoWord !== null;
   const isCompleted = state.phase === 'completed';
