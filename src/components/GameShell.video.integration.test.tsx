@@ -55,8 +55,10 @@ describe('GameShell video flow', () => {
     fireEvent.mouseUp(canvas);
 
     expect(hazeLayer).toHaveStyle({ pointerEvents: 'none' });
+    expect(canvas).toHaveAttribute('data-grid-pulse', 'steady');
     expect(screen.getByRole('dialog')).toHaveClass('video-overlay-lg');
-    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
+    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
+    expect(screen.getByRole('dialog')).toHaveClass('signal-state-locked');
     expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
@@ -64,10 +66,10 @@ describe('GameShell video flow', () => {
     fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('1/2 words found');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 1 OF 2');
 
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
-    fireEvent.click(screen.getByRole('button', { name: /replay alpha/i }));
+    fireEvent.click(screen.getByRole('button', { name: /replay record alpha/i }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
@@ -76,6 +78,6 @@ describe('GameShell video flow', () => {
     fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('2/2 words found');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 2 OF 2');
   });
 });

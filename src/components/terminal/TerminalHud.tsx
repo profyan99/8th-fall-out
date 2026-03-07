@@ -9,11 +9,9 @@ export function TerminalHud({ title, sessionId, foundCount, totalCount }: Termin
   return (
     <header className="terminal-hud">
       <h1>{title}</h1>
-      <p className="terminal-hud-session">SESSION {sessionId}</p>
-      <p data-testid="hud-progress">
-        {foundCount}/{totalCount}
-      </p>
+      <p className="terminal-hud-session">SESSION::{sessionId}</p>
+      <p className="terminal-hud-status">LINK STABLE</p>
+      <p className="terminal-hud-progress" data-testid="hud-progress">{`WORDS LOCATED ${foundCount}/${totalCount}`}</p>
     </header>
   );
 }
-

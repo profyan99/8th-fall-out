@@ -20,6 +20,11 @@ Desktop-only browser word game inspired by Severance-style UI.
 - Close/continue resumes the game
 - Completion banner appears when all words are found
 
+## CRT Polish v3 Scope
+
+- Cinematic polish updates are limited to scene/fx/terminal styling and hooks.
+- Gameplay/domain logic and rules remain unchanged.
+
 ## Content
 
 Level data comes from JSON files in `content/levels`.

@@ -34,16 +34,32 @@ const level: LevelDefinition = {
 };
 
 describe("GameShell boot flow", () => {
-  test("blocks grid input while boot sequence is active", () => {
+  test("blocks grid input until ready phase", () => {
     vi.useFakeTimers();
     render(<GameShell level={level} enableBootSequence bootDurationMs={1000} />);
 
     const canvas = screen.getByTestId("grid-canvas");
+    const overlay = screen.getByTestId("boot-overlay");
+
+    expect(overlay).toHaveAttribute("data-boot-phase", "flash");
+    expect(canvas).toHaveAttribute("data-input-blocked", "true");
+
+    act(() => {
+      vi.advanceTimersByTime(250);
+    });
+
+    expect(screen.getByTestId("boot-overlay")).toHaveAttribute("data-boot-phase", "sync");
+    expect(canvas).toHaveAttribute("data-input-blocked", "true");
+
+    act(() => {
+      vi.advanceTimersByTime(749);
+    });
+
     expect(canvas).toHaveAttribute("data-input-blocked", "true");
     expect(screen.getByTestId("boot-overlay")).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1);
     });
 
     expect(canvas).toHaveAttribute("data-input-blocked", "false");

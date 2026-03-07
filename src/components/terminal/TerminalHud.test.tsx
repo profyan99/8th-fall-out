@@ -7,7 +7,8 @@ describe("TerminalHud", () => {
     render(<TerminalHud title="WORD GRID" sessionId="S-1" foundCount={2} totalCount={5} />);
 
     expect(screen.getByText("WORD GRID")).toBeInTheDocument();
-    expect(screen.getByText("SESSION S-1")).toBeInTheDocument();
-    expect(screen.getByTestId("hud-progress")).toHaveTextContent("2/5");
+    expect(screen.getByText("SESSION::S-1")).toBeInTheDocument();
+    expect(screen.getByTestId("hud-progress")).toHaveTextContent("WORDS LOCATED 2/5");
+    expect(screen.getByText("LINK STABLE")).toBeInTheDocument();
   });
 });

@@ -30,5 +30,8 @@ describe("ParallaxBackdrop", () => {
     expect(backdrop.querySelector('[data-semantic-layer="bunker-interior"]')).toBeInTheDocument();
     expect(backdrop.querySelector('[data-semantic-layer="march-decor"]')).toBeInTheDocument();
     expect(backdrop.querySelector('[data-semantic-layer="ambient-haze"]')).toBeInTheDocument();
+
+    expect(screen.getByTestId("parallax-layer-0")).toHaveAttribute("data-depth", "0.3");
+    expect(screen.getByTestId("parallax-layer-3")).toHaveAttribute("data-depth", "1");
   });
 });

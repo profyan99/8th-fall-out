@@ -8,8 +8,9 @@ type SceneStageProps = PropsWithChildren<{
 export function SceneStage({ children, onPointerMove, onPointerLeave }: SceneStageProps) {
   return (
     <section
-      className="scene-stage"
+      className="scene-stage scene-stage--parallax-v2"
       data-testid="scene-stage"
+      data-parallax-inertia="enabled"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >

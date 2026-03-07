@@ -46,9 +46,10 @@ describe('GameShell drag integration', () => {
     fireEvent.mouseUp(canvas);
 
     expect(canvas).toHaveAttribute('data-layout-mode', 'viewport-fit');
+    expect(canvas).toHaveAttribute('data-grid-highlight', 'phosphor-v2');
     expect(backdrop).toHaveStyle({ pointerEvents: 'none' });
     expect(decorLayer).toHaveStyle({ pointerEvents: 'none' });
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('1/1 words found');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 1 OF 1');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
     expect(screen.getByTestId('completion-banner')).toHaveTextContent('8 March transmission complete');
   });
