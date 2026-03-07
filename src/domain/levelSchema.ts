@@ -9,17 +9,27 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const isGridCell = (value: unknown): value is GridCell =>
   isRecord(value) && typeof value.row === 'number' && typeof value.col === 'number';
 
+const parseWordMedia = (value: Record<string, unknown>) => {
+  const hasVideo = typeof value.videoSrc === 'string';
+  const hasImage = typeof value.imageSrc === 'string';
+
+  if (hasVideo === hasImage) {
+    throw new Error('Invalid word definition: xor media required');
+  }
+
+  if (hasVideo) {
+    return { mediaType: 'video' as const, videoSrc: value.videoSrc as string };
+  }
+
+  return { mediaType: 'image' as const, imageSrc: value.imageSrc as string };
+};
+
 const parseWord = (value: unknown): WordDefinition => {
   if (!isRecord(value)) {
     throw new Error('Invalid word definition');
   }
 
-  if (
-    typeof value.id !== 'string' ||
-    typeof value.value !== 'string' ||
-    typeof value.videoSrc !== 'string' ||
-    !Array.isArray(value.path)
-  ) {
+  if (typeof value.id !== 'string' || typeof value.value !== 'string' || !Array.isArray(value.path)) {
     throw new Error('Invalid word definition shape');
   }
 
@@ -27,10 +37,12 @@ const parseWord = (value: unknown): WordDefinition => {
     throw new Error('Invalid word path');
   }
 
+  const media = parseWordMedia(value);
+
   return {
     id: value.id,
     value: value.value,
-    videoSrc: value.videoSrc,
+    ...media,
     path: value.path
   };
 };
@@ -42,14 +54,16 @@ const parseWordSeedInput = (value: unknown): WordSeedInput => {
     throw new Error('Invalid word definition');
   }
 
-  if (typeof value.id !== 'string' || typeof value.value !== 'string' || typeof value.videoSrc !== 'string') {
+  if (typeof value.id !== 'string' || typeof value.value !== 'string') {
     throw new Error('Invalid word definition shape');
   }
+
+  const media = parseWordMedia(value);
 
   return {
     id: value.id,
     value: value.value,
-    videoSrc: value.videoSrc
+    ...media
   };
 };
 

@@ -45,6 +45,134 @@ describe('loadLevel', () => {
     expect((parsed.words[0] as { mediaType?: string }).mediaType).toBe('video');
   });
 
+  test('accepts static word with videoSrc only', () => {
+    const level = loadLevel({
+      id: 'video-only',
+      title: 'Video only',
+      grid: [
+        'ABCDWXYZ',
+        'EFGHQRST',
+        'IJKLUVWX',
+        'MNOPABCD',
+        'QRSTEFGH',
+        'UVWXIJKL',
+        'YZABMNOP',
+        'CDEFQRST'
+      ],
+      words: [
+        {
+          id: 'word-video',
+          value: 'ABCD',
+          videoSrc: '/video/word.mp4',
+          path: [
+            { row: 0, col: 0 },
+            { row: 0, col: 1 },
+            { row: 0, col: 2 },
+            { row: 0, col: 3 }
+          ]
+        }
+      ]
+    });
+
+    expect(level.words[0].mediaType).toBe('video');
+  });
+
+  test('accepts static word with imageSrc only', () => {
+    const level = loadLevel({
+      id: 'image-only',
+      title: 'Image only',
+      grid: [
+        'ABCDWXYZ',
+        'EFGHQRST',
+        'IJKLUVWX',
+        'MNOPABCD',
+        'QRSTEFGH',
+        'UVWXIJKL',
+        'YZABMNOP',
+        'CDEFQRST'
+      ],
+      words: [
+        {
+          id: 'word-image',
+          value: 'ABCD',
+          imageSrc: '/images/word.png',
+          path: [
+            { row: 0, col: 0 },
+            { row: 0, col: 1 },
+            { row: 0, col: 2 },
+            { row: 0, col: 3 }
+          ]
+        }
+      ]
+    });
+
+    expect(level.words[0].mediaType).toBe('image');
+  });
+
+  test('throws when word has both videoSrc and imageSrc', () => {
+    expect(() =>
+      loadLevel({
+        id: 'both-media',
+        title: 'Both media',
+        grid: [
+          'ABCDWXYZ',
+          'EFGHQRST',
+          'IJKLUVWX',
+          'MNOPABCD',
+          'QRSTEFGH',
+          'UVWXIJKL',
+          'YZABMNOP',
+          'CDEFQRST'
+        ],
+        words: [
+          {
+            id: 'word-both',
+            value: 'ABCD',
+            videoSrc: '/video/word.mp4',
+            imageSrc: '/images/word.png',
+            path: [
+              { row: 0, col: 0 },
+              { row: 0, col: 1 },
+              { row: 0, col: 2 },
+              { row: 0, col: 3 }
+            ]
+          }
+        ]
+      })
+    ).toThrow(/xor media/i);
+  });
+
+  test('throws when word has neither videoSrc nor imageSrc', () => {
+    expect(() =>
+      loadLevel({
+        id: 'no-media',
+        title: 'No media',
+        grid: [
+          'ABCDWXYZ',
+          'EFGHQRST',
+          'IJKLUVWX',
+          'MNOPABCD',
+          'QRSTEFGH',
+          'UVWXIJKL',
+          'YZABMNOP',
+          'CDEFQRST'
+        ],
+        words: [
+          {
+            id: 'word-none',
+            value: 'ABCD',
+            path: [
+              { row: 0, col: 0 },
+              { row: 0, col: 1 },
+              { row: 0, col: 2 },
+              { row: 0, col: 3 }
+            ]
+          }
+        ]
+      })
+    ).toThrow(/xor media/i);
+  });
+
   test('parses valid level JSON', () => {
     const level = loadLevel({
       id: 'level-01',
