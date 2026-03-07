@@ -1,3 +1,4 @@
+import { CrtCurvatureLayer } from "./fx/CrtCurvatureLayer";
 import { CrtNoiseLayer } from "./fx/CrtNoiseLayer";
 import { CrtScanlineLayer } from "./fx/CrtScanlineLayer";
 import { CrtVignetteLayer } from "./fx/CrtVignetteLayer";
@@ -9,6 +10,7 @@ export function FxLayer() {
       <CrtScanlineLayer />
       <CrtNoiseLayer />
       <CrtVignetteLayer />
+      <CrtCurvatureLayer />
       <PhosphorGlowLayer />
     </div>
   );

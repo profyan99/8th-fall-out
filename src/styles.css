@@ -395,8 +395,20 @@ body {
   background: radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.62) 100%);
 }
 
+.crt-curvature-layer {
+  background:
+    radial-gradient(130% 95% at 50% 48%, transparent 62%, rgba(0, 0, 0, 0.15) 80%, rgba(0, 0, 0, 0.28) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent 7%, transparent 93%, rgba(0, 0, 0, 0.16));
+  transform: perspective(1400px) scale(1.015);
+  transform-origin: center;
+}
+
 .phosphor-glow-layer {
   background: radial-gradient(circle at 50% 50%, rgba(124, 255, 124, 0.11), transparent 62%);
+}
+
+.phosphor-glow-edge-soften {
+  mask-image: radial-gradient(120% 100% at 50% 50%, #000 0 70%, transparent 100%);
 }
 
 .phosphor-glow-pulse {
