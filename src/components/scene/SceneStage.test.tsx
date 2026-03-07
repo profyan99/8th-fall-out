@@ -40,6 +40,10 @@ describe("Scene shell", () => {
     expect(screen.getByTestId("scene-stage")).toBeInTheDocument();
     expect(screen.getByTestId("monitor-frame")).toBeInTheDocument();
     expect(screen.getByTestId("screen-viewport")).toBeInTheDocument();
+    expect(screen.getByTestId("monitor-bezel-depth")).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getByTestId("monitor-glass")).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getByTestId("monitor-reflection")).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getByTestId("monitor-glare-sweep")).toHaveAttribute("aria-hidden", "true");
 
     const backdrop = screen.getByTestId("global-parallax-backdrop");
     expect(backdrop).toHaveClass("bunker-scene-art");
