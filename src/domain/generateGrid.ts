@@ -1,6 +1,6 @@
-import type { GridCell, WordDefinition } from './types';
+import type { GeneratedWordPayload, GridCell, WordDefinition } from './types';
 
-export type WordSeedInput = Omit<WordDefinition, 'path'>;
+export type WordSeedInput = GeneratedWordPayload;
 
 type GenerateGridOptions = {
   words: WordSeedInput[];
@@ -135,12 +135,23 @@ export const generateGridFromWords = ({
         }
 
         placeWord(grid, word.value, path);
-        placed.push({
-          id: word.id,
-          value: word.value,
-          videoSrc: word.videoSrc,
-          path
-        });
+        if (typeof word.videoSrc === 'string') {
+          placed.push({
+            id: word.id,
+            value: word.value,
+            mediaType: 'video',
+            videoSrc: word.videoSrc,
+            path
+          });
+        } else {
+          placed.push({
+            id: word.id,
+            value: word.value,
+            mediaType: 'image',
+            imageSrc: word.imageSrc as string,
+            path
+          });
+        }
         placedWord = true;
         break;
       }

@@ -21,6 +21,7 @@ const level: LevelDefinition = {
     {
       id: "word-a",
       value: "ABCDE",
+      mediaType: "video",
       videoSrc: "/videos/a.mp4",
       path: [
         { row: 0, col: 0 },

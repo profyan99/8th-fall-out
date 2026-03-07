@@ -45,7 +45,7 @@ export function GameShell({
     [level.words, state.foundWordIds]
   );
 
-  const activeVideoWord = useMemo(
+  const activeMediaWord = useMemo(
     () => level.words.find((word) => word.id === state.activeVideoWordId) ?? null,
     [level.words, state.activeVideoWordId]
   );
@@ -67,7 +67,7 @@ export function GameShell({
   });
   const { layerTransforms, onPointerMove, onPointerLeave } = useParallax('high');
 
-  const isVideoOpen = state.phase === 'video_open' && activeVideoWord !== null;
+  const isVideoOpen = state.phase === 'video_open' && activeMediaWord !== null;
   const isCompleted = state.phase === 'completed';
   const isBooting = boot.phase !== 'ready';
 
@@ -127,8 +127,8 @@ export function GameShell({
         </MonitorFrame>
       </SceneStage>
 
-      {isVideoOpen && activeVideoWord && (
-        <VideoOverlay word={activeVideoWord} onClose={() => dispatch({ type: 'video_closed' })} />
+      {isVideoOpen && activeMediaWord && (
+        <VideoOverlay word={activeMediaWord} onClose={() => dispatch({ type: 'video_closed' })} />
       )}
 
       <FxLayer />

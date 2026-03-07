@@ -21,6 +21,7 @@ const level: LevelDefinition = {
     {
       id: 'word-alpha',
       value: 'ALPHA',
+      mediaType: 'video',
       videoSrc: '/videos/alpha.mp4',
       path: [
         { row: 0, col: 0 },
@@ -33,7 +34,8 @@ const level: LevelDefinition = {
     {
       id: 'word-beta',
       value: 'BETA',
-      videoSrc: '/videos/beta.mp4',
+      mediaType: 'image',
+      imageSrc: '/images/beta.png',
       path: [
         { row: 0, col: 5 },
         { row: 0, col: 6 },
@@ -44,14 +46,14 @@ const level: LevelDefinition = {
 };
 
 describe('GameShell video flow', () => {
-  test('opens overlay on found word, allows replay from progress panel, and blocks input until close', () => {
+  test('opens overlay on found word, supports image-backed word, allows replay, and blocks input until close', () => {
     render(<GameShell level={level} />);
 
     const canvas = screen.getByTestId('grid-canvas');
     const hazeLayer = screen.getByTestId('parallax-layer-3');
 
-    fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
-    fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
+    fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });
+    fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
     expect(hazeLayer).toHaveStyle({ pointerEvents: 'none' });
@@ -60,24 +62,25 @@ describe('GameShell video flow', () => {
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
     expect(screen.getByRole('dialog')).toHaveClass('signal-state-locked');
     expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
+    expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 1 OF 2');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 
-    fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });
-    fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
+    fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
+    fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
     fireEvent.mouseUp(canvas);
-
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 1 OF 2');
+    expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
 
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
-    fireEvent.click(screen.getByRole('button', { name: 'ALPHA' }));
+    fireEvent.click(screen.getByRole('button', { name: /replay record beta/i }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
+    expect(screen.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
 
-    fireEvent.mouseDown(canvas, { offsetX: 450, offsetY: 10, clientX: 450, clientY: 10 });
-    fireEvent.mouseMove(canvas, { offsetX: 690, offsetY: 10, clientX: 690, clientY: 10 });
+    fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
+    fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
-    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS: 2 OF 2');
+    expect(screen.getByTestId('progress-text')).toHaveTextContent('WORDS INDEXED: 2 OF 2');
   });
 });

@@ -1,4 +1,4 @@
-import type { GridCell, LevelDefinition, WordDefinition } from './types';
+import type { GeneratedWordPayload, GridCell, LevelDefinition, WordDefinition } from './types';
 import { generateGridFromWords } from './generateGrid';
 
 const SUPPORTED_GRID_SIZES = new Set([8, 10, 12]);
@@ -9,17 +9,31 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const isGridCell = (value: unknown): value is GridCell =>
   isRecord(value) && typeof value.row === 'number' && typeof value.col === 'number';
 
+type ParsedMediaSources =
+  | { videoSrc: string; imageSrc?: never }
+  | { imageSrc: string; videoSrc?: never };
+
+const parseWordMedia = (value: Record<string, unknown>): ParsedMediaSources => {
+  const hasVideo = typeof value.videoSrc === 'string';
+  const hasImage = typeof value.imageSrc === 'string';
+
+  if (hasVideo === hasImage) {
+    throw new Error('Invalid word definition: xor media required');
+  }
+
+  if (hasVideo) {
+    return { videoSrc: value.videoSrc as string };
+  }
+
+  return { imageSrc: value.imageSrc as string };
+};
+
 const parseWord = (value: unknown): WordDefinition => {
   if (!isRecord(value)) {
     throw new Error('Invalid word definition');
   }
 
-  if (
-    typeof value.id !== 'string' ||
-    typeof value.value !== 'string' ||
-    typeof value.videoSrc !== 'string' ||
-    !Array.isArray(value.path)
-  ) {
+  if (typeof value.id !== 'string' || typeof value.value !== 'string' || !Array.isArray(value.path)) {
     throw new Error('Invalid word definition shape');
   }
 
@@ -27,29 +41,37 @@ const parseWord = (value: unknown): WordDefinition => {
     throw new Error('Invalid word path');
   }
 
+  const media = parseWordMedia(value);
+  const mediaWord =
+    typeof media.videoSrc === 'string'
+      ? { mediaType: 'video' as const, videoSrc: media.videoSrc }
+      : { mediaType: 'image' as const, imageSrc: media.imageSrc };
+
   return {
     id: value.id,
     value: value.value,
-    videoSrc: value.videoSrc,
+    ...mediaWord,
     path: value.path
   };
 };
 
-type WordSeedInput = Omit<WordDefinition, 'path'>;
+type WordSeedInput = GeneratedWordPayload;
 
 const parseWordSeedInput = (value: unknown): WordSeedInput => {
   if (!isRecord(value)) {
     throw new Error('Invalid word definition');
   }
 
-  if (typeof value.id !== 'string' || typeof value.value !== 'string' || typeof value.videoSrc !== 'string') {
+  if (typeof value.id !== 'string' || typeof value.value !== 'string') {
     throw new Error('Invalid word definition shape');
   }
+
+  const media = parseWordMedia(value);
 
   return {
     id: value.id,
     value: value.value,
-    videoSrc: value.videoSrc
+    ...(typeof media.videoSrc === 'string' ? { videoSrc: media.videoSrc } : { imageSrc: media.imageSrc })
   };
 };
 

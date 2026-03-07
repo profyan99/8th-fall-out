@@ -25,18 +25,35 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
       >
         <h2>SIGNAL LOCK: {word.value}</h2>
 
-        {!hasError ? (
-          <video
-            data-testid="video-element"
-            className="video-player"
-            src={word.videoSrc}
-            controls
-            autoPlay
+        {word.mediaType === 'video' ? (
+          !hasError ? (
+            <video
+              data-testid="video-element"
+              className="video-player"
+              src={word.videoSrc}
+              controls
+              autoPlay
+              onError={() => setHasError(true)}
+            />
+          ) : (
+            <div data-testid="video-fallback" className="video-fallback">
+              <p>Video unavailable. Continue to the game.</p>
+              <button type="button" className="terminal-action-button" onClick={onClose}>
+                Continue
+              </button>
+            </div>
+          )
+        ) : !hasError ? (
+          <img
+            data-testid="media-image"
+            className="media-image"
+            src={word.imageSrc}
+            alt={`${word.value} media`}
             onError={() => setHasError(true)}
           />
         ) : (
-          <div data-testid="video-fallback" className="video-fallback">
-            <p>Video unavailable. Continue to the game.</p>
+          <div data-testid="media-image-fallback" className="video-fallback">
+            <p>Image unavailable. Continue to the game.</p>
             <button type="button" className="terminal-action-button" onClick={onClose}>
               Continue
             </button>
