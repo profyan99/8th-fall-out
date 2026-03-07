@@ -34,15 +34,19 @@ const level: LevelDefinition = {
 };
 
 describe('GameShell drag integration', () => {
-  test('marks a word as found after valid drag path', () => {
+  test('marks a word as found after valid drag path and keeps backdrop non-interactive', () => {
     render(<GameShell level={level} />);
 
     const canvas = screen.getByTestId('grid-canvas');
+    const backdrop = screen.getByTestId('parallax-backdrop');
+    const decorLayer = screen.getByTestId('parallax-layer-2');
 
     fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
     fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
+    expect(backdrop).toHaveStyle({ pointerEvents: 'none' });
+    expect(decorLayer).toHaveStyle({ pointerEvents: 'none' });
     expect(screen.getByTestId('progress-text')).toHaveTextContent('1/1 words found');
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
     expect(screen.getByTestId('completion-banner')).toHaveTextContent('8 March transmission complete');

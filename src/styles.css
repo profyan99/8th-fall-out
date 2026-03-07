@@ -51,30 +51,104 @@ body {
   overflow: hidden;
   border-radius: 22px;
   z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(241, 194, 110, 0.14), transparent 32%),
+    radial-gradient(circle at 86% 15%, rgba(228, 96, 56, 0.08), transparent 30%),
+    linear-gradient(180deg, #261f19 0%, #191510 45%, #12120f 100%);
 }
 
 .parallax-layer {
   position: absolute;
   inset: 0;
-  transition: transform 120ms linear;
+  transition: transform 120ms linear, opacity 180ms ease-out;
+  pointer-events: none;
 }
 
 .parallax-layer-0 {
+  opacity: 0.95;
   background:
-    radial-gradient(circle at 20% 15%, rgba(198, 162, 92, 0.16), transparent 30%),
-    linear-gradient(135deg, #1f1a12, #16130f 45%, #1a2018);
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 68px,
+      rgba(0, 0, 0, 0.2) 68px,
+      rgba(0, 0, 0, 0.2) 72px
+    ),
+    linear-gradient(180deg, rgba(108, 92, 76, 0.4), rgba(20, 18, 15, 0.8) 66%),
+    radial-gradient(circle at 50% -20%, rgba(255, 197, 132, 0.16), transparent 58%);
 }
 
 .parallax-layer-1 {
+  opacity: 0.85;
   background:
-    radial-gradient(circle at 18% 78%, rgba(108, 92, 65, 0.32), transparent 42%),
-    radial-gradient(circle at 88% 22%, rgba(84, 72, 52, 0.27), transparent 40%);
+    linear-gradient(130deg, transparent 0 18%, rgba(26, 37, 33, 0.45) 18% 23%, transparent 23% 100%),
+    linear-gradient(45deg, transparent 0 70%, rgba(252, 193, 74, 0.4) 70% 73%, transparent 73% 100%),
+    radial-gradient(circle at 78% 32%, rgba(132, 171, 125, 0.12), transparent 32%),
+    radial-gradient(circle at 18% 72%, rgba(60, 74, 65, 0.35), transparent 30%);
 }
 
 .parallax-layer-2 {
+  opacity: 0.86;
   background:
-    radial-gradient(circle at 50% 50%, rgba(90, 120, 90, 0.12), transparent 55%),
-    linear-gradient(0deg, rgba(12, 20, 12, 0.46), transparent 65%);
+    radial-gradient(circle at 14% 20%, rgba(255, 147, 116, 0.24), transparent 20%),
+    radial-gradient(circle at 86% 22%, rgba(255, 192, 126, 0.22), transparent 18%),
+    radial-gradient(circle at 30% 16%, rgba(255, 223, 188, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 68% 18%, rgba(255, 223, 188, 0.45) 0 1px, transparent 2px),
+    linear-gradient(180deg, transparent 0 58%, rgba(94, 38, 31, 0.28) 58% 68%, transparent 68% 100%);
+}
+
+.parallax-layer-3 {
+  opacity: 0.7;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(245, 191, 115, 0.2), transparent 34%),
+    radial-gradient(circle at 82% 28%, rgba(255, 164, 122, 0.18), transparent 30%),
+    radial-gradient(circle at 50% 70%, rgba(84, 120, 92, 0.16), transparent 44%);
+  animation: ambient-haze-drift 9s ease-in-out infinite alternate;
+}
+
+.bunker-wall::before,
+.bunker-props::before,
+.march-decor::before,
+.ambient-haze::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bunker-wall::before {
+  background:
+    linear-gradient(180deg, transparent 0 24%, rgba(0, 0, 0, 0.22) 24% 25%, transparent 25% 52%, rgba(0, 0, 0, 0.2) 52% 53%, transparent 53% 100%),
+    radial-gradient(circle at 50% 8%, rgba(255, 231, 166, 0.16), transparent 30%);
+}
+
+.bunker-props::before {
+  background:
+    linear-gradient(90deg, transparent 0 12%, rgba(56, 70, 61, 0.45) 12% 16%, transparent 16% 84%, rgba(56, 70, 61, 0.4) 84% 88%, transparent 88% 100%),
+    radial-gradient(circle at 12% 76%, rgba(82, 56, 34, 0.36), transparent 20%),
+    radial-gradient(circle at 88% 74%, rgba(75, 52, 33, 0.33), transparent 18%);
+}
+
+.march-decor::before {
+  background:
+    repeating-linear-gradient(
+      160deg,
+      transparent 0 32px,
+      rgba(218, 80, 64, 0.32) 32px 36px,
+      rgba(245, 190, 116, 0.28) 36px 40px,
+      transparent 40px 76px
+    ),
+    linear-gradient(180deg, rgba(255, 150, 125, 0.2), transparent 40%);
+}
+
+.ambient-haze::before {
+  background:
+    radial-gradient(circle at 18% 42%, rgba(255, 229, 180, 0.3) 0 1px, transparent 2px),
+    radial-gradient(circle at 52% 28%, rgba(255, 233, 195, 0.24) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 58%, rgba(255, 223, 188, 0.22) 0 1px, transparent 2px);
+  background-size: 120px 120px, 160px 160px, 140px 140px;
+  animation: ambient-dust-float 12s linear infinite;
 }
 
 .monitor-frame {
@@ -335,6 +409,29 @@ body {
   }
   100% {
     transform: translate3d(-1px, 1px, 0);
+  }
+}
+
+@keyframes ambient-haze-drift {
+  0% {
+    transform: translate3d(-4px, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(5px, -3px, 0) scale(1.03);
+  }
+}
+
+@keyframes ambient-dust-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(6px, -8px, 0);
+    opacity: 0.45;
   }
 }
 

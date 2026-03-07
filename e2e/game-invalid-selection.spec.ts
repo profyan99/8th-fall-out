@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('invalid drag does not mark word', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?level=01');
 
   const canvas = page.getByTestId('grid-canvas');
   await canvas.hover({ position: { x: 10, y: 70 } });
