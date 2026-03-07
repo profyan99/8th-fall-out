@@ -3,10 +3,11 @@ import { describe, expect, it } from "vitest";
 import { ParallaxBackdrop } from "./ParallaxBackdrop";
 
 describe("ParallaxBackdrop", () => {
-  it("renders interior parallax layers", () => {
+  it("renders semantic bunker scene layers with parallax transforms", () => {
     render(
       <ParallaxBackdrop
         layerTransforms={[
+          "translate3d(0px, 0px, 0)",
           "translate3d(0px, 0px, 0)",
           "translate3d(0px, 0px, 0)",
           "translate3d(0px, 0px, 0)",
@@ -17,5 +18,12 @@ describe("ParallaxBackdrop", () => {
     expect(screen.getByTestId("parallax-layer-0")).toBeInTheDocument();
     expect(screen.getByTestId("parallax-layer-1")).toBeInTheDocument();
     expect(screen.getByTestId("parallax-layer-2")).toBeInTheDocument();
+    expect(screen.getByTestId("parallax-layer-3")).toBeInTheDocument();
+
+    const backdrop = screen.getByTestId("parallax-backdrop");
+    expect(backdrop.querySelector(".bunker-wall")).toBeInTheDocument();
+    expect(backdrop.querySelector(".bunker-props")).toBeInTheDocument();
+    expect(backdrop.querySelector(".march-decor")).toBeInTheDocument();
+    expect(backdrop.querySelector(".ambient-haze")).toBeInTheDocument();
   });
 });
