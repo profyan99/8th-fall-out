@@ -48,11 +48,13 @@ describe('GameShell video flow', () => {
     render(<GameShell level={level} />);
 
     const canvas = screen.getByTestId('grid-canvas');
+    const hazeLayer = screen.getByTestId('parallax-layer-3');
 
     fireEvent.mouseDown(canvas, { offsetX: 10, offsetY: 10, clientX: 10, clientY: 10 });
     fireEvent.mouseMove(canvas, { offsetX: 390, offsetY: 10, clientX: 390, clientY: 10 });
     fireEvent.mouseUp(canvas);
 
+    expect(hazeLayer).toHaveStyle({ pointerEvents: 'none' });
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
