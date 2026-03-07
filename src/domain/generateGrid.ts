@@ -6,6 +6,7 @@ type GenerateGridOptions = {
   words: WordSeedInput[];
   gridSize: number;
   seed?: string | number;
+  alphabet?: 'latin' | 'cyrillic';
 };
 
 type GenerateGridResult = {
@@ -13,7 +14,8 @@ type GenerateGridResult = {
   words: WordDefinition[];
 };
 
-const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const LATIN_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const CYRILLIC_LETTERS = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
 const DIRECTIONS = [
   { dr: -1, dc: -1 },
   { dr: -1, dc: 0 },
@@ -88,18 +90,27 @@ const placeWord = (grid: string[][], letters: string, path: GridCell[]): void =>
 const inBounds = (path: GridCell[], size: number): boolean =>
   path.every((cell) => cell.row >= 0 && cell.row < size && cell.col >= 0 && cell.col < size);
 
-const toUpperWord = (word: string): string => word.trim().toUpperCase();
+const toUpperWord = (word: string, alphabet: 'latin' | 'cyrillic'): string =>
+  alphabet === 'cyrillic' ? word.trim().toLocaleUpperCase('ru-RU') : word.trim().toUpperCase();
 
-const randomLetter = (rng: () => number): string => LETTERS[randomInt(rng, LETTERS.length)];
+const randomLetter = (rng: () => number, alphabet: 'latin' | 'cyrillic'): string => {
+  const letters = alphabet === 'cyrillic' ? CYRILLIC_LETTERS : LATIN_LETTERS;
+  return letters[randomInt(rng, letters.length)];
+};
 
-export const generateGridFromWords = ({ words, gridSize, seed }: GenerateGridOptions): GenerateGridResult => {
+export const generateGridFromWords = ({
+  words,
+  gridSize,
+  seed,
+  alphabet = 'latin'
+}: GenerateGridOptions): GenerateGridResult => {
   if (gridSize !== 10) {
     throw new Error('Dynamic grid generator currently supports only 10x10');
   }
 
   const rng = createRng(seed);
   const normalizedWords = words
-    .map((word) => ({ ...word, value: toUpperWord(word.value) }))
+    .map((word) => ({ ...word, value: toUpperWord(word.value, alphabet) }))
     .sort((left, right) => right.value.length - left.value.length);
 
   const maxRestarts = 250;
@@ -147,7 +158,7 @@ export const generateGridFromWords = ({ words, gridSize, seed }: GenerateGridOpt
     for (let row = 0; row < gridSize; row += 1) {
       for (let col = 0; col < gridSize; col += 1) {
         if (grid[row][col] === '') {
-          grid[row][col] = randomLetter(rng);
+          grid[row][col] = randomLetter(rng, alphabet);
         }
       }
     }

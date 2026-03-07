@@ -17,7 +17,7 @@ describe('generateGridFromWords', () => {
   });
 
   test('creates a 10x10 grid and fills all cells with letters', () => {
-    const result = generateGridFromWords({ words, gridSize: 10, seed: 'fill' });
+    const result = generateGridFromWords({ words, gridSize: 10, seed: 'fill', alphabet: 'latin' });
 
     expect(result.grid).toHaveLength(10);
     for (const row of result.grid) {
@@ -27,7 +27,7 @@ describe('generateGridFromWords', () => {
   });
 
   test('returns valid paths that map to the original words in the generated grid', () => {
-    const result = generateGridFromWords({ words, gridSize: 10, seed: 'paths' });
+    const result = generateGridFromWords({ words, gridSize: 10, seed: 'paths', alphabet: 'latin' });
 
     for (const word of result.words) {
       const extracted = word.path.map((cell) => result.grid[cell.row][cell.col]).join('');
@@ -42,7 +42,8 @@ describe('generateGridFromWords', () => {
         { id: 'word-beta', value: 'BETA', videoSrc: '/videos/beta.mp4' }
       ],
       gridSize: 10,
-      seed: 'test-level-seed'
+      seed: 'test-level-seed',
+      alphabet: 'latin'
     });
 
     for (const word of result.words) {
@@ -50,6 +51,41 @@ describe('generateGridFromWords', () => {
       const end = word.path[word.path.length - 1];
       const isForward = end.row > start.row || (end.row === start.row && end.col >= start.col);
       expect(isForward).toBe(true);
+    }
+  });
+
+  test('fills random cells with uppercase Cyrillic letters when alphabet is cyrillic', () => {
+    const result = generateGridFromWords({
+      words: [
+        { id: 'ru-1', value: 'лампа', videoSrc: '/videos/lampa.mp4' },
+        { id: 'ru-2', value: 'сигнал', videoSrc: '/videos/signal.mp4' }
+      ],
+      gridSize: 10,
+      seed: 'ru-fill',
+      alphabet: 'cyrillic'
+    });
+
+    expect(result.grid).toHaveLength(10);
+    for (const row of result.grid) {
+      expect(row).toHaveLength(10);
+      expect(row).toMatch(/^[А-ЯЁ]+$/);
+    }
+  });
+
+  test('places and extracts cyrillic words correctly using generated paths', () => {
+    const result = generateGridFromWords({
+      words: [
+        { id: 'ru-1', value: 'лампа', videoSrc: '/videos/lampa.mp4' },
+        { id: 'ru-2', value: 'сигнал', videoSrc: '/videos/signal.mp4' }
+      ],
+      gridSize: 10,
+      seed: 'ru-paths',
+      alphabet: 'cyrillic'
+    });
+
+    for (const word of result.words) {
+      const extracted = word.path.map((cell) => result.grid[cell.row][cell.col]).join('');
+      expect(extracted).toBe(word.value.toLocaleUpperCase('ru-RU'));
     }
   });
 });

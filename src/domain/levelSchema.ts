@@ -104,12 +104,17 @@ export const parseLevelDefinition = (value: unknown): LevelDefinition => {
   if (gridSize !== 10) {
     throw new Error('Dynamic payload requires gridSize 10');
   }
+  const alphabet = value.alphabet;
+  if (alphabet !== undefined && alphabet !== 'latin' && alphabet !== 'cyrillic') {
+    throw new Error('Dynamic payload alphabet must be latin or cyrillic');
+  }
 
   const seededWords = value.words.map(parseWordSeedInput);
   const { grid, words } = generateGridFromWords({
     words: seededWords,
     gridSize,
-    seed: typeof value.seed === 'string' || typeof value.seed === 'number' ? value.seed : undefined
+    seed: typeof value.seed === 'string' || typeof value.seed === 'number' ? value.seed : undefined,
+    alphabet: alphabet === 'cyrillic' ? 'cyrillic' : 'latin'
   });
 
   return {
