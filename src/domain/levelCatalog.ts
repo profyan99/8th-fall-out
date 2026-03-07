@@ -8,13 +8,33 @@ const LEVELS: Record<string, LevelPayload> = {
   test: testLevel
 };
 
-export const resolveLevelPayload = (search: string): LevelPayload => {
+export type ResolveLevelResult =
+  | { status: 'ok'; payload: LevelPayload; levelKey: string }
+  | {
+      status: 'error';
+      reason: 'missing_level' | 'unknown_level';
+      requestedLevel: string | null;
+    };
+
+export const resolveLevelPayload = (search: string): ResolveLevelResult => {
   const params = new URLSearchParams(search);
   const requested = params.get('level');
 
-  if (!requested) {
-    return defaultLevel;
+  if (requested === null) {
+    return { status: 'error', reason: 'missing_level', requestedLevel: null };
   }
 
-  return LEVELS[requested] ?? defaultLevel;
+  const normalized = requested.trim().toLowerCase();
+  if (!normalized) {
+    return { status: 'error', reason: 'missing_level', requestedLevel: requested };
+  }
+
+  const payload = LEVELS[normalized];
+  if (!payload) {
+    return { status: 'error', reason: 'unknown_level', requestedLevel: requested };
+  }
+
+  return { status: 'ok', payload, levelKey: normalized };
 };
+
+export const availableLevels = Object.keys(LEVELS);
