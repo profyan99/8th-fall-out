@@ -67,7 +67,7 @@ export function GameShell({
     <main className="game-shell">
       <ParallaxBackdrop
         layerTransforms={layerTransforms}
-        className="parallax-backdrop parallax-backdrop-global"
+        className="parallax-backdrop parallax-backdrop-global bunker-scene-art"
         testId="global-parallax-backdrop"
       />
       <SceneStage onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
