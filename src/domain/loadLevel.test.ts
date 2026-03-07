@@ -1,7 +1,50 @@
 import { describe, expect, test } from 'vitest';
 import { loadLevel } from './loadLevel';
+import type { GeneratedWordPayload, WordDefinition } from './types';
 
 describe('loadLevel', () => {
+  test('word definitions expose mediaType discriminator in domain types', () => {
+    const mediaType: WordDefinition['mediaType'] = 'video';
+    expect(mediaType).toBe('video');
+
+    const imageSeed: GeneratedWordPayload = {
+      id: 'img-1',
+      value: 'POSTER',
+      imageSrc: '/images/poster.png'
+    };
+    expect(imageSeed.imageSrc).toContain('/images/');
+
+    const parsed = loadLevel({
+      id: 'runtime-media-type',
+      title: 'Runtime mediaType',
+      grid: [
+        'ABCDWXYZ',
+        'EFGHQRST',
+        'IJKLUVWX',
+        'MNOPABCD',
+        'QRSTEFGH',
+        'UVWXIJKL',
+        'YZABMNOP',
+        'CDEFQRST'
+      ],
+      words: [
+        {
+          id: 'word-runtime',
+          value: 'ABCD',
+          videoSrc: '/video/word.mp4',
+          path: [
+            { row: 0, col: 0 },
+            { row: 0, col: 1 },
+            { row: 0, col: 2 },
+            { row: 0, col: 3 }
+          ]
+        }
+      ]
+    });
+
+    expect((parsed.words[0] as { mediaType?: string }).mediaType).toBe('video');
+  });
+
   test('parses valid level JSON', () => {
     const level = loadLevel({
       id: 'level-01',

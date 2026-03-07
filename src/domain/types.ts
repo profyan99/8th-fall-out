@@ -3,12 +3,25 @@ export type GridCell = {
   col: number;
 };
 
-export type WordDefinition = {
+type BaseWordDefinition = {
   id: string;
   value: string;
-  videoSrc: string;
   path: GridCell[];
 };
+
+export type VideoWordDefinition = BaseWordDefinition & {
+  mediaType: 'video';
+  videoSrc: string;
+  imageSrc?: never;
+};
+
+export type ImageWordDefinition = BaseWordDefinition & {
+  mediaType: 'image';
+  imageSrc: string;
+  videoSrc?: never;
+};
+
+export type WordDefinition = VideoWordDefinition | ImageWordDefinition;
 
 export type LevelDefinition = {
   id: string;
@@ -18,18 +31,26 @@ export type LevelDefinition = {
   words: WordDefinition[];
 };
 
-export type StaticWordPayload = {
+type BaseWordPayload = {
   id: string;
   value: string;
+};
+
+type VideoWordPayload = BaseWordPayload & {
   videoSrc: string;
+  imageSrc?: never;
+};
+
+type ImageWordPayload = BaseWordPayload & {
+  imageSrc: string;
+  videoSrc?: never;
+};
+
+export type StaticWordPayload = (VideoWordPayload | ImageWordPayload) & {
   path: GridCell[];
 };
 
-export type GeneratedWordPayload = {
-  id: string;
-  value: string;
-  videoSrc: string;
-};
+export type GeneratedWordPayload = VideoWordPayload | ImageWordPayload;
 
 export type StaticLevelPayload = {
   id: string;
