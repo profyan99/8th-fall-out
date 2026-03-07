@@ -1,11 +1,19 @@
+import type { BootPhase } from "../../hooks/useBootSequence";
+
 type BootOverlayProps = {
   lines: string[];
   visibleLineCount: number;
+  phase: BootPhase;
 };
 
-export function BootOverlay({ lines, visibleLineCount }: BootOverlayProps) {
+export function BootOverlay({ lines, visibleLineCount, phase }: BootOverlayProps) {
   return (
-    <div className="boot-overlay" data-testid="boot-overlay" aria-live="polite">
+    <div
+      className={`boot-overlay boot-overlay--${phase}`}
+      data-testid="boot-overlay"
+      data-boot-phase={phase}
+      aria-live="polite"
+    >
       {lines.slice(0, visibleLineCount).map((line) => (
         <p key={line}>{line}</p>
       ))}
@@ -15,4 +23,3 @@ export function BootOverlay({ lines, visibleLineCount }: BootOverlayProps) {
     </div>
   );
 }
-

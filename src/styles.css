@@ -416,6 +416,20 @@ body {
   text-shadow: 0 0 8px rgba(140, 255, 140, 0.35);
 }
 
+.boot-overlay--flash {
+  background: rgba(240, 255, 240, 0.9);
+  color: #183218;
+  text-shadow: none;
+}
+
+.boot-overlay--sync {
+  background: rgba(6, 17, 6, 0.94);
+}
+
+.boot-overlay--ready {
+  opacity: 0;
+}
+
 .boot-overlay p {
   margin: 0;
 }

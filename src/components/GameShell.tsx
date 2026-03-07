@@ -69,7 +69,7 @@ export function GameShell({
 
   const isVideoOpen = state.phase === 'video_open' && activeVideoWord !== null;
   const isCompleted = state.phase === 'completed';
-  const isBooting = boot.phase === 'booting';
+  const isBooting = boot.phase !== 'ready';
 
   return (
     <main className="game-shell">
@@ -116,7 +116,13 @@ export function GameShell({
               />
             </div>
 
-            {isBooting && <BootOverlay lines={boot.visibleLines} visibleLineCount={boot.visibleLineCount} />}
+            {isBooting && (
+              <BootOverlay
+                lines={boot.visibleLines}
+                visibleLineCount={boot.visibleLineCount}
+                phase={boot.phase}
+              />
+            )}
           </ScreenViewport>
         </MonitorFrame>
       </SceneStage>

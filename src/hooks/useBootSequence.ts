@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-type BootPhase = "booting" | "playing";
+export type BootPhase = "flash" | "sync" | "ready";
 
 type UseBootSequenceOptions = {
   enabled: boolean;
@@ -21,31 +21,37 @@ export function useBootSequence({
   lineIntervalMs,
   lines,
 }: UseBootSequenceOptions): UseBootSequenceResult {
-  const [phase, setPhase] = useState<BootPhase>(enabled ? "booting" : "playing");
+  const [phase, setPhase] = useState<BootPhase>(enabled ? "flash" : "ready");
   const [visibleLineCount, setVisibleLineCount] = useState(0);
 
   useEffect(() => {
     if (!enabled) {
-      setPhase("playing");
+      setPhase("ready");
       setVisibleLineCount(lines.length);
       return;
     }
 
-    setPhase("booting");
+    setPhase("flash");
     setVisibleLineCount(0);
+    const flashDuration = Math.max(1, Math.floor(durationMs * 0.25));
 
     const lineTimer = window.setInterval(() => {
       setVisibleLineCount((current) => Math.min(current + 1, lines.length));
     }, lineIntervalMs);
 
+    const syncTimer = window.setTimeout(() => {
+      setPhase("sync");
+    }, flashDuration);
+
     const doneTimer = window.setTimeout(() => {
-      setPhase("playing");
+      setPhase("ready");
       window.clearInterval(lineTimer);
       setVisibleLineCount(lines.length);
     }, durationMs);
 
     return () => {
       window.clearInterval(lineTimer);
+      window.clearTimeout(syncTimer);
       window.clearTimeout(doneTimer);
     };
   }, [durationMs, enabled, lineIntervalMs, lines.length]);
@@ -54,4 +60,3 @@ export function useBootSequence({
 
   return { phase, visibleLineCount, visibleLines };
 }
-
