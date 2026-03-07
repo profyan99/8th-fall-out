@@ -53,7 +53,7 @@ describe('GameShell drag integration', () => {
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
     const completionBanner = screen.getByTestId('completion-banner');
     expect(completionBanner).toHaveTextContent('8 March transmission complete');
-    expect(completionBanner).toHaveClass('completion-banner-overlay');
+    expect(completionBanner).not.toHaveClass('completion-banner-overlay');
     expect(screen.getByTestId('hud-progress')).toBeInTheDocument();
     expect(screen.getByTestId('grid-canvas')).toBeInTheDocument();
     expect(screen.getByTestId('progress-replay-list')).toBeInTheDocument();

@@ -27,7 +27,7 @@ export function ProgressPanel({
         ))}
       </div>
       {replayItems.length > 0 && (
-        <div className="progress-replay-scroll" data-testid="progress-replay-scroll">
+        <div className="progress-replay-scroll progress-replay-scroll-fill" data-testid="progress-replay-scroll">
           <div className="progress-replay-list" data-testid="progress-replay-list">
             {replayItems
               .filter((item) => item.found)

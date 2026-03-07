@@ -63,6 +63,7 @@ describe("ProgressPanel", () => {
 
     const scrollContainer = screen.getByTestId("progress-replay-scroll");
     expect(scrollContainer).toBeInTheDocument();
+    expect(scrollContainer).toHaveClass("progress-replay-scroll-fill");
     expect(scrollContainer.querySelectorAll("button")).toHaveLength(12);
     expect(screen.getByRole("button", { name: "WORD-12" })).toBeInTheDocument();
   });

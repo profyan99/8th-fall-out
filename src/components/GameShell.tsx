@@ -89,7 +89,7 @@ export function GameShell({
             />
 
             {isCompleted && (
-              <section className="completion-banner completion-banner-overlay" data-testid="completion-banner">
+              <section className="completion-banner" data-testid="completion-banner">
                 <h2>8 March transmission complete</h2>
                 <p>Congratulations. Terminal session archived with gratitude.</p>
               </section>

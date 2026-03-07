@@ -39,7 +39,8 @@ body {
 
 .scene-stage {
   width: min(92vw, 1080px);
-  height: min(86vh, 760px);
+  height: auto;
+  min-height: min(86vh, 760px);
   max-height: calc(100vh - 1rem);
   position: relative;
   z-index: 1;
@@ -276,15 +277,6 @@ body {
   margin: 0;
 }
 
-.completion-banner-overlay {
-  position: absolute;
-  top: calc(var(--crt-viewport-padding) + 7rem);
-  left: var(--crt-viewport-padding);
-  right: var(--crt-viewport-padding);
-  z-index: 3;
-  pointer-events: none;
-}
-
 .game-main {
   display: grid;
   gap: 0.6rem;
@@ -300,6 +292,11 @@ body {
   border-radius: 14px;
   padding: 0.65rem;
   min-height: 0;
+}
+
+.progress-panel {
+  display: flex;
+  flex-direction: column;
 }
 
 .grid-canvas-wrap canvas {
@@ -362,11 +359,15 @@ body {
 
 .progress-replay-scroll {
   margin-top: 0.65rem;
-  max-height: min(12rem, 35vh);
   overflow-y: auto;
   padding-right: 0.15rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(141, 255, 141, 0.45) rgba(5, 20, 5, 0.8);
+}
+
+.progress-replay-scroll-fill {
+  flex: 1;
+  min-height: 0;
 }
 
 .progress-replay-scroll::-webkit-scrollbar {
