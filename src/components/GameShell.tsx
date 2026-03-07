@@ -24,7 +24,7 @@ type GameShellProps = {
 };
 
 const toLetterGrid = (rows: string[]): string[][] => rows.map((row) => row.split(''));
-const bootLines = ru.boot.lines;
+const bootLines = [...ru.boot.lines];
 const GRID_CANVAS_SIZE = 640;
 
 export function GameShell({

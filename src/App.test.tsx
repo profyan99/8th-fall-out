@@ -31,7 +31,7 @@ describe('App level routing', () => {
     setSearch('?level=test');
     render(<App />);
 
-    expect(screen.getByText('Test Grid')).toBeInTheDocument();
+    expect(screen.getByText('Тестовая сетка')).toBeInTheDocument();
     expect(screen.queryByText('FATAL SYSTEM EXCEPTION')).not.toBeInTheDocument();
   });
 });
