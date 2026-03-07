@@ -49,6 +49,15 @@ export function GameShell({
     () => level.words.find((word) => word.id === state.activeVideoWordId) ?? null,
     [level.words, state.activeVideoWordId]
   );
+  const replayItems = useMemo(
+    () =>
+      level.words.map((word) => ({
+        wordId: word.id,
+        label: word.value,
+        found: state.foundWordIds.has(word.id),
+      })),
+    [level.words, state.foundWordIds]
+  );
 
   const { activeSelection, onMouseStart, onMouseMove, onMouseEnd } = useGridSelection({
     gridSize: level.gridSize,
@@ -99,7 +108,12 @@ export function GameShell({
                 canvasSize={GRID_CANVAS_SIZE}
                 layoutMode="viewport-fit"
               />
-              <ProgressPanel foundCount={state.foundWordIds.size} totalCount={level.words.length} />
+              <ProgressPanel
+                foundCount={state.foundWordIds.size}
+                totalCount={level.words.length}
+                replayItems={replayItems}
+                onReplayRequested={(wordId) => dispatch({ type: 'video_replay_requested', wordId })}
+              />
             </div>
 
             {isBooting && <BootOverlay lines={boot.visibleLines} visibleLineCount={boot.visibleLineCount} />}
