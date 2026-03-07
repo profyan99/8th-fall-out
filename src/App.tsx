@@ -1,11 +1,24 @@
 import { GameShell } from './components/GameShell';
+import { LevelFatalScreen } from './components/LevelFatalScreen';
 import { loadLevel } from './domain/loadLevel';
-import { resolveLevelPayload } from './domain/levelCatalog';
+import { availableLevels, resolveLevelPayload } from './domain/levelCatalog';
 
 function App() {
-  const level = loadLevel(resolveLevelPayload(window.location.search));
+  const resolveResult = resolveLevelPayload(window.location.search);
   const search = new URLSearchParams(window.location.search);
   const isVisualMode = search.get('visual') === '1';
+
+  if (resolveResult.status === 'error') {
+    return (
+      <LevelFatalScreen
+        reason={resolveResult.reason}
+        requestedLevel={resolveResult.requestedLevel}
+        availableLevels={availableLevels}
+      />
+    );
+  }
+
+  const level = loadLevel(resolveResult.payload);
 
   return (
     <GameShell
