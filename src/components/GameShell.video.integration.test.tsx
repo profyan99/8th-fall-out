@@ -57,7 +57,8 @@ describe('GameShell video flow', () => {
     expect(hazeLayer).toHaveStyle({ pointerEvents: 'none' });
     expect(canvas).toHaveAttribute('data-grid-pulse', 'steady');
     expect(screen.getByRole('dialog')).toHaveClass('video-overlay-lg');
-    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-capture-active');
+    expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
+    expect(screen.getByRole('dialog')).toHaveClass('signal-state-locked');
     expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
     expect(screen.getByTestId('grid-canvas')).toHaveAttribute('data-input-blocked', 'true');
 

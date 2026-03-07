@@ -10,6 +10,7 @@ test('broken video still allows continue', async ({ page }) => {
   await page.mouse.up();
 
   await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByTestId('video-overlay-backdrop')).toHaveClass(/signal-state-capture/);
 
   await page.evaluate(() => {
     const video = document.querySelector('[data-testid="video-element"]');
@@ -19,6 +20,7 @@ test('broken video still allows continue', async ({ page }) => {
   });
 
   await expect(page.getByTestId('video-fallback')).toBeVisible();
+  await expect(page.getByTestId('video-overlay-backdrop')).toHaveClass(/signal-state-loss/);
   await page.getByRole('button', { name: /continue/i }).click();
   await expect(page.getByTestId('completion-banner')).toBeVisible();
 });
