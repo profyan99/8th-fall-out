@@ -8,12 +8,12 @@
     {
       "id": "word-egor",
       "value": "егор",
-      "videoSrc": "/videos/egor.mp4"
+      "imageSrc": "/images/egor.jpg"
     },
     {
       "id": "word-ilya",
       "value": "илья",
-      "videoSrc": "/videos/ilya.mp4"
+      "videoSrc": "/videos/alpha.mp4"
     },
     {
       "id": "word-kostya",
