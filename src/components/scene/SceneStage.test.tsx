@@ -34,14 +34,14 @@ const level: LevelDefinition = {
 };
 
 describe("Scene shell", () => {
-  it("renders scene wrappers and decorative backdrop layers", () => {
+  it("renders scene wrappers and global decorative backdrop layers", () => {
     render(<GameShell level={level} />);
 
     expect(screen.getByTestId("scene-stage")).toBeInTheDocument();
     expect(screen.getByTestId("monitor-frame")).toBeInTheDocument();
     expect(screen.getByTestId("screen-viewport")).toBeInTheDocument();
 
-    const backdrop = screen.getByTestId("parallax-backdrop");
+    const backdrop = screen.getByTestId("global-parallax-backdrop");
     expect(backdrop.querySelector(".march-decor")).toBeInTheDocument();
     expect(backdrop.querySelector(".ambient-haze")).toBeInTheDocument();
   });

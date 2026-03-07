@@ -1,10 +1,11 @@
-import type { PropsWithChildren } from "react";
-import { useParallax } from "../../hooks/useParallax";
-import { ParallaxBackdrop } from "./ParallaxBackdrop";
+import type { PointerEventHandler, PropsWithChildren } from "react";
 
-export function SceneStage({ children }: PropsWithChildren) {
-  const { layerTransforms, onPointerMove, onPointerLeave } = useParallax("medium");
+type SceneStageProps = PropsWithChildren<{
+  onPointerMove: PointerEventHandler<HTMLElement>;
+  onPointerLeave: PointerEventHandler<HTMLElement>;
+}>;
 
+export function SceneStage({ children, onPointerMove, onPointerLeave }: SceneStageProps) {
   return (
     <section
       className="scene-stage"
@@ -12,7 +13,6 @@ export function SceneStage({ children }: PropsWithChildren) {
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
-      <ParallaxBackdrop layerTransforms={layerTransforms} />
       {children}
     </section>
   );
