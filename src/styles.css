@@ -285,6 +285,18 @@ body {
   background: var(--crt-phosphor-dim);
 }
 
+.progress-replay-list {
+  margin-top: 0.65rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.progress-replay-button {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.55rem;
+}
+
 .video-overlay-backdrop {
   position: fixed;
   inset: 0;
