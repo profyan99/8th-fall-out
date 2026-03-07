@@ -33,6 +33,6 @@ test('broken video still allows continue', async ({ page }) => {
 
   await expect(page.getByTestId('video-fallback')).toBeVisible();
   await expect(page.getByTestId('video-overlay-backdrop')).toHaveClass(/signal-state-loss/);
-  await page.getByRole('button', { name: /continue/i }).click();
+  await page.getByRole('button', { name: 'Продолжить' }).click();
   await expect(page.getByTestId('completion-banner')).toBeVisible();
 });

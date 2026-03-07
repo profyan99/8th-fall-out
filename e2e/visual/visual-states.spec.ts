@@ -33,7 +33,7 @@ test("captures crt visual states", async ({ page }) => {
   await expect(page.getByTestId("video-overlay-backdrop")).toHaveClass(/signal-state-capture/);
   await expect(page).toHaveScreenshot("video-overlay.png");
 
-  await page.getByRole("button", { name: /close/i }).click();
+  await page.getByRole("button", { name: "Закрыть" }).click();
   await expect(page.getByTestId("completion-banner")).toBeVisible();
   await expect(page).toHaveScreenshot("completion.png");
 });

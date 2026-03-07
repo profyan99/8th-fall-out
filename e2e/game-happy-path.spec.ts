@@ -29,12 +29,12 @@ test('completes level on happy path', async ({ page }) => {
 
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByTestId('video-element').or(page.getByTestId('video-fallback'))).toBeVisible();
-  await page.getByRole('button', { name: /close/i }).click();
+  await page.getByRole('button', { name: 'Закрыть' }).click();
 
   await expect(page.getByTestId('completion-banner')).toBeVisible();
-  await expect(page.getByTestId('completion-banner')).toContainText('8 March transmission complete');
-  await expect(page.getByRole('heading', { name: 'Result' })).toBeVisible();
-  await expect(page.getByTestId('progress-text')).toContainText('WORDS: 1 OF 1');
+  await expect(page.getByTestId('completion-banner')).toContainText('Передача 8 Марта завершена');
+  await expect(page.getByRole('heading', { name: 'РЕЗУЛЬТАТ' })).toBeVisible();
+  await expect(page.getByTestId('progress-text')).toContainText('СЛОВА: 1 ИЗ 1');
   const replayButton = page.getByTestId('progress-replay-list').getByRole('button').first();
   await expect(replayButton).toBeVisible();
   await expect(replayButton).not.toContainText(/replay record/i);
