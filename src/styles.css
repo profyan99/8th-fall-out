@@ -270,6 +270,8 @@ body {
   border-radius: 12px;
   padding: 0.75rem 1rem;
   font-family: "IBM Plex Mono", monospace;
+  width: min(100%, var(--terminal-content-max-width));
+  justify-self: center;
 }
 
 .completion-banner h2 {
