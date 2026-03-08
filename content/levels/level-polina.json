@@ -33,7 +33,7 @@
     {
       "id": "word-kostya",
       "value": "костя",
-      "videoSrc": "/videos/kostya.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/kostya_polya.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T082804Z&X-Amz-Expires=604800&X-Amz-Signature=ad024c86116f6d9296fb5d3a557938563ef770e8fa7f39a2574a70a60d23ff31&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-egor",
