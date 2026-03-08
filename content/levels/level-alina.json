@@ -8,12 +8,12 @@
     {
       "id": "word-egor",
       "value": "егор",
-      "imageSrc": "/images/egor.jpg"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/egor_alina.MOV?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062223Z&X-Amz-Expires=604800&X-Amz-Signature=85b02e1d5d84c9410c43f7cf63dd9aee1071e0d8fd399b3e5f56ce25a067bbac&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-ilya",
       "value": "илья",
-      "videoSrc": "/videos/alpha.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/ilya.MOV?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062422Z&X-Amz-Expires=604800&X-Amz-Signature=33ada035f34ff2ef50f78125f233ae8e93f23d72ce26ed2e81347a29ab3f3253&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-kostya",
@@ -23,17 +23,17 @@
     {
       "id": "word-matvey",
       "value": "матвей",
-      "videoSrc": "/videos/matvey.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/matew_alina.MOV?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062435Z&X-Amz-Expires=604800&X-Amz-Signature=682b83427b24d26895803aea46281270b1fae3ab0495ab8a56b2e7ead0c672c2&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-roma",
       "value": "рома",
-      "videoSrc": "/videos/roma.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/roma_alina.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062519Z&X-Amz-Expires=604800&X-Amz-Signature=487aa950c5c523d5b1bf4c168ce2ce48193a4efa60e9d2af225fe152dc23177f&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-balmont",
       "value": "бальмонт",
-      "videoSrc": "/videos/balmont.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/balmont.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062356Z&X-Amz-Expires=604800&X-Amz-Signature=a39ad0207bb2cc546cde0e38d73d567f984e97807c4d641e6dd4390f95973cdf&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-oksimiron",

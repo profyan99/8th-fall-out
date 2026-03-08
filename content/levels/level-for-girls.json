@@ -13,27 +13,27 @@
     {
       "id": "word-ilya",
       "value": "илья",
-      "videoSrc": "/videos/ilya.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/ilya.MOV?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062611Z&X-Amz-Expires=604800&X-Amz-Signature=b0465129739403f8f3e56f8275e788e31934cef2e9659ba74a7efe1ca3ecb530&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-roma",
       "value": "рома",
-      "videoSrc": "/videos/roma.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/roma_common.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062543Z&X-Amz-Expires=604800&X-Amz-Signature=8369f279d9f96c4a29b975ebbe4261d35790623b1b497fc76fec12a75271bf34&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-matvey",
       "value": "матвей",
-      "videoSrc": "/videos/matvey.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/matew_common.MOV?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062600Z&X-Amz-Expires=604800&X-Amz-Signature=2ed9801f2c68e4c03ee7a23159d34ab2dd834d18b5d623a877e492f44998c04c&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-egor",
       "value": "егор",
-      "videoSrc": "/videos/egor.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/egor_common.MOV?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062623Z&X-Amz-Expires=604800&X-Amz-Signature=a7fa7babe7069228544c9f81adabdfd5f24f65229302782ccf93b6afb10536ee&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     },
     {
       "id": "word-balmont",
       "value": "бальмонт",
-      "videoSrc": "/videos/balmont.mp4"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/balmont.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062356Z&X-Amz-Expires=604800&X-Amz-Signature=a39ad0207bb2cc546cde0e38d73d567f984e97807c4d641e6dd4390f95973cdf&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     }
   ]
 }
