@@ -33,7 +33,7 @@
     {
       "id": "word-balmont",
       "value": "бальмонт",
-      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/balmont.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T062356Z&X-Amz-Expires=604800&X-Amz-Signature=a39ad0207bb2cc546cde0e38d73d567f984e97807c4d641e6dd4390f95973cdf&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+      "videoSrc": "https://s3.cloud.ru/bucket-bfed8f/balmont_2.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=19c34fcb-29bd-423a-bbf8-5e209bdf5d13%3Ac7829fa3efea6489fbcf7b3b22bdb76f%2F20260308%2Fru-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260308T092950Z&X-Amz-Expires=604800&X-Amz-Signature=8d5e3d856530407d0e8e8a1c8ca00e6a70d40b743ba9461081d8c638bdcde1a8&X-Amz-SignedHeaders=host&response-content-disposition=attachment&x-amz-checksum-mode=ENABLED&x-id=GetObject"
     }
   ]
 }
