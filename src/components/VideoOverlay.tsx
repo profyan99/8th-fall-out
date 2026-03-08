@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ru } from '../i18n/ru';
+import { resolveAssetUrl } from '../domain/assetUrl';
 import type { WordDefinition } from '../domain/types';
 
 type VideoOverlayProps = {
@@ -9,6 +10,7 @@ type VideoOverlayProps = {
 
 export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
   const [hasError, setHasError] = useState(false);
+  const baseUrl = import.meta.env.BASE_URL;
   const backdropSignalClass = hasError ? 'signal-state-loss' : 'signal-state-capture';
   const dialogSignalClass = hasError ? 'signal-state-loss-dialog' : 'signal-state-locked';
 
@@ -32,7 +34,7 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
               <video
                 data-testid="video-element"
                 className="video-player video-player-fit"
-                src={word.videoSrc}
+                src={resolveAssetUrl(word.videoSrc, baseUrl)}
                 controls
                 autoPlay
                 onError={() => setHasError(true)}
@@ -46,13 +48,13 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
               </div>
             )
           ) : !hasError ? (
-            <img
-              data-testid="media-image"
-              className="media-image media-image-fit"
-              src={word.imageSrc}
-              alt={`${word.value} медиа`}
-              onError={() => setHasError(true)}
-            />
+              <img
+                data-testid="media-image"
+                className="media-image media-image-fit"
+                src={resolveAssetUrl(word.imageSrc, baseUrl)}
+                alt={`${word.value} медиа`}
+                onError={() => setHasError(true)}
+              />
           ) : (
             <div data-testid="media-image-fallback" className="video-fallback">
               <p>{ru.overlay.imageUnavailable}</p>

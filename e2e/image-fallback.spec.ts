@@ -40,7 +40,8 @@ test('broken image still allows continue', async ({ page }) => {
   await dragPath(page, imageWord.path, level.gridSize);
 
   await expect(page.getByRole('dialog')).toBeVisible();
-  await expect(page.getByTestId('media-image')).toHaveAttribute('src', '/images/egor.jpg');
+  const expectedImagePathPattern = new RegExp(`${imageWord.imageSrc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`);
+  await expect(page.getByTestId('media-image')).toHaveAttribute('src', expectedImagePathPattern);
   await page.evaluate(() => {
     const image = document.querySelector('[data-testid="media-image"]');
     if (image) {
