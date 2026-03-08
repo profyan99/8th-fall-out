@@ -36,6 +36,7 @@ describe('VideoOverlay', () => {
     expect(dialog).toHaveClass('video-overlay-viewport-fit');
     expect(screen.getByText(`${ru.overlay.signalLock}: ${word.value}`)).toBeInTheDocument();
     expect(screen.getByTestId('video-overlay-media')).toHaveClass('video-overlay-media-bounded');
+    expect(screen.getByTestId('video-overlay-media')).toHaveClass('video-overlay-media-letterbox');
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', expect.stringMatching(/\/videos\/alpha\.mp4$/));
     expect(screen.getByTestId('video-element')).toHaveClass('video-player-fit');
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
@@ -62,6 +63,7 @@ describe('VideoOverlay', () => {
     render(<VideoOverlay word={imageWord} onClose={() => undefined} />);
 
     expect(screen.queryByTestId('video-element')).not.toBeInTheDocument();
+    expect(screen.getByTestId('video-overlay-media')).toHaveClass('video-overlay-media-letterbox');
     expect(screen.getByTestId('media-image')).toHaveAttribute('src', expect.stringMatching(/\/images\/poster\.png$/));
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
   });

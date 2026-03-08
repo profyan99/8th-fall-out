@@ -10,6 +10,7 @@ type VideoOverlayProps = {
 
 export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
   const [hasError, setHasError] = useState(false);
+  const [videoFitMode, setVideoFitMode] = useState<'portrait' | 'landscape' | 'square'>('landscape');
   const baseUrl = import.meta.env.BASE_URL;
   const backdropSignalClass = hasError ? 'signal-state-loss' : 'signal-state-capture';
   const dialogSignalClass = hasError ? 'signal-state-loss-dialog' : 'signal-state-locked';
@@ -28,15 +29,33 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
       >
         <h2>{ru.overlay.signalLock}: {word.value}</h2>
 
-        <div className="video-overlay-media video-overlay-media-bounded" data-testid="video-overlay-media">
+        <div
+          className="video-overlay-media video-overlay-media-bounded video-overlay-media-letterbox"
+          data-testid="video-overlay-media"
+        >
           {word.mediaType === 'video' ? (
             !hasError ? (
               <video
                 data-testid="video-element"
-                className="video-player video-player-fit"
+                className={`video-player video-player-fit video-player-fit-${videoFitMode}`}
                 src={resolveAssetUrl(word.videoSrc, baseUrl)}
                 controls
                 autoPlay
+                onLoadedMetadata={(event) => {
+                  const videoElement = event.currentTarget;
+                  if (!videoElement.videoWidth || !videoElement.videoHeight) {
+                    return;
+                  }
+
+                  const ratio = videoElement.videoWidth / videoElement.videoHeight;
+                  if (ratio > 1.05) {
+                    setVideoFitMode('landscape');
+                  } else if (ratio < 0.95) {
+                    setVideoFitMode('portrait');
+                  } else {
+                    setVideoFitMode('square');
+                  }
+                }}
                 onError={() => setHasError(true)}
               />
             ) : (
