@@ -33,8 +33,11 @@ describe('VideoOverlay', () => {
     const dialog = screen.getByRole('dialog');
     expect(dialog).toBeInTheDocument();
     expect(dialog).toHaveClass('video-overlay-lg');
+    expect(dialog).toHaveClass('video-overlay-viewport-fit');
     expect(screen.getByText(`${ru.overlay.signalLock}: ${word.value}`)).toBeInTheDocument();
+    expect(screen.getByTestId('video-overlay-media')).toHaveClass('video-overlay-media-bounded');
     expect(screen.getByTestId('video-element')).toHaveAttribute('src', '/videos/alpha.mp4');
+    expect(screen.getByTestId('video-element')).toHaveClass('video-player-fit');
     expect(screen.getByTestId('video-overlay-backdrop')).toHaveClass('signal-state-capture');
     expect(screen.getByTestId('video-close-button')).toHaveClass('terminal-action-button');
     expect(screen.getByRole('button', { name: ru.overlay.close })).toBeInTheDocument();

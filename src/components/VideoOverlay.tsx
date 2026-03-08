@@ -19,47 +19,49 @@ export function VideoOverlay({ word, onClose }: VideoOverlayProps) {
       data-testid="video-overlay-backdrop"
     >
       <section
-        className={`video-overlay video-overlay-lg signal-capture-dialog ${dialogSignalClass}`}
+        className={`video-overlay video-overlay-lg video-overlay-viewport-fit signal-capture-dialog ${dialogSignalClass}`}
         role="dialog"
         aria-modal="true"
         aria-label={ru.overlay.ariaLabel}
       >
         <h2>{ru.overlay.signalLock}: {word.value}</h2>
 
-        {word.mediaType === 'video' ? (
-          !hasError ? (
-            <video
-              data-testid="video-element"
-              className="video-player"
-              src={word.videoSrc}
-              controls
-              autoPlay
+        <div className="video-overlay-media video-overlay-media-bounded" data-testid="video-overlay-media">
+          {word.mediaType === 'video' ? (
+            !hasError ? (
+              <video
+                data-testid="video-element"
+                className="video-player video-player-fit"
+                src={word.videoSrc}
+                controls
+                autoPlay
+                onError={() => setHasError(true)}
+              />
+            ) : (
+              <div data-testid="video-fallback" className="video-fallback">
+                <p>{ru.overlay.videoUnavailable}</p>
+                <button type="button" className="terminal-action-button" onClick={onClose}>
+                  {ru.overlay.continue}
+                </button>
+              </div>
+            )
+          ) : !hasError ? (
+            <img
+              data-testid="media-image"
+              className="media-image media-image-fit"
+              src={word.imageSrc}
+              alt={`${word.value} медиа`}
               onError={() => setHasError(true)}
             />
           ) : (
-            <div data-testid="video-fallback" className="video-fallback">
-              <p>{ru.overlay.videoUnavailable}</p>
+            <div data-testid="media-image-fallback" className="video-fallback">
+              <p>{ru.overlay.imageUnavailable}</p>
               <button type="button" className="terminal-action-button" onClick={onClose}>
                 {ru.overlay.continue}
               </button>
             </div>
-          )
-        ) : !hasError ? (
-          <img
-            data-testid="media-image"
-            className="media-image"
-            src={word.imageSrc}
-            alt={`${word.value} медиа`}
-            onError={() => setHasError(true)}
-          />
-        ) : (
-          <div data-testid="media-image-fallback" className="video-fallback">
-            <p>{ru.overlay.imageUnavailable}</p>
-            <button type="button" className="terminal-action-button" onClick={onClose}>
-              {ru.overlay.continue}
-            </button>
-          </div>
-        )}
+          )}
+        </div>
 
         <button type="button" className="terminal-action-button" onClick={onClose} data-testid="video-close-button">
           {ru.overlay.close}

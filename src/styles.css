@@ -432,6 +432,23 @@ body {
   width: min(950px, 94vw);
 }
 
+.video-overlay-viewport-fit {
+  max-height: 92vh;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+.video-overlay-media {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.video-overlay-media-bounded {
+  max-height: min(64vh, calc(92vh - 13rem));
+}
+
 .signal-capture-dialog {
   border-color: rgba(128, 255, 128, 0.45);
   box-shadow: 0 0 0 1px rgba(128, 255, 128, 0.2), 0 18px 44px rgba(0, 0, 0, 0.45);
@@ -448,17 +465,29 @@ body {
 }
 
 .video-player {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
   background: #000;
 }
 
-.media-image {
-  width: 100%;
-  max-height: 60vh;
+.video-player-fit {
+  width: auto;
+  height: auto;
   object-fit: contain;
+}
+
+.media-image {
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
   background: #000;
+}
+
+.media-image-fit {
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .video-fallback {
