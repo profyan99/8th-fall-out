@@ -28,10 +28,10 @@ describe('App level routing', () => {
   });
 
   test('shows game shell when level query is known', () => {
-    setSearch('?level=test');
+    setSearch('?level=for-girls');
     render(<App />);
 
-    expect(screen.getByText('Тестовая сетка')).toBeInTheDocument();
+    expect(screen.getByText(/для всех девушек/i)).toBeInTheDocument();
     expect(screen.queryByText('FATAL SYSTEM EXCEPTION')).not.toBeInTheDocument();
   });
 });

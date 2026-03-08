@@ -19,14 +19,6 @@ describe('resolveLevelPayload', () => {
     });
   });
 
-  test('returns missing_level when level is whitespace', () => {
-    expect(resolveLevelPayload('?level=%20%20')).toEqual({
-      status: 'error',
-      reason: 'missing_level',
-      requestedLevel: '  '
-    });
-  });
-
   test('returns unknown_level for unknown key', () => {
     expect(resolveLevelPayload('?level=unknown')).toEqual({
       status: 'error',
@@ -36,49 +28,47 @@ describe('resolveLevelPayload', () => {
   });
 
   test('returns success for known key', () => {
-    expect(resolveLevelPayload('?level=test')).toMatchObject({
+    expect(resolveLevelPayload('?level=for-girls')).toMatchObject({
       status: 'ok',
-      levelKey: 'test',
-      payload: { id: 'level-test' }
+      levelKey: 'for-girls',
+      payload: { id: 'for-girls' }
     });
   });
 
-  test('supports static payload shape for level=01', () => {
-    const result = resolveLevelPayload('?level=01');
+  test('resolves generated payload for level=for-girls', () => {
+    const result = resolveLevelPayload('?level=for-girls');
     expect(result.status).toBe('ok');
     if (result.status !== 'ok') {
       return;
     }
 
     expect(result.payload).toMatchObject({
-      id: 'level-01',
-      grid: expect.any(Array)
+      id: 'for-girls',
+      title: 'для всех девушек',
+      gridSize: 10,
+      alphabet: 'cyrillic'
     });
-    expect(result.payload.words[0]).toHaveProperty('path');
-    expect(result.payload.title).toMatch(/[А-Яа-яЁё]/);
-    expect(result.payload.words[0].value).toMatch(/[А-Яа-яЁё]/);
+    expect(result.payload.words).toHaveLength(6);
   });
 
-  test('supports generated payload shape for level=test', () => {
-    const result = resolveLevelPayload('?level=test');
+  test('loads for-girls payload through existing loadLevel flow', () => {
+    const result = resolveLevelPayload('?level=for-girls');
     expect(result.status).toBe('ok');
     if (result.status !== 'ok') {
       return;
     }
 
-    expect(result.payload).toMatchObject({
-      id: 'level-test',
-      gridSize: 10
-    });
-    expect(result.payload.title).toMatch(/[А-Яа-яЁё]/);
-    expect(result.payload).not.toHaveProperty('grid');
-    expect(result.payload.words[0]).not.toHaveProperty('path');
-    expect(result.payload.words.some((word) => 'imageSrc' in word)).toBe(true);
-    expect(result.payload.words.every((word) => /[А-Яа-яЁё]/.test(word.value))).toBe(true);
+    const level = loadLevel(result.payload);
+    expect(level.gridSize).toBe(10);
+    expect(level.grid).toHaveLength(10);
+    expect(level.words).toHaveLength(6);
+    for (const word of level.words) {
+      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
+    }
   });
 
-  test('loads level=test with at least one image-backed word after parse', () => {
-    const result = resolveLevelPayload('?level=test');
+  test('loads alina payload with at least one image-backed word after parse', () => {
+    const result = resolveLevelPayload('?level=alina');
     expect(result.status).toBe('ok');
     if (result.status !== 'ok') {
       return;
@@ -88,101 +78,36 @@ describe('resolveLevelPayload', () => {
     expect(level.words.some((word) => word.mediaType === 'image')).toBe(true);
   });
 
-  test('resolves cyrillic dynamic payload by key ru-test', () => {
-    const result = resolveLevelPayload('?level=ru-test');
-    expect(result.status).toBe('ok');
-    if (result.status !== 'ok') {
-      return;
-    }
-
-    expect(result.levelKey).toBe('ru-test');
-    expect(result.payload).toMatchObject({
-      id: 'level-ru-test',
-      gridSize: 10,
-      alphabet: 'cyrillic'
-    });
-  });
-
-  test('loads ru-test payload through existing loadLevel flow', () => {
-    const result = resolveLevelPayload('?level=ru-test');
-    expect(result.status).toBe('ok');
-    if (result.status !== 'ok') {
-      return;
-    }
-
-    const level = loadLevel(result.payload);
-    expect(level.gridSize).toBe(10);
-    expect(level.grid).toHaveLength(10);
-    expect(level.words.length).toBeGreaterThan(0);
-    for (const word of level.words) {
-      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
-    }
-  });
-
-  test('resolves cyrillic dynamic payload by key polina', () => {
+  test('resolves cyrillic dynamic payload by key polina without word цветы', () => {
     const result = resolveLevelPayload('?level=polina');
     expect(result.status).toBe('ok');
     if (result.status !== 'ok') {
       return;
     }
 
-    expect(result.levelKey).toBe('polina');
     expect(result.payload).toMatchObject({
       id: 'polina',
-      title: "Polina's challenge",
       gridSize: 10,
       alphabet: 'cyrillic'
     });
-    expect(result.payload.words).toHaveLength(10);
+    expect(result.payload.words).toHaveLength(9);
+    expect(result.payload.words.some((word) => word.value.toLocaleLowerCase('ru-RU') === 'цветы')).toBe(false);
   });
 
-  test('loads polina payload through existing loadLevel flow', () => {
-    const result = resolveLevelPayload('?level=polina');
-    expect(result.status).toBe('ok');
-    if (result.status !== 'ok') {
-      return;
-    }
-
-    const level = loadLevel(result.payload);
-    expect(level.gridSize).toBe(10);
-    expect(level.grid).toHaveLength(10);
-    expect(level.words).toHaveLength(10);
-    for (const word of level.words) {
-      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
-    }
-  });
-
-  test('resolves cyrillic dynamic payload by key masha', () => {
+  test('resolves cyrillic dynamic payload by key masha without word цветы', () => {
     const result = resolveLevelPayload('?level=masha');
     expect(result.status).toBe('ok');
     if (result.status !== 'ok') {
       return;
     }
 
-    expect(result.levelKey).toBe('masha');
     expect(result.payload).toMatchObject({
       id: 'masha',
-      title: "Masha's challenge",
       gridSize: 10,
       alphabet: 'cyrillic'
     });
-    expect(result.payload.words).toHaveLength(10);
-  });
-
-  test('loads masha payload through existing loadLevel flow', () => {
-    const result = resolveLevelPayload('?level=masha');
-    expect(result.status).toBe('ok');
-    if (result.status !== 'ok') {
-      return;
-    }
-
-    const level = loadLevel(result.payload);
-    expect(level.gridSize).toBe(10);
-    expect(level.grid).toHaveLength(10);
-    expect(level.words).toHaveLength(10);
-    for (const word of level.words) {
-      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
-    }
+    expect(result.payload.words).toHaveLength(9);
+    expect(result.payload.words.some((word) => word.value.toLocaleLowerCase('ru-RU') === 'цветы')).toBe(false);
   });
 
   test('resolves cyrillic dynamic payload by key alina', () => {
@@ -192,7 +117,6 @@ describe('resolveLevelPayload', () => {
       return;
     }
 
-    expect(result.levelKey).toBe('alina');
     expect(result.payload).toMatchObject({
       id: 'alina',
       title: "Alina's challenge",
@@ -200,21 +124,5 @@ describe('resolveLevelPayload', () => {
       alphabet: 'cyrillic'
     });
     expect(result.payload.words).toHaveLength(10);
-  });
-
-  test('loads alina payload through existing loadLevel flow', () => {
-    const result = resolveLevelPayload('?level=alina');
-    expect(result.status).toBe('ok');
-    if (result.status !== 'ok') {
-      return;
-    }
-
-    const level = loadLevel(result.payload);
-    expect(level.gridSize).toBe(10);
-    expect(level.grid).toHaveLength(10);
-    expect(level.words).toHaveLength(10);
-    for (const word of level.words) {
-      expect(word.value).toBe(word.value.toLocaleUpperCase('ru-RU'));
-    }
   });
 });

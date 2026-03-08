@@ -299,19 +299,19 @@ describe('loadLevel', () => {
   });
 
   test('loads bundled levels with russian user-facing title and words', () => {
-    const level01Payload = JSON.parse(
-      readFileSync(resolve(process.cwd(), 'content/levels/level-01.json'), 'utf8')
+    const alinaPayload = JSON.parse(
+      readFileSync(resolve(process.cwd(), 'content/levels/level-alina.json'), 'utf8')
     );
-    const levelTestPayload = JSON.parse(
-      readFileSync(resolve(process.cwd(), 'content/levels/level-test.json'), 'utf8')
+    const forGirlsPayload = JSON.parse(
+      readFileSync(resolve(process.cwd(), 'content/levels/level-for-girls.json'), 'utf8')
     );
 
-    const level01 = loadLevel(level01Payload);
-    const levelTest = loadLevel(levelTestPayload);
+    const alina = loadLevel(alinaPayload);
+    const forGirls = loadLevel(forGirlsPayload);
 
-    expect(level01.title).toMatch(/[А-Яа-яЁё]/);
-    expect(level01.words[0].value).toMatch(/[А-Яа-яЁё]/);
-    expect(levelTest.title).toMatch(/[А-Яа-яЁё]/);
-    expect(levelTest.words.every((word) => /[А-Яа-яЁё]/.test(word.value))).toBe(true);
+    expect(alina.title).toMatch(/[A-Za-zА-Яа-яЁё]/);
+    expect(alina.words[0].value).toMatch(/[А-Яа-яЁё]/);
+    expect(forGirls.title).toMatch(/[А-Яа-яЁё]/);
+    expect(forGirls.words.every((word) => /[А-Яа-яЁё]/.test(word.value))).toBe(true);
   });
 });

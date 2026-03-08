@@ -1,18 +1,14 @@
-import defaultLevel from '../../content/levels/level-01.json';
-import testLevel from '../../content/levels/level-test.json';
-import ruTestLevel from '../../content/levels/level-ru-test.json';
 import polinaLevel from '../../content/levels/level-polina.json';
 import mashaLevel from '../../content/levels/level-masha.json';
 import alinaLevel from '../../content/levels/level-alina.json';
+import forGirlsLevel from '../../content/levels/level-for-girls.json';
 import type { LevelPayload } from './types';
 
 const LEVELS: Record<string, LevelPayload> = {
-  '01': defaultLevel,
-  test: testLevel,
-  'ru-test': ruTestLevel,
   polina: polinaLevel,
   masha: mashaLevel,
-  alina: alinaLevel
+  alina: alinaLevel,
+  'for-girls': forGirlsLevel
 };
 
 export type ResolveLevelResult =

@@ -1,0 +1,39 @@
+{
+  "id": "for-girls",
+  "title": "для всех девушек",
+  "gridSize": 10,
+  "alphabet": "cyrillic",
+  "seed": "for-all-girls-seed",
+  "words": [
+    {
+      "id": "word-kostya",
+      "value": "костя",
+      "videoSrc": "/videos/kostya.mp4"
+    },
+    {
+      "id": "word-ilya",
+      "value": "илья",
+      "videoSrc": "/videos/ilya.mp4"
+    },
+    {
+      "id": "word-roma",
+      "value": "рома",
+      "videoSrc": "/videos/roma.mp4"
+    },
+    {
+      "id": "word-matvey",
+      "value": "матвей",
+      "videoSrc": "/videos/matvey.mp4"
+    },
+    {
+      "id": "word-egor",
+      "value": "егор",
+      "videoSrc": "/videos/egor.mp4"
+    },
+    {
+      "id": "word-balmont",
+      "value": "бальмонт",
+      "videoSrc": "/videos/balmont.mp4"
+    }
+  ]
+}

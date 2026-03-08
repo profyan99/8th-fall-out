@@ -36,11 +36,6 @@
       "videoSrc": "/videos/kostya.mp4"
     },
     {
-      "id": "word-tsvety",
-      "value": "цветы",
-      "videoSrc": "/videos/tsvety.mp4"
-    },
-    {
       "id": "word-egor",
       "value": "егор",
       "videoSrc": "/videos/egor.mp4"

@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('invalid drag does not mark word', async ({ page }) => {
-  await page.goto('/?level=01');
+  await page.goto('/?level=for-girls');
   await expect(page.getByTestId('boot-overlay')).not.toBeVisible({ timeout: 5000 });
 
   const canvas = page.getByTestId('grid-canvas');
@@ -10,5 +10,5 @@ test('invalid drag does not mark word', async ({ page }) => {
   await canvas.hover({ position: { x: 220, y: 220 } });
   await page.mouse.up();
 
-  await expect(page.getByTestId('progress-text')).toContainText('СЛОВА: 0 ИЗ 1');
+  await expect(page.getByTestId('progress-text')).toContainText('СЛОВА: 0 ИЗ 6');
 });

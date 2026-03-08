@@ -26,33 +26,30 @@ async function dragPath(page: Page, path: Array<{ row: number; col: number }>, g
 }
 
 test('broken image still allows continue', async ({ page }) => {
-  const levelTestPayload = JSON.parse(
-    readFileSync(new URL('../content/levels/level-test.json', import.meta.url), 'utf8')
+  const alinaPayload = JSON.parse(
+    readFileSync(new URL('../content/levels/level-alina.json', import.meta.url), 'utf8')
   );
-  const level = loadLevel(levelTestPayload);
-  const imageWord = level.words.find((word) => word.id === 'word-beta');
+  const level = loadLevel(alinaPayload);
+  const imageWord = level.words.find((word) => word.mediaType === 'image');
   if (!imageWord) {
-    throw new Error('word-beta not found in level-test');
+    throw new Error('image word not found in level-alina');
   }
 
-  await page.goto('/?level=test');
+  await page.goto('/?level=alina');
   await expect(page.getByTestId('boot-overlay')).not.toBeVisible({ timeout: 5000 });
   await dragPath(page, imageWord.path, level.gridSize);
 
   await expect(page.getByRole('dialog')).toBeVisible();
-  const imageCount = await page.getByTestId('media-image').count();
-  if (imageCount > 0) {
-    await expect(page.getByTestId('media-image')).toHaveAttribute('src', '/images/beta.png');
-    await page.evaluate(() => {
-      const image = document.querySelector('[data-testid="media-image"]');
-      if (image) {
-        image.dispatchEvent(new Event('error'));
-      }
-    });
-  }
+  await expect(page.getByTestId('media-image')).toHaveAttribute('src', '/images/egor.jpg');
+  await page.evaluate(() => {
+    const image = document.querySelector('[data-testid="media-image"]');
+    if (image) {
+      image.dispatchEvent(new Event('error'));
+    }
+  });
 
   await expect(page.getByTestId('media-image-fallback')).toBeVisible();
   await page.getByRole('button', { name: 'Продолжить' }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
-  await expect(page.getByTestId('progress-text')).toContainText('СЛОВА: 1 ИЗ 2');
+  await expect(page.getByTestId('progress-text')).toContainText('СЛОВА: 1 ИЗ 10');
 });
