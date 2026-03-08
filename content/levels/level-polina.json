@@ -1,6 +1,6 @@
 {
   "id": "polina",
-  "title": "Polina's challenge",
+  "title": "Код 'Полина'",
   "gridSize": 10,
   "alphabet": "cyrillic",
   "seed": "polina-challenge-seed",
@@ -8,12 +8,12 @@
     {
       "id": "word-kinovoyska",
       "value": "киновойска",
-      "videoSrc": "/videos/kinovoyska.mp4"
+      "imageSrc": "/images/kinovoiska.png"
     },
     {
       "id": "word-tranduil",
       "value": "трандуил",
-      "videoSrc": "/videos/tranduil.mp4"
+      "imageSrc": "/images/tranduil.png"
     },
     {
       "id": "word-balmont",
@@ -28,7 +28,7 @@
     {
       "id": "word-mopsik",
       "value": "мопсик",
-      "videoSrc": "/videos/mopsik.mp4"
+      "imageSrc": "/images/polina_mops.png"
     },
     {
       "id": "word-kostya",

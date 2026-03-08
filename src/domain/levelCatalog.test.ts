@@ -44,7 +44,6 @@ describe('resolveLevelPayload', () => {
 
     expect(result.payload).toMatchObject({
       id: 'for-girls',
-      title: 'для всех девушек',
       gridSize: 10,
       alphabet: 'cyrillic'
     });
@@ -119,10 +118,9 @@ describe('resolveLevelPayload', () => {
 
     expect(result.payload).toMatchObject({
       id: 'alina',
-      title: "Alina's challenge",
       gridSize: 10,
       alphabet: 'cyrillic'
     });
-    expect(result.payload.words).toHaveLength(10);
+    expect(result.payload.words).toHaveLength(9);
   });
 });

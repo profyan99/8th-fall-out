@@ -1,6 +1,6 @@
 {
   "id": "alina",
-  "title": "Alina's challenge",
+  "title": "Код 'Алина'",
   "gridSize": 10,
   "alphabet": "cyrillic",
   "seed": "alina-challenge-seed",
@@ -36,24 +36,19 @@
       "videoSrc": "/videos/balmont.mp4"
     },
     {
-      "id": "word-luxemburg",
-      "value": "люксембург",
-      "videoSrc": "/videos/luxemburg.mp4"
-    },
-    {
       "id": "word-oksimiron",
       "value": "оксимирон",
-      "videoSrc": "/videos/oksimiron.mp4"
+      "imageSrc": "/images/alina_oxxxy.png"
     },
     {
       "id": "word-beg",
       "value": "бег",
-      "videoSrc": "/videos/beg.mp4"
+      "imageSrc": "/images/alina_run.png"
     },
     {
       "id": "word-tsyplenok",
       "value": "цыпленок",
-      "videoSrc": "/videos/tsyplenok.mp4"
+      "imageSrc": "/images/alina_chicken.png"
     }
   ]
 }

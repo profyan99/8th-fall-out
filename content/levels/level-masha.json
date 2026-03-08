@@ -1,6 +1,6 @@
 {
   "id": "masha",
-  "title": "Masha's challenge",
+  "title": "Код 'Маша'",
   "gridSize": 10,
   "alphabet": "cyrillic",
   "seed": "masha-challenge-seed",
@@ -8,12 +8,12 @@
     {
       "id": "word-kinovoyska",
       "value": "киновойска",
-      "videoSrc": "/videos/kinovoyska.mp4"
+      "imageSrc": "/images/kinovoiska.png"
     },
     {
       "id": "word-tranduil",
       "value": "трандуил",
-      "videoSrc": "/videos/tranduil.mp4"
+      "imageSrc": "/images/tranduil.png"
     },
     {
       "id": "word-balmont",
@@ -28,7 +28,7 @@
     {
       "id": "word-yulya",
       "value": "юля",
-      "videoSrc": "/videos/yulya.mp4"
+      "imageSrc": "/images/masha_julia.png"
     },
     {
       "id": "word-kostya",

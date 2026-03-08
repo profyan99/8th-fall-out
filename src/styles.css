@@ -6,6 +6,7 @@
   --crt-bezel-edge: #2b332b;
   --crt-frame-radius: 16px;
   --crt-viewport-padding: 1rem;
+  --terminal-content-max-width: calc(clamp(260px, 56vh, 640px) + 210px + 0.6rem + 1.3rem + 2px);
   color: var(--crt-phosphor);
   background: #0a0f0a;
   font-family: "IBM Plex Mono", "Courier New", monospace;
@@ -38,7 +39,7 @@ body {
 }
 
 .scene-stage {
-  width: min(92vw, 1080px);
+  width: min(92vw, 940px);
   height: auto;
   min-height: min(86vh, 760px);
   max-height: calc(100vh - 1rem);
@@ -228,10 +229,13 @@ body {
   border: 1px solid rgba(140, 255, 140, 0.35);
   border-radius: 10px;
   padding: 0.75rem 1rem;
+  margin-top: 0.35rem;
   color: var(--crt-phosphor);
   font-family: "IBM Plex Mono", monospace;
   display: grid;
   gap: 0.35rem;
+  width: min(100%, var(--terminal-content-max-width));
+  justify-self: center;
 }
 
 .terminal-hud h1 {
@@ -280,7 +284,10 @@ body {
 .game-main {
   display: grid;
   gap: 0.6rem;
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 220px);
+  grid-template-columns: max-content minmax(180px, 210px);
+  width: min(100%, var(--terminal-content-max-width));
+  justify-content: center;
+  justify-self: center;
   align-items: stretch;
   min-height: 0;
 }
